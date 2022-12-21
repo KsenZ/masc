@@ -2,10 +2,11 @@
 rule PUP_InstallRex_AntiFWb {
 	meta:
 		description = "Malware InstallRex / AntiFW"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2015-05-13"
 		hash = "bb5607cd2ee51f039f60e32cf7edc4e21a2d95cd"
-		score = 65
+		score = 55
 	strings:
 		$s4 = "Error %u while loading TSU.DLL %ls" fullword ascii
 		$s7 = "GetModuleFileName() failed => %u" fullword ascii

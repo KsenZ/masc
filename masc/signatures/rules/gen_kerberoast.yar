@@ -8,6 +8,7 @@
 rule GetUserSPNs_VBS {
 	meta:
 		description = "Auto-generated rule - file GetUserSPNs.vbs"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/skelsec/PyKerberoast"
 		date = "2016-05-21"
@@ -23,6 +24,7 @@ rule GetUserSPNs_VBS {
 rule GetUserSPNs_PS1 {
 	meta:
 		description = "Auto-generated rule - file GetUserSPNs.ps1"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/skelsec/PyKerberoast"
 		date = "2016-05-21"
@@ -39,6 +41,7 @@ rule GetUserSPNs_PS1 {
 rule kerberoast_PY {
 	meta:
 		description = "Auto-generated rule - file kerberoast.py"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/skelsec/PyKerberoast"
 		date = "2016-05-21"

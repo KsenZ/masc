@@ -8,6 +8,7 @@
 rule Sofacy_Malware_StrangeSpaces {
 	meta:
 		description = "Detetcs strange strings from Sofacy malware with many spaces"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -23,6 +24,7 @@ rule Sofacy_Malware_StrangeSpaces {
 rule Sofacy_Malware_AZZY_Backdoor_1 {
 	meta:
 		description = "AZZY Backdoor - Sample 1"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -38,6 +40,7 @@ rule Sofacy_Malware_AZZY_Backdoor_1 {
 rule Sofacy_AZZY_Backdoor_Implant_1 {
 	meta:
 		description = "AZZY Backdoor Implant 4.3 - Sample 1"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -55,6 +58,7 @@ rule Sofacy_AZZY_Backdoor_Implant_1 {
 rule Sofacy_AZZY_Backdoor_HelperDLL {
 	meta:
 		description = "Dropped C&C helper DLL for AZZY 4.3"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -64,7 +68,7 @@ rule Sofacy_AZZY_Backdoor_HelperDLL {
 		$s1 = "InternetExchange" fullword ascii
 		$s2 = "SendData"
 	condition:
-		uint16(0) == 0x5a4d and filesize < 100KB and 2 of them
+		uint16(0) == 0x5a4d and filesize < 100KB and all of them
 }
 
 /* Super Rules ------------------------------------------------------------- */
@@ -72,6 +76,7 @@ rule Sofacy_AZZY_Backdoor_HelperDLL {
 rule Sofacy_CollectorStealer_Gen1 {
 	meta:
 		description = "Generic rule to detect Sofacy Malware Collector Stealer"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -89,6 +94,7 @@ rule Sofacy_CollectorStealer_Gen1 {
 rule Sofacy_CollectorStealer_Gen2 {
 	meta:
 		description = "File collectors / USB stealers - Generic"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"
@@ -106,6 +112,7 @@ rule Sofacy_CollectorStealer_Gen2 {
 rule Sofacy_CollectorStealer_Gen3 {
 	meta:
 		description = "File collectors / USB stealers - Generic"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://securelist.com/blog/research/72924/sofacy-apt-hits-high-profile-targets-with-updated-toolset/"
 		date = "2015-12-04"

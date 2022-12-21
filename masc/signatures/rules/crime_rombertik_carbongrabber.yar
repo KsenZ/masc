@@ -10,6 +10,7 @@
 rule Rombertik_CarbonGrabber {
 	meta:
 		description = "Detects CarbonGrabber alias Rombertik - file Copy#064046.scr"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://blogs.cisco.com/security/talos/rombertik"
 		date = "2015-05-05"
@@ -31,6 +32,7 @@ rule Rombertik_CarbonGrabber {
 rule Rombertik_CarbonGrabber_Panel_InstallScript {
 	meta:
 		description = "Detects CarbonGrabber alias Rombertik panel install script - file install.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://blogs.cisco.com/security/talos/rombertik"
 		date = "2015-05-05"
@@ -51,6 +53,7 @@ rule Rombertik_CarbonGrabber_Panel_InstallScript {
 rule Rombertik_CarbonGrabber_Panel {
 	meta:
 		description = "Detects CarbonGrabber alias Rombertik Panel - file index.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://blogs.cisco.com/security/talos/rombertik"
 		date = "2015-05-05"
@@ -69,6 +72,7 @@ rule Rombertik_CarbonGrabber_Panel {
 rule Rombertik_CarbonGrabber_Builder {
 	meta:
 		description = "Detects CarbonGrabber alias Rombertik Builder - file Builder.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://blogs.cisco.com/security/talos/rombertik"
 		date = "2015-05-05"
@@ -86,6 +90,7 @@ rule Rombertik_CarbonGrabber_Builder {
 rule Rombertik_CarbonGrabber_Builder_Server {
 	meta:
 		description = "Detects CarbonGrabber alias Rombertik Builder Server - file Server.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://blogs.cisco.com/security/talos/rombertik"
 		date = "2015-05-05"

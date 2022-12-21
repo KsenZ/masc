@@ -1,9 +1,9 @@
-rule Explosive_EXE : APT { 
+rule Explosive_EXE : APT {
 	meta:
 		description = "Explosion/Explosive Malware - Volatile Cedar APT"
-		author = "Check Point Software Technologies Inc." 
+		author = "Check Point Software Technologies Inc."
 	strings:
-		$DLD_S = "DLD-S:" 
+		$DLD_S = "DLD-S:"
 		$DLD_E = "DLD-E:"
 	condition:
 		all of them and
@@ -12,7 +12,8 @@ rule Explosive_EXE : APT {
 
 rule Explosion_Sample_1 {
 	meta:
-		description = "Explosion/Explosive Malware - Volatile Cedar APT - file b74bd5660baf67038353136978ed16dbc7d105c60c121cf64c61d8f3d31de32c"
+		description = "Explosion/Explosive Malware - Volatile Cedar APT"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://goo.gl/5vYaNb"
 		date = "2015/04/03"
@@ -30,13 +31,14 @@ rule Explosion_Sample_1 {
 		$s17 = "Office Outlook HTTP" fullword ascii
 		$s20 = "Hist :<b> %ws</b>  :%s </br></br>" fullword ascii
 	condition:
-		all of them and  
+		all of them and
         uint16(0) == 0x5A4D
 }
 
 rule Explosion_Sample_2 {
 	meta:
-		description = "Explosion/Explosive Malware - Volatile Cedar APT - file bfc63b30624332f4fc2e510f95b69d18dd0241eb0d2fcd33ed2e81b7275ab488"
+		description = "Explosion/Explosive Malware - Volatile Cedar APT"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://goo.gl/5vYaNb"
 		date = "2015/04/03"
@@ -47,13 +49,14 @@ rule Explosion_Sample_2 {
 		$s1 = "Windows Help DLL" fullword wide
 		$s5 = "SetWinHoK" fullword ascii
 	condition:
-		all of them and  
+		all of them and
         uint16(0) == 0x5A4D
 }
 
 rule Explosion_Generic_1 {
 	meta:
 		description = "Generic Rule for Explosion/Explosive Malware - Volatile Cedar APT"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/04/03"
@@ -76,27 +79,29 @@ rule Explosion_Generic_1 {
 		$s13 = "%s %s|" fullword
 		$s16 = ":\\autorun.exe" fullword
 	condition:
-		7 of them and  
-        uint16(0) == 0x5A4D 
+		7 of them and
+        uint16(0) == 0x5A4D
 }
 
 rule Explosive_UA {
 	meta:
 		description = "Explosive Malware Embedded User Agent - Volatile Cedar APT http://goo.gl/HQRCdw"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://goo.gl/HQRCdw"
 		date = "2015/04/03"
 		score = 60
-	strings:	
+	strings:
 		$x1 = "Mozilla/4.0 (compatible; MSIE 7.0; MSIE 6.0; Windows NT 5.1; .NET CLR 2.0.50727)" fullword
 	condition:
-		$x1 and  
-        uint16(0) == 0x5A4D 
+		$x1 and
+        uint16(0) == 0x5A4D
 }
 
 rule Webshell_Caterpillar_ASPX {
 	meta:
 		description = "Volatile Cedar Webshell - from file caterpillar.aspx"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://goo.gl/emons5"
 		date = "2015/04/03"

@@ -10,9 +10,11 @@
 
 	Notice: These rules require an external variable called "filename"
 
-   License: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
-	Copyright and related rights waived via https://creativecommons.org/licenses/by-nc-sa/4.0/
+   License: Detetction Rule License 1.1 (https://github.com/SigmaHQ/sigma/blob/master/LICENSE.Detection.Rules.md)
+
 */
+
+import "pe"
 
 private rule WINDOWS_UPDATE_BDC
 {
@@ -27,24 +29,29 @@ condition:
 /* Rules -------------------------------------------------------------------- */
 
 rule iexplore_ANOMALY {
-	meta:
-		author = "Florian Roth"
-		description = "Abnormal iexplore.exe - typical strings not found in file"
-		date = "23/04/2014"
-		score = 55
-	strings:
-		$win2003_win7_u1 = "IEXPLORE.EXE" wide nocase
-		$win2003_win7_u2 = "Internet Explorer" wide fullword
-		$win2003_win7_u3 = "translation" wide fullword nocase
-		$win2003_win7_u4 = "varfileinfo" wide fullword nocase
-	condition:
-		filename == "iexplore.exe"
+   meta:
+      author = "Florian Roth"
+      description = "Abnormal iexplore.exe - typical strings not found in file"
+      date = "23/04/2014"
+      score = 55
+      nodeepdive = 1
+   strings:
+      $win2003_win7_u1 = "IEXPLORE.EXE" wide nocase
+      $win2003_win7_u2 = "Internet Explorer" wide fullword
+      $win2003_win7_u3 = "translation" wide fullword nocase
+      $win2003_win7_u4 = "varfileinfo" wide fullword nocase
+   condition:
+      filename == "iexplore.exe"
+      and uint16(0) == 0x5a4d
       and not filepath contains "teamviewer"
       and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+      and filepath contains "C:\\"
+      and not filepath contains "Package_for_RollupFix"
 }
 
 rule svchost_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal svchost.exe - typical strings not found in file"
 		date = "23/04/2014"
@@ -56,13 +63,16 @@ rule svchost_ANOMALY {
 		$win2000 = "Generic Host Process for Win32 Services" wide fullword
 		$win2012 = "Host Process for Windows Services" wide fullword
 	condition:
-		filename == "svchost.exe" and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+		filename == "svchost.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
 }
 
 /* removed 1 rule here */
 
 rule explorer_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal explorer.exe - typical strings not found in file"
 		date = "27/05/2014"
@@ -72,6 +82,7 @@ rule explorer_ANOMALY {
 		$s2 = "Windows Explorer" wide fullword
 	condition:
 		filename == "explorer.exe"
+      and uint16(0) == 0x5a4d
       and not filepath contains "teamviewer"
       and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
@@ -89,11 +100,14 @@ rule sethc_ANOMALY {
 		$s3 = "Control_RunDLL access.cpl" wide fullword
 		$s4 = "SETHC.EXE" wide fullword
 	condition:
-		filename == "sethc.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "sethc.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule Utilman_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal utilman.exe - typical strings not found in file"
 		date = "01/06/2014"
@@ -103,11 +117,14 @@ rule Utilman_ANOMALY {
 		$win2000 = "Start with Utility Manager" fullword wide
 		$win2012 = "utilman2.exe" fullword wide
 	condition:
-		( filename == "utilman.exe" or filename == "Utilman.exe" ) and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+		( filename == "utilman.exe" or filename == "Utilman.exe" )
+      and uint16(0) == 0x5a4d
+      and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
 }
 
 rule osk_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal osk.exe (On Screen Keyboard) - typical strings not found in file"
 		date = "01/06/2014"
@@ -118,11 +135,14 @@ rule osk_ANOMALY {
 		$s3 = "&About On-Screen Keyboard..." wide fullword
 		$s4 = "Software\\Microsoft\\Osk" wide
 	condition:
-		filename == "osk.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "osk.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule magnify_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal magnify.exe (Magnifier) - typical strings not found in file"
 		date = "01/06/2014"
@@ -132,11 +152,14 @@ rule magnify_ANOMALY {
 		$win2000 = "Microsoft Magnifier" wide fullword
 		$winxp = "Software\\Microsoft\\Magnify" wide
 	condition:
-		filename =="magnify.exe" and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+		filename =="magnify.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
 }
 
 rule narrator_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal narrator.exe - typical strings not found in file"
 		date = "01/06/2014"
@@ -148,11 +171,14 @@ rule narrator_ANOMALY {
 		$winxp = "Software\\Microsoft\\Narrator"
 		$winxp_en = "SOFTWARE\\Microsoft\\Speech\\Voices" wide
 	condition:
-		filename == "narrator.exe" and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+		filename == "narrator.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
 }
 
 rule notepad_ANOMALY {
 	meta:
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		description = "Abnormal notepad.exe - typical strings not found in file"
 		date = "01/06/2014"
@@ -164,7 +190,9 @@ rule notepad_ANOMALY {
 		$winxp = "Software\\Microsoft\\Notepad" wide
 		$winxp_de = "Software\\Microsoft\\Notepad" wide
 	condition:
-		filename == "notepad.exe" and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
+		filename == "notepad.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($win*) and not WINDOWS_UPDATE_BDC
 }
 
 /* NEW ---------------------------------------------------------------------- */
@@ -172,6 +200,7 @@ rule notepad_ANOMALY {
 rule csrss_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file csrss.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -182,12 +211,15 @@ rule csrss_ANOMALY {
 		$s5 = "CSRSRV.dll" fullword ascii
 		$s6 = "CsrServerInitialization" fullword ascii
 	condition:
-		filename == "csrss.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "csrss.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule conhost_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file conhost.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -195,12 +227,15 @@ rule conhost_ANOMALY {
 	strings:
 		$s2 = "Console Window Host" fullword wide
 	condition:
-		filename == "conhost.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "conhost.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule wininit_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file wininit.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -208,12 +243,15 @@ rule wininit_ANOMALY {
 	strings:
 		$s1 = "Windows Start-Up Application" fullword wide
 	condition:
-		filename == "wininit.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "wininit.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule winlogon_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file winlogon.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -222,7 +260,9 @@ rule winlogon_ANOMALY {
 		$s1 = "AuthzAccessCheck failed" fullword
 		$s2 = "Windows Logon Application" fullword wide
 	condition:
-		filename == "winlogon.exe" and not 1 of ($s*)
+		filename == "winlogon.exe"
+      and not 1 of ($s*)
+      and uint16(0) == 0x5a4d
 		and not WINDOWS_UPDATE_BDC
 		and not filepath contains "Malwarebytes"
 }
@@ -230,6 +270,7 @@ rule winlogon_ANOMALY {
 rule SndVol_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file SndVol.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -237,12 +278,15 @@ rule SndVol_ANOMALY {
 	strings:
 		$s1 = "Volume Control Applet" fullword wide
 	condition:
-		filename == "sndvol.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "sndvol.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule doskey_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file doskey.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -250,12 +294,15 @@ rule doskey_ANOMALY {
 	strings:
 		$s3 = "Keyboard History Utility" fullword wide
 	condition:
-		filename == "doskey.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "doskey.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule lsass_ANOMALY {
 	meta:
 		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file lsass.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/03/16"
@@ -266,22 +313,30 @@ rule lsass_ANOMALY {
 		$s3 = "Local Security Authority Process" fullword wide
 		$s4 = "LsapInitLsa" fullword
 	condition:
-		filename == "lsass.exe" and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+		filename == "lsass.exe"
+      and uint16(0) == 0x5a4d
+      and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
 }
 
 rule taskmgr_ANOMALY {
-	meta:
-		description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file taskmgr.exe"
-		author = "Florian Roth"
-		reference = "not set"
-		date = "2015/03/16"
-		hash = "e8b4d84a28e5ea17272416ec45726964fdf25883"
-	strings:
-		$s0 = "Windows Task Manager" fullword wide
-		$s1 = "taskmgr.chm" fullword
-		$s2 = "TmEndTaskHandler::" ascii
-	condition:
-		( filename == "taskmgr.exe" or filename == "Taskmgr.exe" ) and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+   meta:
+      description = "Anomaly rule looking for certain strings in a system file (maybe false positive on certain systems) - file taskmgr.exe"
+      author = "Florian Roth"
+      reference = "not set"
+      date = "2015/03/16"
+      nodeepdive = 1
+      hash = "e8b4d84a28e5ea17272416ec45726964fdf25883"
+   strings:
+      $s0 = "Windows Task Manager" fullword wide
+      $s1 = "taskmgr.chm" fullword
+      $s2 = "TmEndTaskHandler::" ascii
+      $s3 = "CM_Request_Eject_PC" /* Win XP */
+      $s4 = "NTShell Taskman Startup Mutex" fullword wide
+   condition:
+      ( filename == "taskmgr.exe" or filename == "Taskmgr.exe" ) and not 1 of ($s*) and not WINDOWS_UPDATE_BDC
+      and uint16(0) == 0x5a4d
+      and filepath contains "C:\\"
+      and not filepath contains "Package_for_RollupFix"
 }
 
 /* removed 22 rules here */
@@ -291,8 +346,9 @@ rule taskmgr_ANOMALY {
 rule APT_Cloaked_PsExec
 	{
 	meta:
-		description = "Looks like a cloaked PsExec. May be APT group activity."
+		description = "Looks like a cloaked PsExec. This may be APT group activity."
 		date = "2014-07-18"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		score = 60
 	strings:
@@ -300,7 +356,8 @@ rule APT_Cloaked_PsExec
 		$s1 = "Sysinternals PsExec" wide fullword
 	condition:
 		uint16(0) == 0x5a4d and $s0 and $s1
-		and not filename matches /^(psexec.exe|psexesvc.exe)$/is
+		and not filename matches /(psexec.exe|PSEXESVC.EXE|PsExec64.exe)$/is
+		and not filepath matches /RECYCLE.BIN\\S-1/
 }
 
 /* removed 6 rules here */
@@ -308,38 +365,39 @@ rule APT_Cloaked_PsExec
 rule APT_Cloaked_SuperScan
 	{
 	meta:
-		description = "Looks like a cloaked SuperScan Port Scanner. May be APT group activity."
+		description = "Looks like a cloaked SuperScan Port Scanner. This may be APT group activity."
 		date = "2014-07-18"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		score = 50
 	strings:
-		$magic = { 4d 5a }
 		$s0 = "SuperScan4.exe" wide fullword
 		$s1 = "Foundstone Inc." wide fullword
 	condition:
-		( $magic at 0 ) and $s0 and $s1 and not filename contains "superscan"
+		uint16(0) == 0x5a4d and $s0 and $s1 and not filename contains "superscan"
 }
 
 rule APT_Cloaked_ScanLine
 	{
 	meta:
-		description = "Looks like a cloaked ScanLine Port Scanner. May be APT group activity."
+		description = "Looks like a cloaked ScanLine Port Scanner. This may be APT group activity."
 		date = "2014-07-18"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		score = 50
 	strings:
-		$magic = { 4d 5a }
 		$s0 = "ScanLine" wide fullword
 		$s1 = "Command line port scanner" wide fullword
 		$s2 = "sl.exe" wide fullword
 	condition:
-		( $magic at 0 ) and $s0 and $s1 and $s2 and not filename == "sl.exe"
+		uint16(0) == 0x5a4d and $s0 and $s1 and $s2 and not filename == "sl.exe"
 }
 
 rule SAM_Hive_Backup
 {
 	meta:
 		description = "Detects a SAM hive backup file"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/gentilkiwi/mimikatz/wiki/module-~-lsadump"
 		score = 60
@@ -353,4 +411,84 @@ rule SAM_Hive_Backup
 			not filename contains "_sam" and
 			not filename == "SAM" and
 			not filename == "sam"
+}
+
+rule SUSP_Renamed_Dot1Xtray {
+   meta:
+      description = "Detects a legitimate renamed dot1ctray.exe, which is often used by PlugX for DLL side-loading"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2018-11-15"
+      hash1 = "f9ebf6aeb3f0fb0c29bd8f3d652476cd1fe8bd9a0c11cb15c43de33bbce0bf68"
+   strings:
+      $a1 = "\\Symantec_Network_Access_Control\\"  ascii
+      $a2 = "\\dot1xtray.pdb" ascii
+      $a3 = "DOT1X_NAMED_PIPE_CONNECT" fullword wide /* Goodware String - occured 2 times */
+   condition:
+      uint16(0) == 0x5a4d and filesize < 300KB and all of them
+      and not filename matches /dot1xtray.exe/i
+      and not filepath matches /Recycle.Bin/i
+}
+
+rule APT_Cloaked_CERTUTIL {
+   meta:
+      description = "Detects a renamed certutil.exe utility that is often used to decode encoded payloads"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2018-09-14"
+      modified = "2022-06-27"
+   strings:
+      $s1 = "-------- CERT_CHAIN_CONTEXT --------" fullword ascii
+      $s5 = "certutil.pdb" fullword ascii
+      $s3 = "Password Token" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and all of them
+      and not filename contains "certutil"
+      and not filename contains "CertUtil"
+      and not filename contains "Certutil"
+      and not filepath contains "\\Bromium\\"
+}
+
+rule APT_SUSP_Solarwinds_Orion_Config_Anomaly_Dec20 {
+   meta:
+      description = "Detects a suspicious renamed Afind.exe as used by different attackers"
+      author = "Florian Roth"
+      reference = "https://twitter.com/iisresetme/status/1339546337390587905?s=12"
+      date = "2020-12-15"
+      score = 70
+      nodeepdive = 1
+   strings:
+      $s1 = "ReportWatcher" fullword wide ascii 
+      
+      $fp1 = "ReportStatus" fullword wide ascii
+   condition:
+      filename == "SolarWindows.Orion.Core.BusinessLayer.dll.config"
+      and $s1 
+      and not $fp1
+}
+
+rule PAExec_Cloaked {
+   meta:
+      description = "Detects a renamed remote access tool PAEXec (like PsExec)"
+      author = "Florian Roth"
+      reference = "http://researchcenter.paloaltonetworks.com/2017/03/unit42-shamoon-2-delivering-disttrack/"
+      date = "2017-03-27"
+      score = 70
+      hash1 = "01a461ad68d11b5b5096f45eb54df9ba62c5af413fa9eb544eacb598373a26bc"
+   strings:
+      $x1 = "Ex: -rlo C:\\Temp\\PAExec.log" fullword ascii
+      $x2 = "Can't enumProcesses - Failed to get token for Local System." fullword wide
+      $x3 = "PAExec %s - Execute Programs Remotely" fullword wide
+      $x4 = "\\\\%s\\pipe\\PAExecIn%s%u" fullword wide
+      $x5 = "\\\\.\\pipe\\PAExecIn%s%u" fullword wide
+      $x6 = "%%SystemRoot%%\\%s.exe" fullword wide
+      $x7 = "in replacement for PsExec, so the command-line usage is identical, with " fullword ascii
+      $x8 = "\\\\%s\\ADMIN$\\PAExec_Move%u.dat" fullword wide
+   condition:
+      ( uint16(0) == 0x5a4d and filesize < 600KB and 1 of ($x*) )
+      and not filename == "paexec.exe"
+      and not filename == "PAExec.exe"
+      and not filename == "PAEXEC.EXE"
+      and not filename matches /Install/
+      and not filename matches /uninstall/
 }

@@ -4,13 +4,13 @@
 rule SNOWGLOBE_Babar_Malware {
 	meta:
 		description = "Detects the Babar Malware used in the SNOWGLOBE attacks - file babar.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://motherboard.vice.com/read/meet-babar-a-new-malware-almost-certainly-created-by-france"
 		date = "2015/02/18"
 		hash = "27a0a98053f3eed82a51cdefbdfec7bb948e1f36"
 		score = 80
 	strings:
-		$mz = { 4d 5a }
 		$z0 = "admin\\Desktop\\Babar64\\Babar64\\obj\\DllWrapper" ascii fullword
 		$z1 = "User-Agent: Mozilla/4.0 (compatible; MSI 6.0;" ascii fullword
 		$z2 = "ExecQueryFailled!" fullword ascii
@@ -28,7 +28,7 @@ rule SNOWGLOBE_Babar_Malware {
 		$x5 = "cmd.exe" fullword ascii
 		$x6 = "DLLPATH" fullword ascii
 	condition:
-		( $mz at 0 ) and filesize < 1MB and
+		uint16(0) == 0x5a4d and filesize < 1MB and
 		(
 			( 1 of ($z*) and 1 of ($x*) ) or
 			( 3 of ($s*) and 4 of ($x*) )

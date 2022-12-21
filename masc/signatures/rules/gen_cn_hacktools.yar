@@ -7,23 +7,29 @@
 */
 
 rule mswin_check_lm_group {
-	meta:
-		description = "Chinese Hacktool Set - file mswin_check_lm_group.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "115d87d7e7a3d08802a9e5fd6cd08e2ec633c367"
-	strings:
-		$s1 = "Valid_Global_Groups: checking group membership of '%s\\%s'." fullword ascii
-		$s2 = "Usage: %s [-D domain][-G][-P][-c][-d][-h]" fullword ascii
-		$s3 = "-D    default user Domain" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 380KB and all of them
+   meta:
+      description = "Chinese Hacktool Set - file mswin_check_lm_group.exe"
+      author = "Florian Roth"
+      score = 70
+      reference = "http://tools.zjqhr.com/"
+      date = "2015-06-13"
+      modified = "2021-03-15"
+      hash = "115d87d7e7a3d08802a9e5fd6cd08e2ec633c367"
+   strings:
+      $s1 = "Valid_Global_Groups: checking group membership of '%s\\%s'." fullword ascii
+      $s2 = "Usage: %s [-D domain][-G][-P][-c][-d][-h]" fullword ascii
+      $s3 = "-D    default user Domain" fullword ascii
+
+      $fp1 = "Panda Security S.L." ascii wide
+   condition:
+      uint16(0) == 0x5a4d and filesize < 380KB and all of ($s*)
+      and not 1 of ($fp*)
 }
 
 rule WAF_Bypass {
 	meta:
 		description = "Chinese Hacktool Set - file WAF-Bypass.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -42,6 +48,7 @@ rule WAF_Bypass {
 rule Guilin_veterans_cookie_spoofing_tool {
 	meta:
 		description = "Chinese Hacktool Set - file Guilin veterans cookie spoofing tool.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -58,6 +65,7 @@ rule Guilin_veterans_cookie_spoofing_tool {
 rule MarathonTool {
 	meta:
 		description = "Chinese Hacktool Set - file MarathonTool.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -73,6 +81,7 @@ rule MarathonTool {
 rule PLUGIN_TracKid {
 	meta:
 		description = "Chinese Hacktool Set - file TracKid.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -91,6 +100,7 @@ rule PLUGIN_TracKid {
 rule Pc_pc2015 {
 	meta:
 		description = "Chinese Hacktool Set - file pc2015.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -106,6 +116,7 @@ rule Pc_pc2015 {
 rule sekurlsa {
 	meta:
 		description = "Chinese Hacktool Set - file sekurlsa.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -122,6 +133,7 @@ rule sekurlsa {
 rule mysqlfast {
 	meta:
 		description = "Chinese Hacktool Set - file mysqlfast.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -140,6 +152,7 @@ rule mysqlfast {
 rule DTools2_02_DTools {
 	meta:
 		description = "Chinese Hacktool Set - file DTools.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -158,6 +171,7 @@ rule DTools2_02_DTools {
 rule dll_PacketX {
 	meta:
 		description = "Chinese Hacktool Set - file PacketX.dll - ActiveX wrapper for WinPcap packet capture library"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -173,6 +187,7 @@ rule dll_PacketX {
 rule SqlDbx_zhs {
 	meta:
 		description = "Chinese Hacktool Set - file SqlDbx_zhs.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -189,25 +204,10 @@ rule SqlDbx_zhs {
 		uint16(0) == 0x5a4d and 4 of them
 }
 
-rule digest_edir_auth {
-	meta:
-		description = "Chinese Hacktool Set - file digest_edir_auth.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "1dc349c91d890e3a1b897c2e8bb0ee1beeb34bd5"
-	strings:
-		$s0 = "Error reading Universal Password: %d = %s" fullword ascii
-		$s1 = "read password for binddn from file secretfile" fullword ascii
-		$s4 = "user search filter pattern. %%s = login" fullword ascii
-		$s5 = "-D binddn -w bindpasswd or -D binddn -W secretfile options" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 400KB and all of them
-}
-
 rule ms10048_x86 {
 	meta:
 		description = "Chinese Hacktool Set - file ms10048-x86.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -226,6 +226,7 @@ rule ms10048_x86 {
 rule Dos_ch {
 	meta:
 		description = "Chinese Hacktool Set - file ch.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -244,6 +245,7 @@ rule Dos_ch {
 rule DUBrute_DUBrute {
 	meta:
 		description = "Chinese Hacktool Set - file DUBrute.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -260,6 +262,7 @@ rule DUBrute_DUBrute {
 rule CookieTools {
 	meta:
 		description = "Chinese Hacktool Set - file CookieTools.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -271,12 +274,13 @@ rule CookieTools {
 		$s8 = "OnGetPasswordP" fullword ascii
 		$s12 = "http://www.chinesehack.org/" fullword ascii
 	condition:
-		uint16(0) == 0x5a4d and filesize < 5000KB and 2 of them
+		uint16(0) == 0x5a4d and filesize < 5000KB and 4 of them
 }
 
 rule update_PcInit {
 	meta:
 		description = "Chinese Hacktool Set - file PcInit.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -295,6 +299,7 @@ rule update_PcInit {
 rule dat_NaslLib {
 	meta:
 		description = "Chinese Hacktool Set - file NaslLib.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -310,6 +315,7 @@ rule dat_NaslLib {
 rule Dos_1 {
 	meta:
 		description = "Chinese Hacktool Set - file 1.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -324,6 +330,7 @@ rule Dos_1 {
 rule OtherTools_servu {
 	meta:
 		description = "Chinese Hacktool Set - file svu.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -334,29 +341,13 @@ rule OtherTools_servu {
 		$s2 = "GetProcAddress" fullword ascii
 		$s3 = "WriteFile" fullword ascii
 	condition:
-		$s0 at 0 and filesize < 50KB and all of them
-}
-
-rule ncsa_auth {
-	meta:
-		description = "Chinese Hacktool Set - file ncsa_auth.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "d87c984107adc3921720f4c76608dc6ed68b2d84"
-	strings:
-		$s0 = "Usage: ncsa_auth <passwordfile>" fullword ascii
-		$s1 = "ERR Wrong password" fullword ascii
-		$s2 = "ERR No such user" fullword ascii
-		$s6 = "ncsa_auth: cannot create hash table" fullword ascii
-		$s20 = "(%d) %s" fullword ascii /* Goodware String - occured 11 times */
-	condition:
-		uint16(0) == 0x5a4d and filesize < 440KB and all of them
+		uint32(0) == 0x454b5a4d and $s0 at 0 and filesize < 50KB and all of them
 }
 
 rule ustrrefadd {
 	meta:
 		description = "Chinese Hacktool Set - file ustrrefadd.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -374,6 +365,7 @@ rule ustrrefadd {
 rule XScanLib {
 	meta:
 		description = "Chinese Hacktool Set - file XScanLib.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -390,6 +382,7 @@ rule XScanLib {
 rule IDTools_For_WinXP_IdtTool {
 	meta:
 		description = "Chinese Hacktool Set - file IdtTool.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -405,6 +398,7 @@ rule IDTools_For_WinXP_IdtTool {
 rule GoodToolset_ms11046 {
 	meta:
 		description = "Chinese Hacktool Set - file ms11046.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -422,6 +416,7 @@ rule GoodToolset_ms11046 {
 rule Cmdshell32 {
 	meta:
 		description = "Chinese Hacktool Set - file Cmdshell32.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -437,6 +432,7 @@ rule Cmdshell32 {
 rule Sniffer_analyzer_SSClone_1210_full_version {
 	meta:
 		description = "Chinese Hacktool Set - file Sniffer analyzer SSClone 1210 full version.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -453,6 +449,7 @@ rule Sniffer_analyzer_SSClone_1210_full_version {
 rule x64_klock {
 	meta:
 		description = "Chinese Hacktool Set - file klock.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -469,6 +466,7 @@ rule x64_klock {
 rule Dos_Down32 {
 	meta:
 		description = "Chinese Hacktool Set - file Down32.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -484,6 +482,7 @@ rule Dos_Down32 {
 rule MarathonTool_2 {
 	meta:
 		description = "Chinese Hacktool Set - file MarathonTool.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -496,27 +495,10 @@ rule MarathonTool_2 {
 		uint16(0) == 0x5a4d and filesize < 1000KB and all of them
 }
 
-rule Tools_termsrv {
-	meta:
-		description = "Chinese Hacktool Set - file termsrv.dll"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "294a693d252f8f4c85ad92ee8c618cebd94ef247"
-	strings:
-		$s1 = "Iv\\SmSsWinStationApiPort" fullword ascii
-		$s2 = " TSInternetUser " fullword wide
-		$s3 = "KvInterlockedCompareExchange" fullword ascii
-		$s4 = " WINS/DNS " fullword wide
-		$s5 = "winerror=%1" fullword wide
-		$s6 = "TermService " fullword wide
-	condition:
-		uint16(0) == 0x5a4d and filesize < 1150KB and all of them
-}
-
 rule scanms_scanms {
 	meta:
 		description = "Chinese Hacktool Set - file scanms.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -534,6 +516,7 @@ rule scanms_scanms {
 rule CN_Tools_PcShare {
 	meta:
 		description = "Chinese Hacktool Set - file PcShare.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -553,6 +536,7 @@ rule CN_Tools_PcShare {
 rule pw_inspector {
 	meta:
 		description = "Chinese Hacktool Set - file pw-inspector.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -568,6 +552,7 @@ rule pw_inspector {
 rule Dll_LoadEx {
 	meta:
 		description = "Chinese Hacktool Set - file Dll_LoadEx.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -587,6 +572,7 @@ rule Dll_LoadEx {
 rule dat_report {
 	meta:
 		description = "Chinese Hacktool Set - file report.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -601,6 +587,7 @@ rule dat_report {
 rule Dos_iis7 {
 	meta:
 		description = "Chinese Hacktool Set - file iis7.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -618,6 +605,7 @@ rule Dos_iis7 {
 rule SwitchSniffer {
 	meta:
 		description = "Chinese Hacktool Set - file SwitchSniffer.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -632,6 +620,7 @@ rule SwitchSniffer {
 rule dbexpora {
 	meta:
 		description = "Chinese Hacktool Set - file dbexpora.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -647,6 +636,7 @@ rule dbexpora {
 rule SQLCracker {
 	meta:
 		description = "Chinese Hacktool Set - file SQLCracker.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -664,6 +654,7 @@ rule SQLCracker {
 rule FreeVersion_debug {
 	meta:
 		description = "Chinese Hacktool Set - file debug.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -683,6 +674,7 @@ rule FreeVersion_debug {
 rule Dos_look {
 	meta:
 		description = "Chinese Hacktool Set - file look.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -698,6 +690,7 @@ rule Dos_look {
 rule NtGodMode {
 	meta:
 		description = "Chinese Hacktool Set - file NtGodMode.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -712,26 +705,10 @@ rule NtGodMode {
 		uint16(0) == 0x5a4d and filesize < 45KB and all of them
 }
 
-rule Dos_NC {
-	meta:
-		description = "Chinese Hacktool Set - file NC.EXE"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "57f0839433234285cc9df96198a6ca58248a4707"
-	strings:
-		$s1 = "nc -l -p port [options] [hostname] [port]" fullword ascii
-		$s2 = "invalid connection to [%s] from %s [%s] %d" fullword ascii
-		$s3 = "post-rcv getsockname failed" fullword ascii
-		$s4 = "Failed to execute shell, error = %s" fullword ascii
-		$s5 = "UDP listen needs -p arg" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 290KB and all of them
-}
-
 rule WebCrack4_RouterPasswordCracking {
 	meta:
 		description = "Chinese Hacktool Set - file WebCrack4-RouterPasswordCracking.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -746,26 +723,10 @@ rule WebCrack4_RouterPasswordCracking {
 		uint16(0) == 0x5a4d and filesize < 5000KB and 2 of them
 }
 
-rule HScan_v1_20_oncrpc {
-	meta:
-		description = "Chinese Hacktool Set - file oncrpc.dll"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "e8f047eed8d4f6d2f5dbaffdd0e6e4a09c5298a2"
-	strings:
-		$s1 = "clnt_raw.c - Fatal header serialization error." fullword ascii
-		$s2 = "svctcp_.c - cannot getsockname or listen" fullword ascii
-		$s3 = "too many connections (%d), compilation constant FD_SETSIZE was only %d" fullword ascii
-		$s4 = "svc_run: - select failed" fullword ascii
-		$s5 = "@(#)bindresvport.c" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 340KB and 4 of them
-}
-
 rule hscan_gui {
 	meta:
 		description = "Chinese Hacktool Set - file hscan-gui.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -781,6 +742,7 @@ rule hscan_gui {
 rule S_MultiFunction_Scanners_s {
 	meta:
 		description = "Chinese Hacktool Set - file s.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -802,25 +764,10 @@ rule S_MultiFunction_Scanners_s {
 		uint16(0) == 0x5a4d and filesize < 8000KB and 4 of them
 }
 
-rule mswin_ntlm_auth {
-	meta:
-		description = "Chinese Hacktool Set - file mswin_ntlm_auth.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "390af28581db224af38a885b7ffad819c9b3be89"
-	strings:
-		$s1 = "Login attempt had result %d" fullword ascii
-		$s2 = "Username string exceeds %d bytes, rejecting" fullword ascii
-		$s3 = "checking domain: '%s', user: '%s'" fullword ascii
-		$s4 = "Usage: %s [-d] [-v] [-A|D LocalUserGroup] [-h]" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 380KB and all of them
-}
-
 rule Dos_GetPass {
 	meta:
 		description = "Chinese Hacktool Set - file GetPass.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -838,6 +785,7 @@ rule Dos_GetPass {
 rule update_PcMain {
 	meta:
 		description = "Chinese Hacktool Set - file PcMain.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -862,6 +810,7 @@ rule update_PcMain {
 rule Dos_sys {
 	meta:
 		description = "Chinese Hacktool Set - file sys.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -878,6 +827,7 @@ rule Dos_sys {
 rule dat_xpf {
 	meta:
 		description = "Chinese Hacktool Set - file xpf.sys"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -893,6 +843,7 @@ rule dat_xpf {
 rule Project1 {
 	meta:
 		description = "Chinese Hacktool Set - file Project1.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -908,6 +859,7 @@ rule Project1 {
 rule Arp_EMP_v1_0 {
 	meta:
 		description = "Chinese Hacktool Set - file Arp EMP v1.0.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -921,6 +873,7 @@ rule Arp_EMP_v1_0 {
 rule CN_Tools_MyUPnP {
 	meta:
 		description = "Chinese Hacktool Set - file MyUPnP.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -933,25 +886,10 @@ rule CN_Tools_MyUPnP {
 		uint16(0) == 0x5a4d and filesize < 1500KB and all of them
 }
 
-rule logfile_daemon {
-	meta:
-		description = "Chinese Hacktool Set - file logfile-daemon.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "132a8f628109cda7eb58c91f1c5e5e626cbfd14a"
-	strings:
-		$s0 = "Error: usage: %s <logfile>" fullword ascii
-		$s1 = "vBWSSSj" fullword ascii /* Goodware String - occured 24 times */
-		$s2 = "t-Ht!Ht" fullword ascii /* Goodware String - occured 25 times */
-		$s3 = "QSUVW3" fullword ascii /* Goodware String - occured 162 times */
-	condition:
-		uint16(0) == 0x5a4d and filesize < 260KB and all of them
-}
-
 rule CN_Tools_Shiell {
 	meta:
 		description = "Chinese Hacktool Set - file Shiell.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -968,6 +906,7 @@ rule CN_Tools_Shiell {
 rule cndcom_cndcom {
 	meta:
 		description = "Chinese Hacktool Set - file cndcom.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -988,6 +927,7 @@ rule cndcom_cndcom {
 rule IsDebug_V1_4 {
 	meta:
 		description = "Chinese Hacktool Set - file IsDebug V1.4.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1008,6 +948,7 @@ rule IsDebug_V1_4 {
 rule HTTPSCANNER {
 	meta:
 		description = "Chinese Hacktool Set - file HTTPSCANNER.EXE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1022,6 +963,7 @@ rule HTTPSCANNER {
 rule HScan_v1_20_PipeCmd {
 	meta:
 		description = "Chinese Hacktool Set - file PipeCmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1043,6 +985,7 @@ rule HScan_v1_20_PipeCmd {
 rule Dos_fp {
 	meta:
 		description = "Chinese Hacktool Set - file fp.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1059,6 +1002,7 @@ rule Dos_fp {
 rule Dos_netstat {
 	meta:
 		description = "Chinese Hacktool Set - file netstat.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1075,6 +1019,7 @@ rule Dos_netstat {
 rule CN_Tools_xsniff {
 	meta:
 		description = "Chinese Hacktool Set - file xsniff.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1089,27 +1034,10 @@ rule CN_Tools_xsniff {
 		uint16(0) == 0x5a4d and filesize < 220KB and 2 of them
 }
 
-rule mswin_check_ad_group {
-	meta:
-		description = "Chinese Hacktool Set - file mswin_check_ad_group.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "15fa3d91c5e4836f27b9809d4efedc5a947fb221"
-	strings:
-		$s1 = "Domain Global group mode enabled using '%s' as default domain." fullword ascii
-		$s2 = "Warning: running in case insensitive mode !!!" fullword ascii
-		$s3 = "Usage: %s [-D domain][-G][-P][-c][-d][-h]" fullword ascii
-		$s4 = "Windows group: %S, Squid group: %S" fullword ascii
-		$s5 = "%s[%d]: " fullword ascii
-		$s6 = "DC Active Directory Site is %s" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 380KB and 4 of them
-}
-
 rule MSSqlPass {
 	meta:
 		description = "Chinese Hacktool Set - file MSSqlPass.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1125,6 +1053,7 @@ rule MSSqlPass {
 rule WSockExpert {
 	meta:
 		description = "Chinese Hacktool Set - file WSockExpert.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1143,6 +1072,7 @@ rule WSockExpert {
 rule Ms_Viru_racle {
 	meta:
 		description = "Chinese Hacktool Set - file racle.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1159,6 +1089,7 @@ rule Ms_Viru_racle {
 rule lamescan3 {
 	meta:
 		description = "Chinese Hacktool Set - file lamescan3.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1175,6 +1106,7 @@ rule lamescan3 {
 rule CN_Tools_pc {
 	meta:
 		description = "Chinese Hacktool Set - file pc.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1191,6 +1123,7 @@ rule CN_Tools_pc {
 rule Dos_Down64 {
 	meta:
 		description = "Chinese Hacktool Set - file Down64.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1209,6 +1142,7 @@ rule Dos_Down64 {
 rule epathobj_exp32 {
 	meta:
 		description = "Chinese Hacktool Set - file epathobj_exp32.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1226,6 +1160,7 @@ rule epathobj_exp32 {
 rule Tools_unknown {
 	meta:
 		description = "Chinese Hacktool Set - file unknown.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1243,6 +1178,7 @@ rule Tools_unknown {
 rule PLUGIN_AJunk {
 	meta:
 		description = "Chinese Hacktool Set - file AJunk.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1258,6 +1194,7 @@ rule PLUGIN_AJunk {
 rule IISPutScanner {
 	meta:
 		description = "Chinese Hacktool Set - file IISPutScanner.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1301,6 +1238,7 @@ rule IISPutScanner {
 rule IDTools_For_WinXP_IdtTool_2 {
 	meta:
 		description = "Chinese Hacktool Set - file IdtTool.sys"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1318,6 +1256,7 @@ rule IDTools_For_WinXP_IdtTool_2 {
 rule hkmjjiis6 {
 	meta:
 		description = "Chinese Hacktool Set - file hkmjjiis6.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1339,6 +1278,7 @@ rule hkmjjiis6 {
 rule Dos_lcx {
 	meta:
 		description = "Chinese Hacktool Set - file lcx.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1363,6 +1303,7 @@ rule Dos_lcx {
 rule x_way2_5_X_way {
 	meta:
 		description = "Chinese Hacktool Set - file X-way.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1384,6 +1325,7 @@ rule x_way2_5_X_way {
 rule tools_Sqlcmd {
 	meta:
 		description = "Chinese Hacktool Set - file Sqlcmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1403,6 +1345,7 @@ rule tools_Sqlcmd {
 rule Sword1_5 {
 	meta:
 		description = "Chinese Hacktool Set - file Sword1.5.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1422,6 +1365,7 @@ rule Sword1_5 {
 rule Tools_scan {
 	meta:
 		description = "Chinese Hacktool Set - file scan.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1437,6 +1381,7 @@ rule Tools_scan {
 rule Dos_c {
 	meta:
 		description = "Chinese Hacktool Set - file c.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1456,6 +1401,7 @@ rule Dos_c {
 rule arpsniffer {
 	meta:
 		description = "Chinese Hacktool Set - file arpsniffer.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1473,6 +1419,7 @@ rule arpsniffer {
 rule pw_inspector_2 {
 	meta:
 		description = "Chinese Hacktool Set - file pw-inspector.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1489,6 +1436,7 @@ rule pw_inspector_2 {
 rule datPcShare {
 	meta:
 		description = "Chinese Hacktool Set - file datPcShare.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1505,6 +1453,7 @@ rule datPcShare {
 rule Tools_xport {
 	meta:
 		description = "Chinese Hacktool Set - file xport.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1523,25 +1472,10 @@ rule Tools_xport {
 		uint16(0) == 0x5a4d and filesize < 100KB and 2 of them
 }
 
-rule fakeauth_auth {
-	meta:
-		description = "Chinese Hacktool Set - file fakeauth_auth.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "4d6311159e10ffbb904059ccfda70fde2fee1f7e"
-	strings:
-		$s0 = "sending 'NA invalid credentials, user=%s' to squid" fullword ascii
-		$s11 = "BH wrong packet type! user=%s" fullword ascii
-		$s16 = "fakeauth_auth[%ld]: " fullword ascii
-		$s20 = "sending 'TT %s' to squid" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 260KB and all of them
-}
-
 rule Pc_xai {
 	meta:
 		description = "Chinese Hacktool Set - file xai.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1561,6 +1495,7 @@ rule Pc_xai {
 rule Radmin_Hash {
 	meta:
 		description = "Chinese Hacktool Set - file Radmin_Hash.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1578,6 +1513,7 @@ rule Radmin_Hash {
 rule OSEditor {
 	meta:
 		description = "Chinese Hacktool Set - file OSEditor.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1595,6 +1531,7 @@ rule OSEditor {
 rule GoodToolset_ms11011 {
 	meta:
 		description = "Chinese Hacktool Set - file ms11011.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1611,6 +1548,7 @@ rule GoodToolset_ms11011 {
 rule FreeVersion_release {
 	meta:
 		description = "Chinese Hacktool Set - file release.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1629,6 +1567,7 @@ rule FreeVersion_release {
 rule churrasco {
 	meta:
 		description = "Chinese Hacktool Set - file churrasco.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1645,6 +1584,7 @@ rule churrasco {
 rule x64_KiwiCmd {
 	meta:
 		description = "Chinese Hacktool Set - file KiwiCmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1660,6 +1600,7 @@ rule x64_KiwiCmd {
 rule sql1433_SQL {
 	meta:
 		description = "Chinese Hacktool Set - file SQL.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1676,6 +1617,7 @@ rule sql1433_SQL {
 rule CookieTools2 {
 	meta:
 		description = "Chinese Hacktool Set - file CookieTools2.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1692,6 +1634,7 @@ rule CookieTools2 {
 rule cyclotron {
 	meta:
 		description = "Chinese Hacktool Set - file cyclotron.sys"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1709,6 +1652,7 @@ rule cyclotron {
 rule xscan_gui {
 	meta:
 		description = "Chinese Hacktool Set - file xscan_gui.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1725,6 +1669,7 @@ rule xscan_gui {
 rule CN_Tools_hscan {
 	meta:
 		description = "Chinese Hacktool Set - file hscan.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1745,6 +1690,7 @@ rule CN_Tools_hscan {
 rule GoodToolset_pr {
 	meta:
 		description = "Chinese Hacktool Set - file pr.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1763,6 +1709,7 @@ rule GoodToolset_pr {
 rule hydra_7_4_1_hydra {
 	meta:
 		description = "Chinese Hacktool Set - file hydra.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1781,6 +1728,7 @@ rule hydra_7_4_1_hydra {
 rule CN_Tools_srss_2 {
 	meta:
 		description = "Chinese Hacktool Set - file srss.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1803,6 +1751,7 @@ rule CN_Tools_srss_2 {
 rule Dos_NtGod {
 	meta:
 		description = "Chinese Hacktool Set - file NtGod.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1819,6 +1768,7 @@ rule Dos_NtGod {
 rule CN_Tools_VNCLink {
 	meta:
 		description = "Chinese Hacktool Set - file VNCLink.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1834,6 +1784,7 @@ rule CN_Tools_VNCLink {
 rule tools_NTCmd {
 	meta:
 		description = "Chinese Hacktool Set - file NTCmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1852,6 +1803,7 @@ rule tools_NTCmd {
 rule mysql_pwd_crack {
 	meta:
 		description = "Chinese Hacktool Set - file mysql_pwd_crack.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1869,6 +1821,7 @@ rule mysql_pwd_crack {
 rule CmdShell64 {
 	meta:
 		description = "Chinese Hacktool Set - file CmdShell64.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1888,6 +1841,7 @@ rule CmdShell64 {
 rule Ms_Viru_v {
 	meta:
 		description = "Chinese Hacktool Set - file v.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1906,6 +1860,7 @@ rule Ms_Viru_v {
 rule CN_Tools_Vscan {
 	meta:
 		description = "Chinese Hacktool Set - file Vscan.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1923,6 +1878,7 @@ rule CN_Tools_Vscan {
 rule Dos_iis {
 	meta:
 		description = "Chinese Hacktool Set - file iis.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1942,6 +1898,7 @@ rule Dos_iis {
 rule IISPutScannesr {
 	meta:
 		description = "Chinese Hacktool Set - file IISPutScannesr.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1953,12 +1910,14 @@ rule IISPutScannesr {
 		uint16(0) == 0x5a4d and filesize < 500KB and all of them
 }
 
-rule Generate {
+rule HKTL_Unknown_CN_Generate {
 	meta:
 		description = "Chinese Hacktool Set - file Generate.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
+		modified = "2022-01-20" /* fixed typo in rule name */
 		hash = "2cb4c3916271868c30c7b4598da697f59e9c7a12"
 	strings:
 		$s1 = "C:\\TEMP\\" fullword ascii
@@ -1973,6 +1932,7 @@ rule Generate {
 rule Pc_rejoice {
 	meta:
 		description = "Chinese Hacktool Set - file rejoice.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -1991,6 +1951,7 @@ rule Pc_rejoice {
 rule ms11080_withcmd {
 	meta:
 		description = "Chinese Hacktool Set - file ms11080_withcmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2008,6 +1969,7 @@ rule ms11080_withcmd {
 rule OtherTools_xiaoa {
 	meta:
 		description = "Chinese Hacktool Set - file xiaoa.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2026,6 +1988,7 @@ rule OtherTools_xiaoa {
 rule unknown2 {
 	meta:
 		description = "Chinese Hacktool Set - file unknown2.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2042,26 +2005,10 @@ rule unknown2 {
 		uint16(0) == 0x5a4d and filesize < 300KB and 4 of them
 }
 
-rule mswin_auth {
-	meta:
-		description = "Chinese Hacktool Set - file mswin_auth.exe"
-		author = "Florian Roth"
-		reference = "http://tools.zjqhr.com/"
-		date = "2015-06-13"
-		hash = "512cbd02f6fe69482e005a067db4eb07ce62d5a0"
-	strings:
-		$s1 = "No such user or wrong password" fullword ascii
-		$s2 = "%s [-A|D UserGroup][-O DefaultDomain][-d]" fullword ascii
-		$s3 = "mswin_auth[%d]: " fullword ascii
-		$s4 = "Unknown option: -%c. Exiting" fullword ascii
-		$s5 = "-D can specify a Windows Local Group name not allowed to authenticate" fullword ascii
-	condition:
-		uint16(0) == 0x5a4d and filesize < 150KB and all of them
-}
-
 rule hydra_7_3_hydra {
 	meta:
 		description = "Chinese Hacktool Set - file hydra.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2079,6 +2026,7 @@ rule hydra_7_3_hydra {
 rule OracleScan {
 	meta:
 		description = "Chinese Hacktool Set - file OracleScan.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2095,6 +2043,7 @@ rule OracleScan {
 rule SQLTools {
 	meta:
 		description = "Chinese Hacktool Set - file SQLTools.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2114,6 +2063,7 @@ rule SQLTools {
 rule portscanner {
 	meta:
 		description = "Chinese Hacktool Set - file portscanner.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2130,6 +2080,7 @@ rule portscanner {
 rule kappfree {
 	meta:
 		description = "Chinese Hacktool Set - file kappfree.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2145,6 +2096,7 @@ rule kappfree {
 rule Smartniff {
 	meta:
 		description = "Chinese Hacktool Set - file Smartniff.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2160,6 +2112,7 @@ rule Smartniff {
 rule ChinaChopper_caidao {
 	meta:
 		description = "Chinese Hacktool Set - file caidao.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2178,6 +2131,7 @@ rule ChinaChopper_caidao {
 rule KiwiTaskmgr_2 {
 	meta:
 		description = "Chinese Hacktool Set - file KiwiTaskmgr.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2193,6 +2147,7 @@ rule KiwiTaskmgr_2 {
 rule kappfree_2 {
 	meta:
 		description = "Chinese Hacktool Set - file kappfree.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2209,6 +2164,7 @@ rule kappfree_2 {
 rule x_way2_5_sqlcmd {
 	meta:
 		description = "Chinese Hacktool Set - file sqlcmd.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2237,6 +2193,7 @@ rule x_way2_5_sqlcmd {
 rule Win32_klock {
 	meta:
 		description = "Chinese Hacktool Set - file klock.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2252,6 +2209,7 @@ rule Win32_klock {
 rule ipsearcher {
 	meta:
 		description = "Chinese Hacktool Set - file ipsearcher.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2268,6 +2226,7 @@ rule ipsearcher {
 rule ms10048_x64 {
 	meta:
 		description = "Chinese Hacktool Set - file ms10048-x64.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2284,6 +2243,7 @@ rule ms10048_x64 {
 rule hscangui {
 	meta:
 		description = "Chinese Hacktool Set - file hscangui.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2300,6 +2260,7 @@ rule hscangui {
 rule GoodToolset_ms11080 {
 	meta:
 		description = "Chinese Hacktool Set - file ms11080.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2318,6 +2279,7 @@ rule GoodToolset_ms11080 {
 rule epathobj_exp64 {
 	meta:
 		description = "Chinese Hacktool Set - file epathobj_exp64.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2336,6 +2298,7 @@ rule epathobj_exp64 {
 rule kelloworld_2 {
 	meta:
 		description = "Chinese Hacktool Set - file kelloworld.dll"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2351,6 +2314,7 @@ rule kelloworld_2 {
 rule HScan_v1_20_hscan {
 	meta:
 		description = "Chinese Hacktool Set - file hscan.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2368,6 +2332,7 @@ rule HScan_v1_20_hscan {
 rule _Project1_Generate_rejoice {
 	meta:
 		description = "Chinese Hacktool Set - from files Project1.exe, Generate.exe, rejoice.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2389,6 +2354,7 @@ rule _Project1_Generate_rejoice {
 rule _hscan_hscan_hscangui {
 	meta:
 		description = "Chinese Hacktool Set - from files hscan.exe, hscan.exe, hscangui.exe"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2408,7 +2374,8 @@ rule _hscan_hscan_hscangui {
 
 rule kiwi_tools {
 	meta:
-		description = "Chinese Hacktool Set - from files kappfree.dll, kelloworld.dll, KiwiCmd.exe, KiwiRegedit.exe, KiwiTaskmgr.exe, klock.dll, mimikatz.exe, mimikatz.sys, sekurlsa.dll, kappfree.dll, kelloworld.dll, KiwiCmd.exe, KiwiRegedit.exe, KiwiTaskmgr.exe, klock.dll, mimikatz.exe, mimikatz.sys, sekurlsa.dll"
+		description = "Chinese Hacktool Set"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"
@@ -2439,9 +2406,10 @@ rule kiwi_tools {
 		uint16(0) == 0x5a4d and filesize < 1000KB and all of them
 }
 
-rule _kappfree_kelloworld_KiwiCmd_KiwiRegedit_KiwiTaskmgr_klock_mimikatz_sekurlsa_kappfree_kelloworld_KiwiCmd_KiwiRegedit_KiwiTaskmg {
+rule kiwi_tools_gentil_kiwi {
 	meta:
-		description = "Chinese Hacktool Set - from files kappfree.dll, kelloworld.dll, KiwiCmd.exe, KiwiRegedit.exe, KiwiTaskmgr.exe, klock.dll, mimikatz.exe, sekurlsa.dll, kappfree.dll, kelloworld.dll, KiwiCmd.exe, KiwiRegedit.exe, KiwiTaskmgr.exe, klock.dll, mimikatz.exe, sekurlsa.dll"
+		description = "Chinese Hacktool Set"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://tools.zjqhr.com/"
 		date = "2015-06-13"

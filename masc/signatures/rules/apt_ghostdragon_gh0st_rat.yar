@@ -8,6 +8,7 @@
 rule GhostDragon_Gh0stRAT {
 	meta:
 		description = "Detects Gh0st RAT mentioned in Cylance' Ghost Dragon Report"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://blog.cylance.com/the-ghost-dragon"
 		date = "2016-04-23"
@@ -25,7 +26,6 @@ rule GhostDragon_Gh0stRAT {
 		$x7 = "%-23s %-16s  0x%x(%02d)" fullword ascii
 		$x8 = "RegSetValueEx(start)" fullword ascii
 		$x9 = "%s\\%s64.dl_" fullword ascii
-		$x10 = "$#REGMASTERKEY$WebCat was successfully started" fullword wide
 
 		$s1 = "viewsc.dll" fullword ascii
 		$s2 = "Proxy-Connection:   Keep-Alive" fullword ascii
@@ -53,6 +53,7 @@ rule GhostDragon_Gh0stRAT {
 rule GhostDragon_Gh0stRAT_Sample2 {
 	meta:
 		description = "Detects Gh0st RAT mentioned in Cylance' Ghost Dragon Report"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://blog.cylance.com/the-ghost-dragon"
 		date = "2016-04-23"
@@ -74,6 +75,7 @@ rule GhostDragon_Gh0stRAT_Sample2 {
 rule GhostDragon_Gh0stRAT_Sample3 {
 	meta:
 		description = "Detects Gh0st RAT mentioned in Cylance' Ghost Dragon Report"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://blog.cylance.com/the-ghost-dragon"
 		date = "2016-04-23"

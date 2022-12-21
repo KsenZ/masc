@@ -2,6 +2,7 @@
 rule LightFTP_fftp_x86_64 {
 	meta:
 		description = "Detects a light FTP server"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/hfiref0x/LightFTP"
 		date = "2015-05-14"
@@ -21,6 +22,7 @@ rule LightFTP_fftp_x86_64 {
 rule LightFTP_Config {
 	meta:
 		description = "Detects a light FTP server - config file"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/hfiref0x/LightFTP"
 		date = "2015-05-14"

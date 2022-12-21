@@ -3,16 +3,16 @@
    Generic Anomalies
 
    Florian Roth
-   BSK Consulting GmbH
+   Nextron Systems GmbH
 
-	License: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
-	Copyright and related rights waived via https://creativecommons.org/licenses/by-nc-sa/4.0/
+	License: Detetction Rule License 1.1 (https://github.com/SigmaHQ/sigma/blob/master/LICENSE.Detection.Rules.md)
 
 */
 rule Embedded_EXE_Cloaking {
         meta:
                 description = "Detects an embedded executable in a non-executable file"
-                author = "Florian Roth"
+                license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
                 date = "2015/02/27"
                 score = 65
         strings:
@@ -36,34 +36,74 @@ rule Embedded_EXE_Cloaking {
                 for any i in (1..#mz): ( @a1 < ( @mz[i] + 200 ) or @a2 < ( @mz[i] + 200 ) )
 }
 
-rule Cloaked_as_JPG {
-        meta:
-                description = "Detects a cloaked file as JPG"
-                author = "Florian Roth (eval section from Didier Stevens)"
-                date = "2015/02/29"
-                score = 40
-        condition:
-                uint16be(0x00) != 0xFFD8 and
-                extension matches /\.jpg/i and
-                filetype != "GIF"
-                /* and
-                not filepath contains "ASP.NET" */
-}
+// whitelist-approach failed : reworked in SUSP_Known_Type_Cloaked_as_JPG
 
-rule GIFCloaked_Webshell {
-    meta:
-        description = "Detects a webshell that cloakes itself with GIF header(s) - Based on Dark Security Team Webshell"
-        author = "Florian Roth"
-        hash = "f1c95b13a71ca3629a0bb79601fcacf57cdfcf768806a71b26f2448f8c1d5d24"
-        score = 60
-    strings:
-        $magic = "GIF"
-        $s0 = "input type"
-        $s1 = "<%eval request"
-        $s2 = "<%eval(Request.Item["
-        $s3 = "LANGUAGE='VBScript'"
-    condition:
-        ( $magic at 0 ) and ( 1 of ($s*) )
+// rule Cloaked_as_JPG {
+//    meta:
+//       description = "Detects a non-JPEG file cloaked as JPG"
+//       author = "Florian Roth"
+//       date = "2015/03/02"
+//       modified = "2022-09-16"
+//       score = 40
+//    strings:
+//       $fp1 = "<!DOCTYPE" ascii
+//       $fp2 = "Sophos Encrypted File Format" ascii
+//       $fp3 = "This is a critical resource file used by WatchGuard/TDR" ascii
+//    condition:
+//       uint16be(0) != 0xFFD8 and extension == ".jpg"
+//       and filetype != "GIF"
+//       and filetype != "PDF"
+//       and not $fp1 in (0..30)
+//       and not $fp2 at 0
+//       and not $fp3
+//       and not uint16(0) == 0x8b1f /* GZIP */
+//       and not uint16(0) == 0x4d42 /* BMP */
+//       and not uint32(0) == 0x474E5089 /* PNG Header */
+//       and not uint32(0) == 0x002A4949 /* TIFF Header */
+//       and not uint32be(0) == 0x3c737667 /* <svg */
+//       and not uint32be(0) == 0x52494646 /* RIFF (WebP) */
+//       and not uint32be(0x4) == 0x66747970 /* HEIF Header https://github.com/strukturag/libheif/commit/6ca8e2548dbfe21200bae3a7c2c315a1796e3852 */
+//       and not uint32be(0xe) == 0x4a464946 /* JFIF distributed by Matlab */
+//       and not filename matches /\$[Ii][A-Z0-9]{6}/
+//       and not filepath contains "WinSxS"
+//       and not filepath contains "Package_for_RollupFix"
+//       and not filename matches /^\._/
+//       and not filepath contains "$Recycle.Bin"
+//       and not filepath contains "\\Cache\\" /* generic cache e.g. for Chrome: \User Data\Default\Cache\ */
+//       and not filepath contains "\\User Data\\Default\\Extensions\\" // chrome extensions
+//       and not filepath contains "\\cache2\\" // FF cache
+//       and not filepath contains "\\Microsoft\\Windows\\INetCache\\IE\\" // old IE
+//       and not filepath contains "/com.apple.Safari/WebKitCache/"
+//       and not filepath contains "\\Edge\\User Data\\" // some uncommon Edge path
+//       and not filepath contains "/Code/"
+//       and not filepath contains "\\Code\\"
+// }
+
+rule SUSP_Known_Type_Cloaked_as_JPG {
+   meta:
+      description = "Detects a non-JPEG file type cloaked as .jpg"
+      author = "Florian Roth"
+      reference = "Internal Research - replacement for Cloaked_as_JPG rule"
+      date = "2022-09-16"
+      score = 60
+   condition:
+      ( extension == ".jpg" or extension == ".jpeg" ) and ( 
+         filetype == "EXE" or
+         filetype == "ELF" or
+         filetype == "MACH-O" or
+         filetype == "VBS" or
+         filetype == "PHP" or
+         filetype == "JSP" or
+         filetype == "Python" or
+         filetype == "LSASS Dump File" or
+         filetype == "ASP" or
+         filetype == "BATCH" or
+         filetype == "RTF" or
+         filetype == "MDMP" or
+
+         filetype contains "PowerShell" or
+         filetype contains "Base64"
+      )
 }
 
 /*
@@ -74,48 +114,68 @@ rule GIFCloaked_Webshell {
 */
 
 rule Suspicious_Size_explorer_exe {
-    meta:
-        description = "Detects uncommon file size of explorer.exe"
-        author = "Florian Roth"
-        score = 60
-        date = "2015-12-21"
-    condition:
-        uint16(0) == 0x5a4d
-        and filename == "explorer.exe"
-        and not filepath contains "teamviewer"
-        and ( filesize < 1000KB or filesize > 3500KB )
+   meta:
+      description = "Detects uncommon file size of explorer.exe"
+      license = "https://creativecommons.org/licenses/by-nc/4.0/"
+      author = "Florian Roth"
+      score = 60
+      nodeepdive = 1
+      date = "2015-12-21"
+      modified = "2022-04-27"
+      noarchivescan = 1
+   strings:
+      $fp = "Wine placeholder DLL"
+   condition:
+      uint16(0) == 0x5a4d
+      and filename == "explorer.exe"
+      and not filepath contains "teamviewer"
+      and not filepath contains "/lib/wine/fakedlls"
+      and ( filesize < 800KB or filesize > 6500KB )
+      and not $fp
 }
 
 rule Suspicious_Size_chrome_exe {
     meta:
-        description = "Detects uncommon file size of chrome.exe"
-        author = "Florian Roth"
-        score = 60
-        date = "2015-12-21"
+      description = "Detects uncommon file size of chrome.exe"
+      author = "Florian Roth"
+      score = 60
+      nodeepdive = 1
+      date = "2015-12-21"
+      modified = "2022-09-15"
+      noarchivescan = 1
+    strings:
+      $fp1 = "HP Sure Click Chromium Launcher" wide
+      $fp2 = "BrChromiumLauncher.exe" wide fullword
     condition:
-        uint16(0) == 0x5a4d
-        and filename == "chrome.exe"
-        and ( filesize < 500KB or filesize > 1300KB )
+      uint16(0) == 0x5a4d
+      and filename == "chrome.exe"
+      and ( filesize < 500KB or filesize > 5000KB )
+      and not 1 of ($fp*)
 }
 
 rule Suspicious_Size_csrss_exe {
     meta:
         description = "Detects uncommon file size of csrss.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        modified = "2022-01-28"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "csrss.exe"
-        and ( filesize > 18KB )
+        and ( filesize > 50KB )
 }
 
 rule Suspicious_Size_iexplore_exe {
     meta:
         description = "Detects uncommon file size of iexplore.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "iexplore.exe"
@@ -126,9 +186,11 @@ rule Suspicious_Size_iexplore_exe {
 rule Suspicious_Size_firefox_exe {
     meta:
         description = "Detects uncommon file size of firefox.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "firefox.exe"
@@ -138,69 +200,82 @@ rule Suspicious_Size_firefox_exe {
 rule Suspicious_Size_java_exe {
     meta:
         description = "Detects uncommon file size of java.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "java.exe"
-        and ( filesize < 42KB or filesize > 900KB )
+        and ( filesize < 30KB or filesize > 900KB )
 }
 
 rule Suspicious_Size_lsass_exe {
     meta:
         description = "Detects uncommon file size of lsass.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "lsass.exe"
-        and ( filesize < 10KB or filesize > 58KB )
+        and ( filesize < 10KB or filesize > 100KB )
 }
 
 rule Suspicious_Size_svchost_exe {
     meta:
         description = "Detects uncommon file size of svchost.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "svchost.exe"
-        and ( filesize < 14KB or filesize > 40KB )
+        and ( filesize < 14KB or filesize > 100KB )
 }
 
 rule Suspicious_Size_winlogon_exe {
     meta:
         description = "Detects uncommon file size of winlogon.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "winlogon.exe"
-        and ( filesize < 279KB or filesize > 580KB )
+        and ( filesize < 279KB or filesize > 970KB )
 }
 
 rule Suspicious_Size_igfxhk_exe {
     meta:
         description = "Detects uncommon file size of igfxhk.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-21"
+        modified = "2022-03-08"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "igfxhk.exe"
-        and ( filesize < 200KB or filesize > 265KB )
+        and ( filesize < 200KB or filesize > 300KB )
 }
 
 rule Suspicious_Size_servicehost_dll {
     meta:
         description = "Detects uncommon file size of servicehost.dll"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "servicehost.dll"
@@ -210,59 +285,206 @@ rule Suspicious_Size_servicehost_dll {
 rule Suspicious_Size_rundll32_exe {
     meta:
         description = "Detects uncommon file size of rundll32.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "rundll32.exe"
-        and ( filesize < 30KB or filesize > 60KB )
+        and ( filesize < 30KB or filesize > 120KB )
 }
 
 rule Suspicious_Size_taskhost_exe {
     meta:
         description = "Detects uncommon file size of taskhost.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "taskhost.exe"
-        and ( filesize < 45KB or filesize > 85KB )
+        and ( filesize < 45KB or filesize > 120KB )
 }
 
 rule Suspicious_Size_spoolsv_exe {
     meta:
         description = "Detects uncommon file size of spoolsv.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "spoolsv.exe"
-        and ( filesize < 50KB or filesize > 930KB )
+        and ( filesize < 50KB or filesize > 1000KB )
 }
 
 rule Suspicious_Size_smss_exe {
     meta:
         description = "Detects uncommon file size of smss.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "smss.exe"
-        and ( filesize < 40KB or filesize > 320KB )
+        and ( filesize < 40KB or filesize > 5000KB )
 }
 
 rule Suspicious_Size_wininit_exe {
     meta:
         description = "Detects uncommon file size of wininit.exe"
-        author = "Florian Roth"
+        license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
         score = 60
         date = "2015-12-23"
+        noarchivescan = 1
     condition:
         uint16(0) == 0x5a4d
         and filename == "wininit.exe"
-        and ( filesize < 90KB or filesize > 300KB )
+        and ( filesize < 90KB or filesize > 800KB )
+}
+
+rule Suspicious_AutoIt_by_Microsoft {
+   meta:
+      description = "Detects a AutoIt script with Microsoft identification"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "Internal Research - VT"
+      date = "2017-12-14"
+      score = 60
+      hash1 = "c0cbcc598d4e8b501aa0bd92115b4c68ccda0993ca0c6ce19edd2e04416b6213"
+   strings:
+      $s1 = "Microsoft Corporation. All rights reserved" fullword wide
+      $s2 = "AutoIt" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and filesize < 2000KB and all of them
+}
+
+rule SUSP_Size_of_ASUS_TuningTool {
+   meta:
+      description = "Detects an ASUS tuning tool with a suspicious size"
+      author = "Florian Roth"
+      reference = "https://www.welivesecurity.com/2018/10/17/greyenergy-updated-arsenal-dangerous-threat-actors/"
+      date = "2018-10-17"
+      score = 60
+      noarchivescan = 1
+      hash1 = "d4e97a18be820a1a3af639c9bca21c5f85a3f49a37275b37fd012faeffcb7c4a"
+   strings:
+      $s1 = "\\Release\\ASGT.pdb" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and filesize < 300KB and filesize > 70KB and all of them
+}
+
+rule SUSP_PiratedOffice_2007 {
+   meta:
+      description = "Detects an Office document that was created with a pirated version of MS Office 2007"
+      author = "Florian Roth"
+      reference = "https://twitter.com/pwnallthethings/status/743230570440826886?lang=en"
+      date = "2018-12-04"
+      score = 40
+      hash1 = "210448e58a50da22c0031f016ed1554856ed8abe79ea07193dc8f5599343f633"
+   strings:
+      $s7 = "<Company>Grizli777</Company>" ascii
+   condition:
+      uint16(0) == 0xcfd0 and filesize < 300KB and all of them
+}
+
+rule SUSP_Scheduled_Task_BigSize {
+   meta:
+      description = "Detects suspiciously big scheduled task XML file as seen in combination with embedded base64 encoded PowerShell code"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2018-12-06"
+   strings:
+      $a0 = "<Task version=" ascii wide
+      $a1 = "xmlns=\"http://schemas.microsoft.com/windows/" ascii wide
+
+      $fp1 = "</Counter><Counter>" wide
+      $fp2 = "Office Feature Updates Logon" wide
+      $fp3 = "Microsoft Shared" fullword wide
+   condition:
+      uint16(0) == 0xfeff and filesize > 20KB and all of ($a*) and not 1 of ($fp*)
+}
+
+rule SUSP_Putty_Unnormal_Size {
+   meta:
+      description = "Detects a putty version with a size different than the one provided by Simon Tatham (could be caused by an additional signature or malware)"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2019-01-07"
+      modified = "2022-06-30"
+      score = 50
+      hash1 = "e5e89bdff733d6db1cffe8b3527e823c32a78076f8eadc2f9fd486b74a0e9d88"
+      hash2 = "ce4c1b718b54973291aefdd63d1cca4e4d8d4f5353a2be7f139a290206d0c170"
+      hash3 = "adb72ea4eab7b2efc2da6e72256b5a3bb388e9cdd4da4d3ff42a9fec080aa96f"
+      hash4 = "1c0bd6660fa43fa90bd88b56cdd4a4c2ffb4ef9d04e8893109407aa7039277db"
+   strings:
+      $s1 = "SSH, Telnet and Rlogin client" fullword wide
+
+      $v1 = "Release 0.6" wide
+      $v2 = "Release 0.70" wide
+
+      $fp1 = "KiTTY fork" fullword wide
+   condition:
+      uint16(0) == 0x5a4d
+      and $s1 and 1 of ($v*)
+      and not 1 of ($fp*)
+      // has offset
+      and filesize != 524288
+      and filesize != 495616
+      and filesize != 483328
+      and filesize != 524288
+      and filesize != 712176
+      and filesize != 828400
+      and filesize != 569328
+      and filesize != 454656
+      and filesize != 531368
+      and filesize != 524288
+      and filesize != 483328
+      and filesize != 713592
+      and filesize != 829304
+      and filesize != 571256
+      and filesize != 774200
+      and filesize != 854072
+      and filesize != 665144
+      and filesize != 774200
+      and filesize != 854072
+      and filesize != 665144
+      and filesize != 640000 /* putty provided by Safenet https://thalesdocs.com/gphsm/luna/7.1/docs/network/Content/install/sa_hw_install/hardware_installation_lunasa.htm */
+      and filesize != 650720 /* Citrix XenCenter */
+      and filesize != 662808 /* Citrix XenCenter */
+      and filesize != 651256 /* Citrix XenCenter */
+      and filesize != 664432 /* Citrix XenCenter */
+}
+
+rule SUSP_RTF_Header_Anomaly {
+   meta:
+      description = "Detects malformed RTF header often used to trick mechanisms that check for a full RTF header"
+      author = "Florian Roth"
+      reference = "https://twitter.com/ItsReallyNick/status/975705759618158593"
+      date = "2019-01-20"
+      modified = "2022-09-15"
+      score = 50
+   condition:
+      uint32(0) == 0x74725c7b and /* {\rt */
+      not uint8(4) == 0x66 /* not f */
+}
+
+rule WEBSHELL_ASPX_ProxyShell_Aug21_1 {
+   meta:
+      description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be PST) and extension"
+      author = "Florian Roth"
+      reference = "https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-servers-are-getting-hacked-via-proxyshell-exploits/"
+      date = "2021-08-13"
+   condition:
+      uint32(0) == 0x4e444221 /* PST header: !BDN */
+      and extension == ".aspx"
 }

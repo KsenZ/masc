@@ -5,35 +5,33 @@
    APT Scanner THOR - the full featured APT scanner
 
    Florian Roth
-   BSK Consulting GmbH
+   Nextron Systems GmbH
 
    revision: 20160115
-
-	License: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
-	Copyright and related rights waived via https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 */
 
 rule Weevely_Webshell {
 	meta:
 		description = "Weevely Webshell - Generic Rule - heavily scrambled tiny web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://www.ehacking.net/2014/12/weevely-php-stealth-web-backdoor-kali.html"
 		date = "2014/12/14"
 		score = 60
 	strings:
-		$php = "<?php" ascii
 		$s0 = /\$[a-z]{4} = \$[a-z]{4}\("[a-z][a-z]?",[\s]?"",[\s]?"/ ascii
 		$s1 = /\$[a-z]{4} = str_replace\("[a-z][a-z]?","","/ ascii
 		$s2 = /\$[a-z]{4}\.\$[a-z]{4}\.\$[a-z]{4}\.\$[a-z]{4}\)\)\); \$[a-z]{4}\(\);/ ascii
 		$s4 = /\$[a-z]{4}="[a-zA-Z0-9]{70}/ ascii
 	condition:
-		$php at 0 and all of ($s*) and filesize > 570 and filesize < 800
+		uint32(0) == 0x68703f3c and all of ($s*) and filesize > 570 and filesize < 800
 }
 
 rule webshell_h4ntu_shell_powered_by_tsoi_ {
 	meta:
-		description = "Web Shell - file h4ntu shell [powered by tsoi].php"
+		description = "Web Shell - file h4ntu shell powered by tsoi.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -49,6 +47,7 @@ rule webshell_h4ntu_shell_powered_by_tsoi_ {
 rule webshell_PHP_sql {
 	meta:
 		description = "Web Shell - file sql.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -62,6 +61,7 @@ rule webshell_PHP_sql {
 rule webshell_PHP_a {
 	meta:
 		description = "Web Shell - file a.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -76,6 +76,7 @@ rule webshell_PHP_a {
 rule webshell_iMHaPFtp_2 {
 	meta:
 		description = "Web Shell - file iMHaPFtp.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -89,6 +90,7 @@ rule webshell_iMHaPFtp_2 {
 rule webshell_Jspspyweb {
 	meta:
 		description = "Web Shell - file Jspspyweb.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -102,6 +104,7 @@ rule webshell_Jspspyweb {
 rule webshell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2 {
 	meta:
 		description = "Web Shell - file Safe_Mode Bypass PHP 4.4.2 and PHP 5.1.2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -115,6 +118,7 @@ rule webshell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2 {
 rule webshell_SimAttacker_Vrsion_1_0_0_priv8_4_My_friend {
 	meta:
 		description = "Web Shell - file SimAttacker - Vrsion 1.0.0 - priv8 4 My friend.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -128,6 +132,7 @@ rule webshell_SimAttacker_Vrsion_1_0_0_priv8_4_My_friend {
 rule webshell_phpshell_2_1_pwhash {
 	meta:
 		description = "Web Shell - file pwhash.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -141,6 +146,7 @@ rule webshell_phpshell_2_1_pwhash {
 rule webshell_PHPRemoteView {
 	meta:
 		description = "Web Shell - file PHPRemoteView.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -154,6 +160,7 @@ rule webshell_PHPRemoteView {
 rule webshell_jsp_12302 {
 	meta:
 		description = "Web Shell - file 12302.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -168,6 +175,7 @@ rule webshell_jsp_12302 {
 rule webshell_caidao_shell_guo {
 	meta:
 		description = "Web Shell - file guo.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -181,6 +189,7 @@ rule webshell_caidao_shell_guo {
 rule webshell_PHP_redcod {
 	meta:
 		description = "Web Shell - file redcod.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -194,6 +203,7 @@ rule webshell_PHP_redcod {
 rule webshell_remview_fix {
 	meta:
 		description = "Web Shell - file remview_fix.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -207,6 +217,7 @@ rule webshell_remview_fix {
 rule webshell_asp_cmd {
 	meta:
 		description = "Web Shell - file cmd.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -221,6 +232,7 @@ rule webshell_asp_cmd {
 rule webshell_php_sh_server {
 	meta:
 		description = "Web Shell - file server.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 50
@@ -233,6 +245,7 @@ rule webshell_php_sh_server {
 rule webshell_PH_Vayv_PH_Vayv {
 	meta:
 		description = "Web Shell - file PH Vayv.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -246,6 +259,7 @@ rule webshell_PH_Vayv_PH_Vayv {
 rule webshell_caidao_shell_ice {
 	meta:
 		description = "Web Shell - file ice.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -258,6 +272,7 @@ rule webshell_caidao_shell_ice {
 rule webshell_cihshell_fix {
 	meta:
 		description = "Web Shell - file cihshell_fix.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -271,6 +286,7 @@ rule webshell_cihshell_fix {
 rule webshell_asp_shell {
 	meta:
 		description = "Web Shell - file shell.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -284,6 +300,7 @@ rule webshell_asp_shell {
 rule webshell_Private_i3lue {
 	meta:
 		description = "Web Shell - file Private-i3lue.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -296,6 +313,7 @@ rule webshell_Private_i3lue {
 rule webshell_php_up {
 	meta:
 		description = "Web Shell - file up.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -310,6 +328,7 @@ rule webshell_php_up {
 rule webshell_Mysql_interface_v1_0 {
 	meta:
 		description = "Web Shell - file Mysql interface v1.0.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -322,6 +341,7 @@ rule webshell_Mysql_interface_v1_0 {
 rule webshell_php_s_u {
 	meta:
 		description = "Web Shell - file s-u.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -334,6 +354,7 @@ rule webshell_php_s_u {
 rule webshell_phpshell_2_1_config {
 	meta:
 		description = "Web Shell - file config.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -346,6 +367,7 @@ rule webshell_phpshell_2_1_config {
 rule webshell_asp_EFSO_2 {
 	meta:
 		description = "Web Shell - file EFSO_2.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -358,6 +380,7 @@ rule webshell_asp_EFSO_2 {
 rule webshell_jsp_up {
 	meta:
 		description = "Web Shell - file up.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -370,6 +393,7 @@ rule webshell_jsp_up {
 rule webshell_NetworkFileManagerPHP {
 	meta:
 		description = "Web Shell - file NetworkFileManagerPHP.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -382,6 +406,7 @@ rule webshell_NetworkFileManagerPHP {
 rule webshell_Server_Variables {
 	meta:
 		description = "Web Shell - file Server Variables.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -395,6 +420,7 @@ rule webshell_Server_Variables {
 rule webshell_caidao_shell_ice_2 {
 	meta:
 		description = "Web Shell - file ice.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -407,6 +433,7 @@ rule webshell_caidao_shell_ice_2 {
 rule webshell_caidao_shell_mdb {
 	meta:
 		description = "Web Shell - file mdb.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -419,6 +446,7 @@ rule webshell_caidao_shell_mdb {
 rule webshell_jsp_guige {
 	meta:
 		description = "Web Shell - file guige.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -431,6 +459,7 @@ rule webshell_jsp_guige {
 rule webshell_phpspy2010 {
 	meta:
 		description = "Web Shell - file phpspy2010.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -445,6 +474,7 @@ rule webshell_phpspy2010 {
 rule webshell_asp_ice {
 	meta:
 		description = "Web Shell - file ice.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -457,6 +487,7 @@ rule webshell_asp_ice {
 rule webshell_drag_system {
 	meta:
 		description = "Web Shell - file system.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -469,6 +500,7 @@ rule webshell_drag_system {
 rule webshell_DarkBlade1_3_asp_indexx {
 	meta:
 		description = "Web Shell - file indexx.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -481,6 +513,7 @@ rule webshell_DarkBlade1_3_asp_indexx {
 rule webshell_phpshell3 {
 	meta:
 		description = "Web Shell - file phpshell3.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -495,6 +528,7 @@ rule webshell_phpshell3 {
 rule webshell_jsp_hsxa {
 	meta:
 		description = "Web Shell - file hsxa.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -507,6 +541,7 @@ rule webshell_jsp_hsxa {
 rule webshell_jsp_utils {
 	meta:
 		description = "Web Shell - file utils.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -520,6 +555,7 @@ rule webshell_jsp_utils {
 rule webshell_asp_01 {
 	meta:
 		description = "Web Shell - file 01.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 50
@@ -532,6 +568,7 @@ rule webshell_asp_01 {
 rule webshell_asp_404 {
 	meta:
 		description = "Web Shell - file 404.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -544,6 +581,7 @@ rule webshell_asp_404 {
 rule webshell_webshell_cnseay02_1 {
 	meta:
 		description = "Web Shell - file webshell-cnseay02-1.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -556,6 +594,7 @@ rule webshell_webshell_cnseay02_1 {
 rule webshell_php_fbi {
 	meta:
 		description = "Web Shell - file fbi.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -568,6 +607,7 @@ rule webshell_php_fbi {
 rule webshell_B374kPHP_B374k {
 	meta:
 		description = "Web Shell - file B374k.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -583,6 +623,7 @@ rule webshell_B374kPHP_B374k {
 rule webshell_cmd_asp_5_1 {
 	meta:
 		description = "Web Shell - file cmd-asp-5.1.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -595,6 +636,7 @@ rule webshell_cmd_asp_5_1 {
 rule webshell_php_dodo_zip {
 	meta:
 		description = "Web Shell - file zip.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -608,6 +650,7 @@ rule webshell_php_dodo_zip {
 rule webshell_aZRaiLPhp_v1_0 {
 	meta:
 		description = "Web Shell - file aZRaiLPhp v1.0.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -621,6 +664,7 @@ rule webshell_aZRaiLPhp_v1_0 {
 rule webshell_php_list {
 	meta:
 		description = "Web Shell - file list.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -635,6 +679,7 @@ rule webshell_php_list {
 rule webshell_ironshell {
 	meta:
 		description = "Web Shell - file ironshell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -648,6 +693,7 @@ rule webshell_ironshell {
 rule webshell_caidao_shell_404 {
 	meta:
 		description = "Web Shell - file 404.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -660,6 +706,7 @@ rule webshell_caidao_shell_404 {
 rule webshell_ASP_aspydrv {
 	meta:
 		description = "Web Shell - file aspydrv.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -672,6 +719,7 @@ rule webshell_ASP_aspydrv {
 rule webshell_jsp_web {
 	meta:
 		description = "Web Shell - file web.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -684,6 +732,7 @@ rule webshell_jsp_web {
 rule webshell_mysqlwebsh {
 	meta:
 		description = "Web Shell - file mysqlwebsh.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -696,6 +745,7 @@ rule webshell_mysqlwebsh {
 rule webshell_jspShell {
 	meta:
 		description = "Web Shell - file jspShell.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -709,6 +759,7 @@ rule webshell_jspShell {
 rule webshell_Dx_Dx {
 	meta:
 		description = "Web Shell - file Dx.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -722,6 +773,7 @@ rule webshell_Dx_Dx {
 rule webshell_asp_ntdaddy {
 	meta:
 		description = "Web Shell - file ntdaddy.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -735,6 +787,7 @@ rule webshell_asp_ntdaddy {
 rule webshell_MySQL_Web_Interface_Version_0_8 {
 	meta:
 		description = "Web Shell - file MySQL Web Interface Version 0.8.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -747,6 +800,7 @@ rule webshell_MySQL_Web_Interface_Version_0_8 {
 rule webshell_elmaliseker_2 {
 	meta:
 		description = "Web Shell - file elmaliseker.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -760,6 +814,7 @@ rule webshell_elmaliseker_2 {
 rule webshell_ASP_RemExp {
 	meta:
 		description = "Web Shell - file RemExp.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -773,6 +828,7 @@ rule webshell_ASP_RemExp {
 rule webshell_jsp_list1 {
 	meta:
 		description = "Web Shell - file list1.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -786,6 +842,7 @@ rule webshell_jsp_list1 {
 rule webshell_phpkit_1_0_odd {
 	meta:
 		description = "Web Shell - file odd.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -800,6 +857,7 @@ rule webshell_phpkit_1_0_odd {
 rule webshell_jsp_123 {
 	meta:
 		description = "Web Shell - file 123.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -814,6 +872,7 @@ rule webshell_jsp_123 {
 rule webshell_asp_1 {
 	meta:
 		description = "Web Shell - file 1.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -827,6 +886,7 @@ rule webshell_asp_1 {
 rule webshell_ASP_tool {
 	meta:
 		description = "Web Shell - file tool.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -841,6 +901,7 @@ rule webshell_ASP_tool {
 rule webshell_cmd_win32 {
 	meta:
 		description = "Web Shell - file cmd_win32.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -854,6 +915,7 @@ rule webshell_cmd_win32 {
 rule webshell_jsp_jshell {
 	meta:
 		description = "Web Shell - file jshell.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -870,6 +932,7 @@ rule webshell_jsp_jshell {
 rule webshell_ASP_zehir4 {
 	meta:
 		description = "Web Shell - file zehir4.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -882,6 +945,7 @@ rule webshell_ASP_zehir4 {
 rule webshell_wsb_idc {
 	meta:
 		description = "Web Shell - file idc.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -895,6 +959,7 @@ rule webshell_wsb_idc {
 rule webshell_cpg_143_incl_xpl {
 	meta:
 		description = "Web Shell - file cpg_143_incl_xpl.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -908,6 +973,7 @@ rule webshell_cpg_143_incl_xpl {
 rule webshell_mumaasp_com {
 	meta:
 		description = "Web Shell - file mumaasp.com.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -920,6 +986,7 @@ rule webshell_mumaasp_com {
 rule webshell_php_404 {
 	meta:
 		description = "Web Shell - file 404.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -932,6 +999,7 @@ rule webshell_php_404 {
 rule webshell_webshell_cnseay_x {
 	meta:
 		description = "Web Shell - file webshell-cnseay-x.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -944,6 +1012,7 @@ rule webshell_webshell_cnseay_x {
 rule webshell_asp_up {
 	meta:
 		description = "Web Shell - file up.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -957,6 +1026,7 @@ rule webshell_asp_up {
 rule webshell_phpkit_0_1a_odd {
 	meta:
 		description = "Web Shell - file odd.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -972,6 +1042,7 @@ rule webshell_phpkit_0_1a_odd {
 rule webshell_ASP_cmd {
 	meta:
 		description = "Web Shell - file cmd.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -984,6 +1055,7 @@ rule webshell_ASP_cmd {
 rule webshell_PHP_Shell_x3 {
 	meta:
 		description = "Web Shell - file PHP Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -998,6 +1070,7 @@ rule webshell_PHP_Shell_x3 {
 rule webshell_PHP_g00nv13 {
 	meta:
 		description = "Web Shell - file g00nv13.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1011,6 +1084,7 @@ rule webshell_PHP_g00nv13 {
 rule webshell_php_h6ss {
 	meta:
 		description = "Web Shell - file h6ss.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1023,6 +1097,7 @@ rule webshell_php_h6ss {
 rule webshell_jsp_zx {
 	meta:
 		description = "Web Shell - file zx.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1035,6 +1110,7 @@ rule webshell_jsp_zx {
 rule webshell_Ani_Shell {
 	meta:
 		description = "Web Shell - file Ani-Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1049,6 +1125,7 @@ rule webshell_Ani_Shell {
 rule webshell_jsp_k8cmd {
 	meta:
 		description = "Web Shell - file k8cmd.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1058,9 +1135,11 @@ rule webshell_jsp_k8cmd {
 	condition:
 		all of them
 }
+
 rule webshell_jsp_cmd {
 	meta:
 		description = "Web Shell - file cmd.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1070,9 +1149,11 @@ rule webshell_jsp_cmd {
 	condition:
 		all of them
 }
+
 rule webshell_jsp_k81 {
 	meta:
 		description = "Web Shell - file k81.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1086,6 +1167,7 @@ rule webshell_jsp_k81 {
 rule webshell_ASP_zehir {
 	meta:
 		description = "Web Shell - file zehir.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1098,6 +1180,7 @@ rule webshell_ASP_zehir {
 rule webshell_Worse_Linux_Shell {
 	meta:
 		description = "Web Shell - file Worse Linux Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1110,6 +1193,7 @@ rule webshell_Worse_Linux_Shell {
 rule webshell_zacosmall {
 	meta:
 		description = "Web Shell - file zacosmall.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1122,6 +1206,7 @@ rule webshell_zacosmall {
 rule webshell_Liz0ziM_Private_Safe_Mode_Command_Execuriton_Bypass_Exploit {
 	meta:
 		description = "Web Shell - file Liz0ziM Private Safe Mode Command Execuriton Bypass Exploit.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1134,6 +1219,7 @@ rule webshell_Liz0ziM_Private_Safe_Mode_Command_Execuriton_Bypass_Exploit {
 rule webshell_redirect {
 	meta:
 		description = "Web Shell - file redirect.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1146,6 +1232,7 @@ rule webshell_redirect {
 rule webshell_jsp_cmdjsp {
 	meta:
 		description = "Web Shell - file cmdjsp.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1158,6 +1245,7 @@ rule webshell_jsp_cmdjsp {
 rule webshell_Java_Shell {
 	meta:
 		description = "Web Shell - file Java Shell.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1171,6 +1259,7 @@ rule webshell_Java_Shell {
 rule webshell_asp_1d {
 	meta:
 		description = "Web Shell - file 1d.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1183,6 +1272,7 @@ rule webshell_asp_1d {
 rule webshell_jsp_IXRbE {
 	meta:
 		description = "Web Shell - file IXRbE.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1195,6 +1285,7 @@ rule webshell_jsp_IXRbE {
 rule webshell_PHP_G5 {
 	meta:
 		description = "Web Shell - file G5.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1207,6 +1298,7 @@ rule webshell_PHP_G5 {
 rule webshell_PHP_r57142 {
 	meta:
 		description = "Web Shell - file r57142.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1219,6 +1311,7 @@ rule webshell_PHP_r57142 {
 rule webshell_jsp_tree {
 	meta:
 		description = "Web Shell - file tree.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1232,6 +1325,7 @@ rule webshell_jsp_tree {
 rule webshell_C99madShell_v_3_0_smowu {
 	meta:
 		description = "Web Shell - file smowu.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1245,6 +1339,7 @@ rule webshell_C99madShell_v_3_0_smowu {
 rule webshell_simple_backdoor {
 	meta:
 		description = "Web Shell - file simple-backdoor.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1259,6 +1354,7 @@ rule webshell_simple_backdoor {
 rule webshell_PHP_404 {
 	meta:
 		description = "Web Shell - file 404.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1271,6 +1367,7 @@ rule webshell_PHP_404 {
 rule webshell_Macker_s_Private_PHPShell {
 	meta:
 		description = "Web Shell - file Macker's Private PHPShell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1285,6 +1382,7 @@ rule webshell_Macker_s_Private_PHPShell {
 rule webshell_Antichat_Shell_v1_3_2 {
 	meta:
 		description = "Web Shell - file Antichat Shell v1.3.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1297,6 +1395,7 @@ rule webshell_Antichat_Shell_v1_3_2 {
 rule webshell_Safe_mode_breaker {
 	meta:
 		description = "Web Shell - file Safe mode breaker.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1310,6 +1409,7 @@ rule webshell_Safe_mode_breaker {
 rule webshell_Sst_Sheller {
 	meta:
 		description = "Web Shell - file Sst-Sheller.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1323,6 +1423,7 @@ rule webshell_Sst_Sheller {
 rule webshell_jsp_list {
 	meta:
 		description = "Web Shell - file list.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1337,6 +1438,7 @@ rule webshell_jsp_list {
 rule webshell_PHPJackal_v1_5 {
 	meta:
 		description = "Web Shell - file PHPJackal v1.5.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1350,6 +1452,7 @@ rule webshell_PHPJackal_v1_5 {
 rule webshell_customize {
 	meta:
 		description = "Web Shell - file customize.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1362,6 +1465,7 @@ rule webshell_customize {
 rule webshell_s72_Shell_v1_1_Coding {
 	meta:
 		description = "Web Shell - file s72 Shell v1.1 Coding.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1374,6 +1478,7 @@ rule webshell_s72_Shell_v1_1_Coding {
 rule webshell_jsp_sys3 {
 	meta:
 		description = "Web Shell - file sys3.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1388,6 +1493,7 @@ rule webshell_jsp_sys3 {
 rule webshell_jsp_guige02 {
 	meta:
 		description = "Web Shell - file guige02.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1401,6 +1507,7 @@ rule webshell_jsp_guige02 {
 rule webshell_php_ghost {
 	meta:
 		description = "Web Shell - file ghost.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1415,6 +1522,7 @@ rule webshell_php_ghost {
 rule webshell_WinX_Shell {
 	meta:
 		description = "Web Shell - file WinX Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1428,6 +1536,7 @@ rule webshell_WinX_Shell {
 rule webshell_Crystal_Crystal {
 	meta:
 		description = "Web Shell - file Crystal.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1441,6 +1550,7 @@ rule webshell_Crystal_Crystal {
 rule webshell_r57_1_4_0 {
 	meta:
 		description = "Web Shell - file r57.1.4.0.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1456,6 +1566,7 @@ rule webshell_r57_1_4_0 {
 rule webshell_jsp_hsxa1 {
 	meta:
 		description = "Web Shell - file hsxa1.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1468,6 +1579,7 @@ rule webshell_jsp_hsxa1 {
 rule webshell_asp_ajn {
 	meta:
 		description = "Web Shell - file ajn.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1481,6 +1593,7 @@ rule webshell_asp_ajn {
 rule webshell_php_cmd {
 	meta:
 		description = "Web Shell - file cmd.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1495,6 +1608,7 @@ rule webshell_php_cmd {
 rule webshell_asp_list {
 	meta:
 		description = "Web Shell - file list.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1508,6 +1622,7 @@ rule webshell_asp_list {
 rule webshell_PHP_co {
 	meta:
 		description = "Web Shell - file co.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1521,6 +1636,7 @@ rule webshell_PHP_co {
 rule webshell_PHP_150 {
 	meta:
 		description = "Web Shell - file 150.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1534,6 +1650,7 @@ rule webshell_PHP_150 {
 rule webshell_jsp_cmdjsp_2 {
 	meta:
 		description = "Web Shell - file cmdjsp.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1547,6 +1664,7 @@ rule webshell_jsp_cmdjsp_2 {
 rule webshell_PHP_c37 {
 	meta:
 		description = "Web Shell - file c37.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1560,6 +1678,7 @@ rule webshell_PHP_c37 {
 rule webshell_PHP_b37 {
 	meta:
 		description = "Web Shell - file b37.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1572,6 +1691,7 @@ rule webshell_PHP_b37 {
 rule webshell_php_backdoor {
 	meta:
 		description = "Web Shell - file php-backdoor.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1585,6 +1705,7 @@ rule webshell_php_backdoor {
 rule webshell_asp_dabao {
 	meta:
 		description = "Web Shell - file dabao.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1598,6 +1719,7 @@ rule webshell_asp_dabao {
 rule webshell_php_2 {
 	meta:
 		description = "Web Shell - file 2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1610,6 +1732,7 @@ rule webshell_php_2 {
 rule webshell_asp_cmdasp {
 	meta:
 		description = "Web Shell - file cmdasp.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1623,6 +1746,7 @@ rule webshell_asp_cmdasp {
 rule webshell_spjspshell {
 	meta:
 		description = "Web Shell - file spjspshell.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1635,6 +1759,7 @@ rule webshell_spjspshell {
 rule webshell_jsp_action {
 	meta:
 		description = "Web Shell - file action.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1648,6 +1773,7 @@ rule webshell_jsp_action {
 rule webshell_Inderxer {
 	meta:
 		description = "Web Shell - file Inderxer.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1660,6 +1786,7 @@ rule webshell_Inderxer {
 rule webshell_asp_Rader {
 	meta:
 		description = "Web Shell - file Rader.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1673,6 +1800,7 @@ rule webshell_asp_Rader {
 rule webshell_c99_madnet_smowu {
 	meta:
 		description = "Web Shell - file smowu.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1690,6 +1818,7 @@ rule webshell_c99_madnet_smowu {
 rule webshell_php_moon {
 	meta:
 		description = "Web Shell - file moon.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1704,6 +1833,7 @@ rule webshell_php_moon {
 rule webshell_jsp_jdbc {
 	meta:
 		description = "Web Shell - file jdbc.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1716,6 +1846,7 @@ rule webshell_jsp_jdbc {
 rule webshell_minupload {
 	meta:
 		description = "Web Shell - file minupload.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1729,6 +1860,7 @@ rule webshell_minupload {
 rule webshell_ELMALISEKER_Backd00r {
 	meta:
 		description = "Web Shell - file ELMALISEKER Backd00r.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1742,6 +1874,7 @@ rule webshell_ELMALISEKER_Backd00r {
 rule webshell_PHP_bug_1_ {
 	meta:
 		description = "Web Shell - file bug (1).php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1754,6 +1887,7 @@ rule webshell_PHP_bug_1_ {
 rule webshell_caidao_shell_hkmjj {
 	meta:
 		description = "Web Shell - file hkmjj.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1766,6 +1900,7 @@ rule webshell_caidao_shell_hkmjj {
 rule webshell_jsp_asd {
 	meta:
 		description = "Web Shell - file asd.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1779,6 +1914,7 @@ rule webshell_jsp_asd {
 rule webshell_jsp_inback3 {
 	meta:
 		description = "Web Shell - file inback3.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1791,6 +1927,7 @@ rule webshell_jsp_inback3 {
 rule webshell_metaslsoft {
 	meta:
 		description = "Web Shell - file metaslsoft.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1803,6 +1940,7 @@ rule webshell_metaslsoft {
 rule webshell_asp_Ajan {
 	meta:
 		description = "Web Shell - file Ajan.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1815,6 +1953,7 @@ rule webshell_asp_Ajan {
 rule webshell_config_myxx_zend {
 	meta:
 		description = "Web Shell - from files config.jsp, myxx.jsp, zend.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1830,6 +1969,7 @@ rule webshell_config_myxx_zend {
 rule webshell_browser_201_3_ma_download {
 	meta:
 		description = "Web Shell - from files browser.jsp, 201.jsp, 3.jsp, ma.jsp, download.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1848,6 +1988,7 @@ rule webshell_browser_201_3_ma_download {
 rule webshell_itsec_itsecteam_shell_jHn {
 	meta:
 		description = "Web Shell - from files itsec.php, itsecteam_shell.php, jHn.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1864,6 +2005,7 @@ rule webshell_itsec_itsecteam_shell_jHn {
 rule webshell_ghost_source_icesword_silic {
 	meta:
 		description = "Web Shell - from files ghost_source.php, icesword.php, silic.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1879,7 +2021,8 @@ rule webshell_ghost_source_icesword_silic {
 }
 rule webshell_JspSpy_JspSpyJDK5_JspSpyJDK51_luci_jsp_spy2009_m_ma3_xxx {
 	meta:
-		description = "Web Shell - from files 000.jsp, 403.jsp, 807.jsp, a.jsp, c5.jsp, css.jsp, dm.jsp, he1p.jsp, JspSpy.jsp, JspSpyJDK5.jsp, JspSpyJDK51.jsp, luci.jsp.spy2009.jsp, m.jsp, ma3.jsp, mmym520.jsp, nogfw.jsp, ok.jsp, queryDong.jsp, spyjsp2010.jsp, style.jsp, t00ls.jsp, u.jsp, xia.jsp, cofigrue.jsp, 1.jsp, jspspy.jsp, jspspy_k8.jsp, JspSpy.jsp, JspSpyJDK5.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1922,6 +2065,7 @@ rule webshell_JspSpy_JspSpyJDK5_JspSpyJDK51_luci_jsp_spy2009_m_ma3_xxx {
 rule webshell_2_520_job_ma1_ma4_2 {
 	meta:
 		description = "Web Shell - from files 2.jsp, 520.jsp, job.jsp, ma1.jsp, ma4.jsp, 2.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1940,7 +2084,8 @@ rule webshell_2_520_job_ma1_ma4_2 {
 }
 rule webshell_000_403_807_a_c5_config_css_dm_he1p_JspSpy_JspSpyJDK5_JspSpyJDK51_luci_jsp_xxx {
 	meta:
-		description = "Web Shell - from files 000.jsp, 403.jsp, 807.jsp, a.jsp, c5.jsp, config.jsp, css.jsp, dm.jsp, he1p.jsp, JspSpy.jsp, JspSpyJDK5.jsp, JspSpyJDK51.jsp, luci.jsp.spy2009.jsp, m.jsp, ma3.jsp, mmym520.jsp, myxx.jsp, nogfw.jsp, ok.jsp, queryDong.jsp, spyjsp2010.jsp, style.jsp, t00ls.jsp, u.jsp, xia.jsp, zend.jsp, cofigrue.jsp, 1.jsp, jspspy.jsp, jspspy_k8.jsp, JspSpy.jsp, JspSpyJDK5.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -1986,6 +2131,7 @@ rule webshell_000_403_807_a_c5_config_css_dm_he1p_JspSpy_JspSpyJDK5_JspSpyJDK51_
 rule webshell_wso2_5_1_wso2_5_wso2 {
 	meta:
 		description = "Web Shell - from files wso2.5.1.php, wso2.5.php, wso2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2002,6 +2148,7 @@ rule webshell_wso2_5_1_wso2_5_wso2 {
 rule webshell_000_403_c5_queryDong_spyjsp2010_t00ls {
 	meta:
 		description = "Web Shell - from files 000.jsp, 403.jsp, c5.jsp, queryDong.jsp, spyjsp2010.jsp, t00ls.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2021,6 +2168,7 @@ rule webshell_000_403_c5_queryDong_spyjsp2010_t00ls {
 rule webshell_404_data_suiyue {
 	meta:
 		description = "Web Shell - from files 404.jsp, data.jsp, suiyue.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2035,7 +2183,8 @@ rule webshell_404_data_suiyue {
 }
 rule webshell_r57shell_r57shell127_SnIpEr_SA_Shell_EgY_SpIdEr_ShElL_V2_r57_xxx {
 	meta:
-		description = "Web Shell - from files r57shell.php, r57shell127.php, SnIpEr_SA Shell.php, EgY_SpIdEr ShElL V2.php, r57_iFX.php, r57_kartal.php, r57_Mohajer22.php, r57.php, r57.php, Backdoor.PHP.Agent.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2059,7 +2208,8 @@ rule webshell_r57shell_r57shell127_SnIpEr_SA_Shell_EgY_SpIdEr_ShElL_V2_r57_xxx {
 }
 rule webshell_807_a_css_dm_he1p_JspSpy_xxx {
 	meta:
-		description = "Web Shell - from files 807.jsp, a.jsp, css.jsp, dm.jsp, he1p.jsp, JspSpy.jsp, JspSpyJDK5.jsp, JspSpyJDK51.jsp, luci.jsp.spy2009.jsp, m.jsp, ma3.jsp, mmym520.jsp, nogfw.jsp, ok.jsp, style.jsp, u.jsp, xia.jsp, cofigrue.jsp, 1.jsp, jspspy.jsp, jspspy_k8.jsp, JspSpy.jsp, JspSpyJDK5.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2097,6 +2247,7 @@ rule webshell_807_a_css_dm_he1p_JspSpy_xxx {
 rule webshell_201_3_ma_download {
 	meta:
 		description = "Web Shell - from files 201.jsp, 3.jsp, ma.jsp, download.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2114,7 +2265,8 @@ rule webshell_201_3_ma_download {
 }
 rule webshell_browser_201_3_400_in_JFolder_jfolder01_jsp_leo_ma_warn_webshell_nc_download {
 	meta:
-		description = "Web Shell - from files browser.jsp, 201.jsp, 3.jsp, 400.jsp, in.jsp, JFolder.jsp, jfolder01.jsp, jsp.jsp, leo.jsp, ma.jsp, warn.jsp, webshell-nc.jsp, download.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2141,6 +2293,7 @@ rule webshell_browser_201_3_400_in_JFolder_jfolder01_jsp_leo_ma_warn_webshell_nc
 rule webshell_shell_phpspy_2006_arabicspy {
 	meta:
 		description = "Web Shell - from files shell.php, phpspy_2006.php, arabicspy.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2157,6 +2310,7 @@ rule webshell_shell_phpspy_2006_arabicspy {
 rule webshell_in_JFolder_jfolder01_jsp_leo_warn {
 	meta:
 		description = "Web Shell - from files in.jsp, JFolder.jsp, jfolder01.jsp, jsp.jsp, leo.jsp, warn.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2176,6 +2330,7 @@ rule webshell_in_JFolder_jfolder01_jsp_leo_warn {
 rule webshell_2_520_icesword_job_ma1_ma4_2 {
 	meta:
 		description = "Web Shell - from files 2.jsp, 520.jsp, icesword.jsp, job.jsp, ma1.jsp, ma4.jsp, 2.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2197,6 +2352,7 @@ rule webshell_2_520_icesword_job_ma1_ma4_2 {
 rule webshell_phpspy_2005_full_phpspy_2005_lite_PHPSPY {
 	meta:
 		description = "Web Shell - from files phpspy_2005_full.php, phpspy_2005_lite.php, PHPSPY.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2214,6 +2370,7 @@ rule webshell_phpspy_2005_full_phpspy_2005_lite_PHPSPY {
 rule webshell_shell_phpspy_2006_arabicspy_hkrkoz {
 	meta:
 		description = "Web Shell - from files shell.php, phpspy_2006.php, arabicspy.php, hkrkoz.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2229,7 +2386,8 @@ rule webshell_shell_phpspy_2006_arabicspy_hkrkoz {
 }
 rule webshell_c99_Shell_ci_Biz_was_here_c100_v_xxx {
 	meta:
-		description = "Web Shell - from files c99.php, Shell [ci] .Biz was here.php, c100 v. 777shell v. Undetectable #18a Modded by 777 - Don.php, c66.php, c99-shadows-mod.php, c99shell.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2248,6 +2406,7 @@ rule webshell_c99_Shell_ci_Biz_was_here_c100_v_xxx {
 rule webshell_2008_2009lite_2009mssql {
 	meta:
 		description = "Web Shell - from files 2008.php, 2009lite.php, 2009mssql.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2263,7 +2422,8 @@ rule webshell_2008_2009lite_2009mssql {
 }
 rule webshell_shell_phpspy_2005_full_phpspy_2005_lite_phpspy_2006_arabicspy_PHPSPY_hkrkoz {
 	meta:
-		description = "Web Shell - from files shell.php, phpspy_2005_full.php, phpspy_2005_lite.php, phpspy_2006.php, arabicspy.php, PHPSPY.php, hkrkoz.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2284,6 +2444,7 @@ rule webshell_shell_phpspy_2005_full_phpspy_2005_lite_phpspy_2006_arabicspy_PHPS
 rule webshell_807_dm_JspSpyJDK5_m_cofigrue {
 	meta:
 		description = "Web Shell - from files 807.jsp, dm.jsp, JspSpyJDK5.jsp, m.jsp, cofigrue.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2301,7 +2462,8 @@ rule webshell_807_dm_JspSpyJDK5_m_cofigrue {
 }
 rule webshell_Dive_Shell_1_0_Emperor_Hacking_Team_xxx {
 	meta:
-		description = "Web Shell - from files Dive Shell 1.0 - Emperor Hacking Team.php, phpshell.php, SimShell 1.0 - Simorgh Security MGZ.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2317,7 +2479,8 @@ rule webshell_Dive_Shell_1_0_Emperor_Hacking_Team_xxx {
 }
 rule webshell_404_data_in_JFolder_jfolder01_xxx {
 	meta:
-		description = "Web Shell - from files 404.jsp, data.jsp, in.jsp, JFolder.jsp, jfolder01.jsp, jsp.jsp, leo.jsp, suiyue.jsp, warn.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2339,6 +2502,7 @@ rule webshell_404_data_in_JFolder_jfolder01_xxx {
 rule webshell_jsp_reverse_jsp_reverse_jspbd {
 	meta:
 		description = "Web Shell - from files jsp-reverse.jsp, jsp-reverse.jsp, jspbd.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		super_rule = 1
@@ -2356,6 +2520,7 @@ rule webshell_jsp_reverse_jsp_reverse_jspbd {
 rule webshell_400_in_JFolder_jfolder01_jsp_leo_warn_webshell_nc {
 	meta:
 		description = "Web Shell - from files 400.jsp, in.jsp, JFolder.jsp, jfolder01.jsp, jsp.jsp, leo.jsp, warn.jsp, webshell-nc.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2379,6 +2544,7 @@ rule webshell_400_in_JFolder_jfolder01_jsp_leo_warn_webshell_nc {
 rule webshell_2_520_job_JspWebshell_1_2_ma1_ma4_2 {
 	meta:
 		description = "Web Shell - from files 2.jsp, 520.jsp, job.jsp, JspWebshell 1.2.jsp, ma1.jsp, ma4.jsp, 2.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2399,7 +2565,8 @@ rule webshell_2_520_job_JspWebshell_1_2_ma1_ma4_2 {
 }
 rule webshell_shell_2008_2009mssql_phpspy_2005_full_phpspy_2006_arabicspy_hkrkoz {
 	meta:
-		description = "Web Shell - from files shell.php, 2008.php, 2009mssql.php, phpspy_2005_full.php, phpspy_2006.php, arabicspy.php, hkrkoz.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 60
@@ -2422,7 +2589,8 @@ rule webshell_shell_2008_2009mssql_phpspy_2005_full_phpspy_2006_arabicspy_hkrkoz
 }
 rule webshell_gfs_sh_r57shell_r57shell127_SnIpEr_SA_xxx {
 	meta:
-		description = "Web Shell - from files gfs_sh.php, r57shell.php, r57shell127.php, SnIpEr_SA Shell.php, EgY_SpIdEr ShElL V2.php, r57_iFX.php, r57_kartal.php, r57_Mohajer22.php, r57.php, r57.php, Backdoor.PHP.Agent.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2447,6 +2615,7 @@ rule webshell_gfs_sh_r57shell_r57shell127_SnIpEr_SA_xxx {
 rule webshell_itsec_PHPJackal_itsecteam_shell_jHn {
 	meta:
 		description = "Web Shell - from files itsec.php, PHPJackal.php, itsecteam_shell.php, jHn.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2464,7 +2633,8 @@ rule webshell_itsec_PHPJackal_itsecteam_shell_jHn {
 }
 rule webshell_Shell_ci_Biz_was_here_c100_v_xxx {
 	meta:
-		description = "Web Shell - from files Shell [ci] .Biz was here.php, c100 v. 777shell v. Undetectable #18a Modded by 777 - Don.php, c99-shadows-mod.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2483,7 +2653,8 @@ rule webshell_Shell_ci_Biz_was_here_c100_v_xxx {
 }
 rule webshell_NIX_REMOTE_WEB_SHELL_NIX_REMOTE_WEB_xxx1 {
 	meta:
-		description = "Web Shell - from files NIX REMOTE WEB-SHELL.php, NIX REMOTE WEB-SHELL v.0.5 alpha Lite Public Version.php, KAdot Universal Shell v0.1.6.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2501,7 +2672,8 @@ rule webshell_NIX_REMOTE_WEB_SHELL_NIX_REMOTE_WEB_xxx1 {
 }
 rule webshell_c99_c99shell_c99_w4cking_Shell_xxx {
 	meta:
-		description = "Web Shell - from files c99.php, c99shell.php, c99_w4cking.php, Shell [ci] .Biz was here.php, acid.php, c100 v. 777shell v. Undetectable #18a Modded by 777 - Don.php, c66.php, c99-shadows-mod.php, c99.php, c99shell.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2528,7 +2700,8 @@ rule webshell_c99_c99shell_c99_w4cking_Shell_xxx {
 }
 rule webshell_2008_2009mssql_phpspy_2005_full_phpspy_2006_arabicspy_hkrkoz {
 	meta:
-		description = "Web Shell - from files 2008.php, 2009mssql.php, phpspy_2005_full.php, phpspy_2006.php, arabicspy.php, hkrkoz.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2550,6 +2723,7 @@ rule webshell_2008_2009mssql_phpspy_2005_full_phpspy_2006_arabicspy_hkrkoz {
 rule webshell_c99_c66_c99_shadows_mod_c99shell {
 	meta:
 		description = "Web Shell - from files c99.php, c66.php, c99-shadows-mod.php, c99shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2571,6 +2745,7 @@ rule webshell_c99_c66_c99_shadows_mod_c99shell {
 rule webshell_he1p_JspSpy_nogfw_ok_style_1_JspSpy1 {
 	meta:
 		description = "Web Shell - from files he1p.jsp, JspSpy.jsp, nogfw.jsp, ok.jsp, style.jsp, 1.jsp, JspSpy.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2593,6 +2768,7 @@ rule webshell_he1p_JspSpy_nogfw_ok_style_1_JspSpy1 {
 rule webshell_000_403_c5_config_myxx_queryDong_spyjsp2010_zend {
 	meta:
 		description = "Web Shell - from files 000.jsp, 403.jsp, c5.jsp, config.jsp, myxx.jsp, queryDong.jsp, spyjsp2010.jsp, zend.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2615,6 +2791,7 @@ rule webshell_000_403_c5_config_myxx_queryDong_spyjsp2010_zend {
 rule webshell_c99_c99shell_c99_c99shell {
 	meta:
 		description = "Web Shell - from files c99.php, c99shell.php, c99.php, c99shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2632,6 +2809,7 @@ rule webshell_c99_c99shell_c99_c99shell {
 rule webshell_r57shell127_r57_iFX_r57_kartal_r57_antichat {
 	meta:
 		description = "Web Shell - from files r57shell127.php, r57_iFX.php, r57_kartal.php, r57.php, antichat.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2651,7 +2829,8 @@ rule webshell_r57shell127_r57_iFX_r57_kartal_r57_antichat {
 }
 rule webshell_NIX_REMOTE_WEB_SHELL_nstview_xxx {
 	meta:
-		description = "Web Shell - from files NIX REMOTE WEB-SHELL.php, nstview.php, NIX REMOTE WEB-SHELL v.0.5 alpha Lite Public Version.php, Cyber Shell (v 1.0).php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2669,7 +2848,8 @@ rule webshell_NIX_REMOTE_WEB_SHELL_nstview_xxx {
 }
 rule webshell_000_403_807_a_c5_config_css_dm_he1p_xxx {
 	meta:
-		description = "Web Shell - from files 000.jsp, 403.jsp, 807.jsp, a.jsp, c5.jsp, config.jsp, css.jsp, dm.jsp, he1p.jsp, JspSpy.jsp, JspSpyJDK5.jsp, JspSpyJDK51.jsp, luci.jsp.spy2009.jsp, m.jsp, ma3.jsp, mmym520.jsp, myxx.jsp, nogfw.jsp, ok.jsp, queryDong.jsp, spyjsp2010.jsp, style.jsp, u.jsp, xia.jsp, zend.jsp, cofigrue.jsp, 1.jsp, jspspy.jsp, jspspy_k8.jsp, JspSpy.jsp, JspSpyJDK5.jsp"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2719,6 +2899,7 @@ rule webshell_000_403_807_a_c5_config_css_dm_he1p_xxx {
 rule webshell_2_520_icesword_job_ma1 {
 	meta:
 		description = "Web Shell - from files 2.jsp, 520.jsp, icesword.jsp, job.jsp, ma1.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2738,6 +2919,7 @@ rule webshell_2_520_icesword_job_ma1 {
 rule webshell_404_data_in_JFolder_jfolder01_jsp_suiyue_warn {
 	meta:
 		description = "Web Shell - from files 404.jsp, data.jsp, in.jsp, JFolder.jsp, jfolder01.jsp, jsp.jsp, suiyue.jsp, warn.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2762,6 +2944,7 @@ rule webshell_404_data_in_JFolder_jfolder01_jsp_suiyue_warn {
 rule webshell_phpspy_2005_full_phpspy_2005_lite_phpspy_2006_PHPSPY {
 	meta:
 		description = "Web Shell - from files phpspy_2005_full.php, phpspy_2005_lite.php, phpspy_2006.php, PHPSPY.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2780,7 +2963,8 @@ rule webshell_phpspy_2005_full_phpspy_2005_lite_phpspy_2006_PHPSPY {
 }
 rule webshell_c99_locus7s_c99_w4cking_xxx {
 	meta:
-		description = "Web Shell - from files c99_locus7s.php, c99_w4cking.php, r57shell.php, r57shell127.php, SnIpEr_SA Shell.php, EgY_SpIdEr ShElL V2.php, r57_iFX.php, r57_kartal.php, r57_Mohajer22.php, r57.php, acid.php, newsh.php, r57.php, Backdoor.PHP.Agent.php"
+		description = "Web Shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2809,6 +2993,7 @@ rule webshell_c99_locus7s_c99_w4cking_xxx {
 rule webshell_browser_201_3_ma_ma2_download {
 	meta:
 		description = "Web Shell - from files browser.jsp, 201.jsp, 3.jsp, ma.jsp, ma2.jsp, download.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2829,6 +3014,7 @@ rule webshell_browser_201_3_ma_ma2_download {
 rule webshell_000_403_c5_queryDong_spyjsp2010 {
 	meta:
 		description = "Web Shell - from files 000.jsp, 403.jsp, c5.jsp, queryDong.jsp, spyjsp2010.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2849,6 +3035,7 @@ rule webshell_000_403_c5_queryDong_spyjsp2010 {
 rule webshell_r57shell127_r57_kartal_r57 {
 	meta:
 		description = "Web Shell - from files r57shell127.php, r57_kartal.php, r57.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/01/28"
 		score = 70
@@ -2867,6 +3054,7 @@ rule webshell_r57shell127_r57_kartal_r57 {
 rule webshell_webshells_new_con2 {
 	meta:
 		description = "Web shells - generated from file con2.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2880,6 +3068,7 @@ rule webshell_webshells_new_con2 {
 rule webshell_webshells_new_make2 {
 	meta:
 		description = "Web shells - generated from file make2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		hash = "9af195491101e0816a263c106e4c145e"
@@ -2892,6 +3081,7 @@ rule webshell_webshells_new_make2 {
 rule webshell_webshells_new_aaa {
 	meta:
 		description = "Web shells - generated from file aaa.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2906,6 +3096,7 @@ rule webshell_webshells_new_aaa {
 rule webshell_Expdoor_com_ASP {
 	meta:
 		description = "Web shells - generated from file Expdoor.com ASP.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2922,6 +3113,7 @@ rule webshell_Expdoor_com_ASP {
 rule webshell_webshells_new_php2 {
 	meta:
 		description = "Web shells - generated from file php2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2934,6 +3126,7 @@ rule webshell_webshells_new_php2 {
 rule webshell_bypass_iisuser_p {
 	meta:
 		description = "Web shells - generated from file bypass-iisuser-p.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2946,6 +3139,7 @@ rule webshell_bypass_iisuser_p {
 rule webshell_sig_404super {
 	meta:
 		description = "Web shells - generated from file 404super.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2963,6 +3157,7 @@ rule webshell_sig_404super {
 rule webshell_webshells_new_JSP {
 	meta:
 		description = "Web shells - generated from file JSP.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2977,6 +3172,7 @@ rule webshell_webshells_new_JSP {
 rule webshell_webshell_123 {
 	meta:
 		description = "Web shells - generated from file webshell-123.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -2992,6 +3188,7 @@ rule webshell_webshell_123 {
 rule webshell_dev_core {
 	meta:
 		description = "Web shells - generated from file dev_core.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3009,6 +3206,7 @@ rule webshell_dev_core {
 rule webshell_webshells_new_pHp {
 	meta:
 		description = "Web shells - generated from file pHp.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3025,6 +3223,7 @@ rule webshell_webshells_new_pHp {
 rule webshell_webshells_new_pppp {
 	meta:
 		description = "Web shells - generated from file pppp.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3039,6 +3238,7 @@ rule webshell_webshells_new_pppp {
 rule webshell_webshells_new_code {
 	meta:
 		description = "Web shells - generated from file code.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3055,6 +3255,7 @@ rule webshell_webshells_new_code {
 rule webshell_webshells_new_jspyyy {
 	meta:
 		description = "Web shells - generated from file jspyyy.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3067,6 +3268,7 @@ rule webshell_webshells_new_jspyyy {
 rule webshell_webshells_new_xxxx {
 	meta:
 		description = "Web shells - generated from file xxxx.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3079,6 +3281,7 @@ rule webshell_webshells_new_xxxx {
 rule webshell_webshells_new_JJjsp3 {
 	meta:
 		description = "Web shells - generated from file JJjsp3.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3091,6 +3294,7 @@ rule webshell_webshells_new_JJjsp3 {
 rule webshell_webshells_new_PHP1 {
 	meta:
 		description = "Web shells - generated from file PHP1.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3105,6 +3309,7 @@ rule webshell_webshells_new_PHP1 {
 rule webshell_webshells_new_JJJsp2 {
 	meta:
 		description = "Web shells - generated from file JJJsp2.jsp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3120,6 +3325,7 @@ rule webshell_webshells_new_JJJsp2 {
 rule webshell_webshells_new_radhat {
 	meta:
 		description = "Web shells - generated from file radhat.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3132,6 +3338,7 @@ rule webshell_webshells_new_radhat {
 rule webshell_webshells_new_asp1 {
 	meta:
 		description = "Web shells - generated from file asp1.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3145,6 +3352,7 @@ rule webshell_webshells_new_asp1 {
 rule webshell_webshells_new_php6 {
 	meta:
 		description = "Web shells - generated from file php6.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3159,6 +3367,7 @@ rule webshell_webshells_new_php6 {
 rule webshell_webshells_new_xxx {
 	meta:
 		description = "Web shells - generated from file xxx.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3171,6 +3380,7 @@ rule webshell_webshells_new_xxx {
 rule webshell_GetPostpHp {
 	meta:
 		description = "Web shells - generated from file GetPostpHp.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3183,6 +3393,7 @@ rule webshell_GetPostpHp {
 rule webshell_webshells_new_php5 {
 	meta:
 		description = "Web shells - generated from file php5.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3195,6 +3406,7 @@ rule webshell_webshells_new_php5 {
 rule webshell_webshells_new_PHP {
 	meta:
 		description = "Web shells - generated from file PHP.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3211,6 +3423,7 @@ rule webshell_webshells_new_PHP {
 rule webshell_webshells_new_Asp {
 	meta:
 		description = "Web shells - generated from file Asp.asp"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/03/28"
 		score = 70
@@ -3443,6 +3656,7 @@ rule r57shell_php_php {
 		$s1 = " else if ($HTTP_POST_VARS['with'] == \"lynx\") { $HTTP_POST_VARS['cmd']= \"lynx "
 		$s2 = "RusH security team"
 		$s3 = "'ru_text12' => 'back-connect"
+		$s4 = "<title>r57shell</title>"
 	condition:
 		1 of them
 }
@@ -4514,7 +4728,7 @@ rule _network_php_php_xinfo_php_php_nfm_php_php {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4529,7 +4743,7 @@ rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_SpecialShell_99_php_php
 }
 rule _r577_php_php_SnIpEr_SA_Shell_php_r57_php_php_r57_Shell_php_php_spy_php_php_s_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files r577.php.php.txt, SnIpEr_SA Shell.php.txt, r57.php.php.txt, r57 Shell.php.php.txt, spy.php.php.txt, s.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
@@ -4574,9 +4788,9 @@ rule _r577_php_php_spy_php_php_s_php_php {
 	condition:
 		1 of them
 }
-rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_c99php_SpecialShell_99_php_php_ctt_sh_php_php {
+rule webshell_c99_generic {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt, SpecialShell_99.php.php.txt, ctt_sh.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4596,7 +4810,7 @@ rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_c
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_c99php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4627,7 +4841,7 @@ rule _w_php_php_wacking_php_php_SpecialShell_99_php_php {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_SsEs_php_php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, SsEs.php.php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4643,7 +4857,7 @@ rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_SsEs_php_php_SpecialShe
 }
 rule _r577_php_php_SnIpEr_SA_Shell_php_r57_php_php_spy_php_php_s_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files r577.php.php.txt, SnIpEr_SA Shell.php.txt, r57.php.php.txt, spy.php.php.txt, s.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
@@ -4737,20 +4951,7 @@ rule _w_php_php_wacking_php_php_SsEs_php_php_SpecialShell_99_php_php {
 	condition:
 		1 of them
 }
-rule _webadmin_php_php_iMHaPFtp_php_php_Private_i3lue_php {
-	meta:
-		description = "Semi-Auto-generated  - from files webadmin.php.php.txt, iMHaPFtp.php.php.txt, Private-i3lue.php.txt"
-		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
-		super_rule = 1
-		hash0 = "b268e6fa3bf3fe496cffb4ea574ec4c7"
-		hash1 = "12911b73bc6a5d313b494102abcf5c57"
-		hash2 = "13f5c7a035ecce5f9f380967cf9d4e92"
-	strings:
-		$s0 = "return $type . $owner . $group . $other;" fullword
-		$s1 = "$owner  = ($mode & 00400) ? 'r' : '-';" fullword
-	condition:
-		all of them
-}
+
 rule multiple_php_webshells {
 	meta:
 		description = "Semi-Auto-generated  - from files multiple_php_webshells"
@@ -4789,7 +4990,7 @@ rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_c99php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4821,7 +5022,7 @@ rule _GFS_web_shell_ver_3_1_7___PRiV8_php_nshell_php_php_gfs_sh_php_php {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4839,7 +5040,7 @@ rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_c99shell_v1_0_php_php_S
 }
 rule _w_php_php_wacking_php_php_c99shell_v1_0_php_php_c99php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4915,7 +5116,7 @@ rule _nst_php_php_cybershell_php_php_img_php_php_nstview_php_php {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_dC3_Security_Crew_Shell_PRiV_php_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, dC3 Security Crew Shell PRiV.php.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4946,7 +5147,7 @@ rule _c99shell_v1_0_php_php_c99php_1_c2007_php_php_c100_php {
 }
 rule multiple_php_webshells_2 {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt, SsEs.php.php.txt, SpecialShell_99.php.php.txt, ctt_sh.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -4966,7 +5167,7 @@ rule multiple_php_webshells_2 {
 }
 rule _w_php_php_c99madshell_v2_1_php_php_wacking_php_php_1_SpecialShell_99_php_php {
 	meta:
-		description = "Semi-Auto-generated  - from files w.php.php.txt, c99madshell_v2.1.php.php.txt, wacking.php.php.txt, 1.txt, SpecialShell_99.php.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
@@ -5000,7 +5201,7 @@ rule _r577_php_php_r57_php_php_spy_php_php_s_php_php {
 }
 rule _nixrem_php_php_c99shell_v1_0_php_php_c99php_NIX_REMOTE_WEB_SHELL_v_0_5_alpha_Lite_Public_Version_php {
 	meta:
-		description = "Semi-Auto-generated  - from files nixrem.php.php.txt, c99shell_v1.0.php.php.txt, c99php.txt, NIX REMOTE WEB-SHELL v.0.5 alpha Lite Public Version.php.txt"
+		description = "Semi-Auto-generated "
 		author = "Neo23x0 Yara BRG + customization by Stefan -dfate- Molls"
 		super_rule = 1
 		hash0 = "40a3e86a63d3d7f063a86aab5b5f92c6"
@@ -5021,6 +5222,7 @@ rule _nixrem_php_php_c99shell_v1_0_php_php_c99php_NIX_REMOTE_WEB_SHELL_v_0_5_alp
 rule DarkSecurityTeam_Webshell {
 	meta:
 		description = "Dark Security Team Webshell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "f1c95b13a71ca3629a0bb79601fcacf57cdfcf768806a71b26f2448f8c1d5d24"
 		score = 50
@@ -5030,27 +5232,11 @@ rule DarkSecurityTeam_Webshell {
 		1 of them
 }
 
-rule GIFCloaked_Webshell_A {
-	meta:
-		description = "Looks like a webshell cloaked as GIF"
-		author = "Florian Roth"
-		hash = "f1c95b13a71ca3629a0bb79601fcacf57cdfcf768806a71b26f2448f8c1d5d24"
-		score = 50
-	strings:
-		$magic = { 47 49 46 38 } /* GIF8 ... */
-		$s0 = "input type"
-		$s1 = "<%eval request"
-		$s2 = "<%eval(Request.Item["
-		$s3 = "LANGUAGE='VBScript'"
-	condition:
-		( $magic at 0 ) and ( 1 of ($s*) )
-		and not filepath contains "AppData"
-}
-
 rule PHP_Cloaked_Webshell_SuperFetchExec {
 	meta:
 		description = "Looks like a webshell cloaked as GIF - http://goo.gl/xFvioC"
 		reference = "http://goo.gl/xFvioC"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		score = 50
 	strings:
@@ -5064,6 +5250,7 @@ rule PHP_Cloaked_Webshell_SuperFetchExec {
 rule WebShell_RemExp_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - file RemExp.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d9919dcf94a70d5180650de8b81669fa1c10c5a2"
 	strings:
@@ -5078,6 +5265,7 @@ rule WebShell_RemExp_asp_php {
 rule WebShell_dC3_Security_Crew_Shell_PRiV {
 	meta:
 		description = "PHP Webshells Github Archive - file dC3_Security_Crew_Shell_PRiV.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "1b2a4a7174ca170b4e3a8cdf4814c92695134c8a"
 	strings:
@@ -5093,6 +5281,7 @@ rule WebShell_dC3_Security_Crew_Shell_PRiV {
 rule WebShell_simattacker {
 	meta:
 		description = "PHP Webshells Github Archive - file simattacker.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "258297b62aeaf4650ce04642ad5f19be25ec29c9"
 	strings:
@@ -5110,6 +5299,7 @@ rule WebShell_simattacker {
 rule WebShell_DTool_Pro {
 	meta:
 		description = "PHP Webshells Github Archive - file DTool Pro.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "e2ee1c7ba7b05994f65710b7bbf935954f2c3353"
 	strings:
@@ -5127,6 +5317,7 @@ rule WebShell_DTool_Pro {
 rule WebShell_ironshell {
 	meta:
 		description = "PHP Webshells Github Archive - file ironshell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d47b8ba98ea8061404defc6b3a30839c4444a262"
 	strings:
@@ -5144,6 +5335,7 @@ rule WebShell_ironshell {
 rule WebShell_indexer_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - file indexer.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "e9a7aa5eb1fb228117dc85298c7d3ecd8e288a2d"
 	strings:
@@ -5159,6 +5351,7 @@ rule WebShell_indexer_asp_php {
 rule WebShell_toolaspshell {
 	meta:
 		description = "PHP Webshells Github Archive - file toolaspshell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "11d236b0d1c2da30828ffd2f393dd4c6a1022e3f"
 	strings:
@@ -5171,6 +5364,7 @@ rule WebShell_toolaspshell {
 rule WebShell_b374k_mini_shell_php_php {
 	meta:
 		description = "PHP Webshells Github Archive - file b374k-mini-shell-php.php.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "afb88635fbdd9ebe86b650cc220d3012a8c35143"
 	strings:
@@ -5183,6 +5377,7 @@ rule WebShell_b374k_mini_shell_php_php {
 rule WebShell_Sincap_1_0 {
 	meta:
 		description = "PHP Webshells Github Archive - file Sincap 1.0.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "9b72635ff1410fa40c4e15513ae3a496d54f971c"
 	strings:
@@ -5197,6 +5392,7 @@ rule WebShell_Sincap_1_0 {
 rule WebShell_b374k_php {
 	meta:
 		description = "PHP Webshells Github Archive - file b374k.php.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "04c99efd187cf29dc4e5603c51be44170987bce2"
 	strings:
@@ -5211,6 +5407,7 @@ rule WebShell_b374k_php {
 rule WebShell_SimAttacker___Vrsion_1_0_0___priv8_4_My_friend {
 	meta:
 		description = "PHP Webshells Github Archive - file SimAttacker - Vrsion 1.0.0 - priv8 4 My friend.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "6454cc5ab73143d72cf0025a81bd1fe710351b44"
 	strings:
@@ -5227,6 +5424,7 @@ rule WebShell_SimAttacker___Vrsion_1_0_0___priv8_4_My_friend {
 rule WebShell_h4ntu_shell__powered_by_tsoi_ {
 	meta:
 		description = "PHP Webshells Github Archive - file h4ntu shell [powered by tsoi].php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "cbca8cd000e705357e2a7e0cf8262678706f18f9"
 	strings:
@@ -5242,6 +5440,7 @@ rule WebShell_h4ntu_shell__powered_by_tsoi_ {
 rule WebShell_php_webshells_MyShell {
 	meta:
 		description = "PHP Webshells Github Archive - file MyShell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "42e283c594c4d061f80a18f5ade0717d3fb2f76d"
 	strings:
@@ -5259,6 +5458,7 @@ rule WebShell_php_webshells_MyShell {
 rule WebShell_php_webshells_pws {
 	meta:
 		description = "PHP Webshells Github Archive - file pws.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "7a405f1c179a84ff8ac09a42177a2bcd8a1a481b"
 	strings:
@@ -5274,6 +5474,7 @@ rule WebShell_php_webshells_pws {
 rule WebShell_reader_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - file reader.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "70656f3495e2b3ad391a77d5208eec0fb9e2d931"
 	strings:
@@ -5287,6 +5488,7 @@ rule WebShell_reader_asp_php {
 rule WebShell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2 {
 	meta:
 		description = "PHP Webshells Github Archive - file Safe_Mode_Bypass_PHP_4.4.2_and_PHP_5.1.2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "db076b7c80d2a5279cab2578aa19cb18aea92832"
 	strings:
@@ -5302,6 +5504,7 @@ rule WebShell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2 {
 rule WebShell_Liz0ziM_Private_Safe_Mode_Command_Execuriton_Bypass_Exploit {
 	meta:
 		description = "PHP Webshells Github Archive - file Liz0ziM Private Safe Mode Command Execuriton Bypass Exploit.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "b2b797707e09c12ff5e632af84b394ad41a46fa4"
 	strings:
@@ -5316,6 +5519,7 @@ rule WebShell_Liz0ziM_Private_Safe_Mode_Command_Execuriton_Bypass_Exploit {
 rule WebShell_php_backdoor {
 	meta:
 		description = "PHP Webshells Github Archive - file php-backdoor.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "b190c03af4f3fb52adc20eb0f5d4d151020c74fe"
 	strings:
@@ -5330,6 +5534,7 @@ rule WebShell_php_backdoor {
 rule WebShell_Worse_Linux_Shell {
 	meta:
 		description = "PHP Webshells Github Archive - file Worse Linux Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "64623ab1246bc8f7d256b25f244eb2b41f543e96"
 	strings:
@@ -5345,6 +5550,7 @@ rule WebShell_Worse_Linux_Shell {
 rule WebShell_php_webshells_pHpINJ {
 	meta:
 		description = "PHP Webshells Github Archive - file pHpINJ.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "75116bee1ab122861b155cc1ce45a112c28b9596"
 	strings:
@@ -5361,6 +5567,7 @@ rule WebShell_php_webshells_pHpINJ {
 rule WebShell_php_webshells_NGH {
 	meta:
 		description = "PHP Webshells Github Archive - file NGH.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "c05b5deecfc6de972aa4652cb66da89cfb3e1645"
 	strings:
@@ -5377,6 +5584,7 @@ rule WebShell_php_webshells_NGH {
 rule WebShell_php_webshells_matamu {
 	meta:
 		description = "PHP Webshells Github Archive - file matamu.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d477aae6bd2f288b578dbf05c1c46b3aaa474733"
 	strings:
@@ -5392,6 +5600,7 @@ rule WebShell_php_webshells_matamu {
 rule WebShell_ru24_post_sh {
 	meta:
 		description = "PHP Webshells Github Archive - file ru24_post_sh.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d2c18766a1cd4dda928c12ff7b519578ccec0769"
 	strings:
@@ -5406,6 +5615,7 @@ rule WebShell_ru24_post_sh {
 rule WebShell_hiddens_shell_v1 {
 	meta:
 		description = "PHP Webshells Github Archive - file hiddens shell v1.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "1674bd40eb98b48427c547bf9143aa7fbe2f4a59"
 	strings:
@@ -5416,6 +5626,7 @@ rule WebShell_hiddens_shell_v1 {
 rule WebShell_c99_madnet {
 	meta:
 		description = "PHP Webshells Github Archive - file c99_madnet.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "17613df393d0a99fd5bea18b2d4707f566cff219"
 	strings:
@@ -5430,6 +5641,7 @@ rule WebShell_c99_madnet {
 rule WebShell_c99_locus7s {
 	meta:
 		description = "PHP Webshells Github Archive - file c99_locus7s.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d413d4700daed07561c9f95e1468fb80238fbf3c"
 	strings:
@@ -5444,6 +5656,7 @@ rule WebShell_c99_locus7s {
 rule WebShell_JspWebshell_1_2 {
 	meta:
 		description = "PHP Webshells Github Archive - file JspWebshell_1.2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "0bed4a1966117dd872ac9e8dceceb54024a030fa"
 	strings:
@@ -5459,6 +5672,7 @@ rule WebShell_JspWebshell_1_2 {
 rule WebShell_safe0ver {
 	meta:
 		description = "PHP Webshells Github Archive - file safe0ver.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "366639526d92bd38ff7218b8539ac0f154190eb8"
 	strings:
@@ -5475,6 +5689,7 @@ rule WebShell_safe0ver {
 rule WebShell_Uploader {
 	meta:
 		description = "PHP Webshells Github Archive - file Uploader.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "e216c5863a23fde8a449c31660fd413d77cce0b7"
 	strings:
@@ -5485,6 +5700,7 @@ rule WebShell_Uploader {
 rule WebShell_php_webshells_kral {
 	meta:
 		description = "PHP Webshells Github Archive - file kral.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "4cd1d1a2fd448cecc605970e3a89f3c2e5c80dfc"
 	strings:
@@ -5500,6 +5716,7 @@ rule WebShell_php_webshells_kral {
 rule WebShell_cgitelnet {
 	meta:
 		description = "PHP Webshells Github Archive - file cgitelnet.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "72e5f0e4cd438e47b6454de297267770a36cbeb3"
 	strings:
@@ -5513,6 +5730,7 @@ rule WebShell_cgitelnet {
 rule WebShell_simple_backdoor {
 	meta:
 		description = "PHP Webshells Github Archive - file simple-backdoor.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "edcd5157a68fa00723a506ca86d6cbb8884ef512"
 	strings:
@@ -5531,6 +5749,7 @@ rule WebShell_simple_backdoor {
 rule WebShell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2_2 {
 	meta:
 		description = "PHP Webshells Github Archive - file Safe_Mode Bypass PHP 4.4.2 and PHP 5.1.2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "8fdd4e0e87c044177e9e1c97084eb5b18e2f1c25"
 	strings:
@@ -5544,6 +5763,7 @@ rule WebShell_Safe_Mode_Bypass_PHP_4_4_2_and_PHP_5_1_2_2 {
 rule WebShell_NTDaddy_v1_9 {
 	meta:
 		description = "PHP Webshells Github Archive - file NTDaddy v1.9.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "79519aa407fff72b7510c6a63c877f2e07d7554b"
 	strings:
@@ -5557,6 +5777,7 @@ rule WebShell_NTDaddy_v1_9 {
 rule WebShell_lamashell {
 	meta:
 		description = "PHP Webshells Github Archive - file lamashell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "b71181e0d899b2b07bc55aebb27da6706ea1b560"
 	strings:
@@ -5572,6 +5793,7 @@ rule WebShell_lamashell {
 rule WebShell_Simple_PHP_backdoor_by_DK {
 	meta:
 		description = "PHP Webshells Github Archive - file Simple_PHP_backdoor_by_DK.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "03f6215548ed370bec0332199be7c4f68105274e"
 	strings:
@@ -5586,6 +5808,7 @@ rule WebShell_Simple_PHP_backdoor_by_DK {
 rule WebShell_Moroccan_Spamers_Ma_EditioN_By_GhOsT {
 	meta:
 		description = "PHP Webshells Github Archive - file Moroccan Spamers Ma-EditioN By GhOsT.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "31e5473920a2cc445d246bc5820037d8fe383201"
 	strings:
@@ -5598,6 +5821,7 @@ rule WebShell_Moroccan_Spamers_Ma_EditioN_By_GhOsT {
 rule WebShell_C99madShell_v__2_0_madnet_edition {
 	meta:
 		description = "PHP Webshells Github Archive - file C99madShell v. 2.0 madnet edition.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "f99f8228eb12746847f54bad45084f19d1a7e111"
 	strings:
@@ -5612,6 +5836,7 @@ rule WebShell_C99madShell_v__2_0_madnet_edition {
 rule WebShell_CmdAsp_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - file CmdAsp.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "cb18e1ac11e37e236e244b96c2af2d313feda696"
 	strings:
@@ -5630,6 +5855,7 @@ rule WebShell_CmdAsp_asp_php {
 rule WebShell_NCC_Shell {
 	meta:
 		description = "PHP Webshells Github Archive - file NCC-Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "64d4495875a809b2730bd93bec2e33902ea80a53"
 	strings:
@@ -5645,6 +5871,7 @@ rule WebShell_NCC_Shell {
 rule WebShell_php_webshells_README {
 	meta:
 		description = "PHP Webshells Github Archive - file README.md"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "ef2c567b4782c994db48de0168deb29c812f7204"
 	strings:
@@ -5656,6 +5883,7 @@ rule WebShell_php_webshells_README {
 rule WebShell_backupsql {
 	meta:
 		description = "PHP Webshells Github Archive - file backupsql.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "863e017545ec8e16a0df5f420f2d708631020dd4"
 	strings:
@@ -5670,6 +5898,7 @@ rule WebShell_backupsql {
 rule WebShell_AK_74_Security_Team_Web_Shell_Beta_Version {
 	meta:
 		description = "PHP Webshells Github Archive - file AK-74 Security Team Web Shell Beta Version.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "c90b0ba575f432ecc08f8f292f3013b5532fe2c4"
 	strings:
@@ -5682,6 +5911,7 @@ rule WebShell_AK_74_Security_Team_Web_Shell_Beta_Version {
 rule WebShell_php_webshells_cpanel {
 	meta:
 		description = "PHP Webshells Github Archive - file cpanel.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "433dab17106b175c7cf73f4f094e835d453c0874"
 	strings:
@@ -5697,6 +5927,7 @@ rule WebShell_php_webshells_cpanel {
 rule WebShell_accept_language {
 	meta:
 		description = "PHP Webshells Github Archive - file accept_language.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "180b13576f8a5407ab3325671b63750adbcb62c9"
 	strings:
@@ -5707,6 +5938,7 @@ rule WebShell_accept_language {
 rule WebShell_php_webshells_529 {
 	meta:
 		description = "PHP Webshells Github Archive - file 529.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "ba3fb2995528307487dff7d5b624d9f4c94c75d3"
 	strings:
@@ -5723,6 +5955,7 @@ rule WebShell_php_webshells_529 {
 rule WebShell_STNC_WebShell_v0_8 {
 	meta:
 		description = "PHP Webshells Github Archive - file STNC WebShell v0.8.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "52068c9dff65f1caae8f4c60d0225708612bb8bc"
 	strings:
@@ -5735,6 +5968,7 @@ rule WebShell_STNC_WebShell_v0_8 {
 rule WebShell_php_webshells_tryag {
 	meta:
 		description = "PHP Webshells Github Archive - file tryag.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "42d837e9ab764e95ed11b8bd6c29699d13fe4c41"
 	strings:
@@ -5749,6 +5983,7 @@ rule WebShell_php_webshells_tryag {
 rule WebShell_dC3_Security_Crew_Shell_PRiV_2 {
 	meta:
 		description = "PHP Webshells Github Archive - file dC3 Security Crew Shell PRiV.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "9077eb05f4ce19c31c93c2421430dd3068a37f17"
 	strings:
@@ -5763,6 +5998,7 @@ rule WebShell_dC3_Security_Crew_Shell_PRiV_2 {
 rule WebShell_qsd_php_backdoor {
 	meta:
 		description = "PHP Webshells Github Archive - file qsd-php-backdoor.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "4856bce45fc5b3f938d8125f7cdd35a8bbae380f"
 	strings:
@@ -5776,6 +6012,7 @@ rule WebShell_qsd_php_backdoor {
 rule WebShell_php_webshells_spygrup {
 	meta:
 		description = "PHP Webshells Github Archive - file spygrup.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "12f9105332f5dc5d6360a26706cd79afa07fe004"
 	strings:
@@ -5789,6 +6026,7 @@ rule WebShell_php_webshells_spygrup {
 rule WebShell_Web_shell__c_ShAnKaR {
 	meta:
 		description = "PHP Webshells Github Archive - file Web-shell (c)ShAnKaR.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "3dd4f25bd132beb59d2ae0c813373c9ea20e1b7a"
 	strings:
@@ -5802,6 +6040,7 @@ rule WebShell_Web_shell__c_ShAnKaR {
 rule WebShell_Ayyildiz_Tim___AYT__Shell_v_2_1_Biz {
 	meta:
 		description = "PHP Webshells Github Archive - file Ayyildiz Tim  -AYT- Shell v 2.1 Biz.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "5fe8c1d01dc5bc70372a8a04410faf8fcde3cb68"
 	strings:
@@ -5815,6 +6054,7 @@ rule WebShell_Ayyildiz_Tim___AYT__Shell_v_2_1_Biz {
 rule WebShell_Gamma_Web_Shell {
 	meta:
 		description = "PHP Webshells Github Archive - file Gamma Web Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "7ef773df7a2f221468cc8f7683e1ace6b1e8139a"
 	strings:
@@ -5828,6 +6068,7 @@ rule WebShell_Gamma_Web_Shell {
 rule WebShell_php_webshells_aspydrv {
 	meta:
 		description = "PHP Webshells Github Archive - file aspydrv.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "3d8996b625025dc549d73cdb3e5fa678ab35d32a"
 	strings:
@@ -5842,6 +6083,7 @@ rule WebShell_php_webshells_aspydrv {
 rule WebShell_JspWebshell_1_2_2 {
 	meta:
 		description = "PHP Webshells Github Archive - file JspWebshell 1.2.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "184fc72b51d1429c44a4c8de43081e00967cf86b"
 	strings:
@@ -5856,6 +6098,7 @@ rule WebShell_JspWebshell_1_2_2 {
 rule WebShell_g00nshell_v1_3 {
 	meta:
 		description = "PHP Webshells Github Archive - file g00nshell-v1.3.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "70fe072e120249c9e2f0a8e9019f984aea84a504"
 	strings:
@@ -5870,6 +6113,7 @@ rule WebShell_g00nshell_v1_3 {
 rule WebShell_WinX_Shell {
 	meta:
 		description = "PHP Webshells Github Archive - file WinX Shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "a94d65c168344ad9fa406d219bdf60150c02010e"
 	strings:
@@ -5884,6 +6128,7 @@ rule WebShell_WinX_Shell {
 rule WebShell_PHANTASMA {
 	meta:
 		description = "PHP Webshells Github Archive - file PHANTASMA.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "cd12d42abf854cd34ff9e93a80d464620af6d75e"
 	strings:
@@ -5897,6 +6142,7 @@ rule WebShell_PHANTASMA {
 rule WebShell_php_webshells_cw {
 	meta:
 		description = "PHP Webshells Github Archive - file cw.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "e65e0670ef6edf0a3581be6fe5ddeeffd22014bf"
 	strings:
@@ -5912,6 +6158,7 @@ rule WebShell_php_webshells_cw {
 rule WebShell_php_include_w_shell {
 	meta:
 		description = "PHP Webshells Github Archive - file php-include-w-shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "1a7f4868691410830ad954360950e37c582b0292"
 	strings:
@@ -5924,6 +6171,7 @@ rule WebShell_php_include_w_shell {
 rule WebShell_mysql_tool {
 	meta:
 		description = "PHP Webshells Github Archive - file mysql_tool.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "c9cf8cafcd4e65d1b57fdee5eef98f0f2de74474"
 	strings:
@@ -5935,6 +6183,7 @@ rule WebShell_mysql_tool {
 rule WebShell_PhpSpy_Ver_2006 {
 	meta:
 		description = "PHP Webshells Github Archive - file PhpSpy Ver 2006.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "34a89e0ab896c3518d9a474b71ee636ca595625d"
 	strings:
@@ -5948,6 +6197,7 @@ rule WebShell_PhpSpy_Ver_2006 {
 rule WebShell_ZyklonShell {
 	meta:
 		description = "PHP Webshells Github Archive - file ZyklonShell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "3fa7e6f3566427196ac47551392e2386a038d61c"
 	strings:
@@ -5961,6 +6211,7 @@ rule WebShell_ZyklonShell {
 rule WebShell_php_webshells_myshell {
 	meta:
 		description = "PHP Webshells Github Archive - file myshell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "5bd52749872d1083e7be076a5e65ffcde210e524"
 	strings:
@@ -5974,6 +6225,7 @@ rule WebShell_php_webshells_myshell {
 rule WebShell_php_webshells_lolipop {
 	meta:
 		description = "PHP Webshells Github Archive - file lolipop.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "86f23baabb90c93465e6851e40104ded5a5164cb"
 	strings:
@@ -5986,6 +6238,7 @@ rule WebShell_php_webshells_lolipop {
 rule WebShell_simple_cmd {
 	meta:
 		description = "PHP Webshells Github Archive - file simple_cmd.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "466a8caf03cdebe07aa16ad490e54744f82e32c2"
 	strings:
@@ -5999,6 +6252,7 @@ rule WebShell_simple_cmd {
 rule WebShell_go_shell {
 	meta:
 		description = "PHP Webshells Github Archive - file go-shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "3dd85981bec33de42c04c53d081c230b5fc0e94f"
 	strings:
@@ -6013,6 +6267,7 @@ rule WebShell_go_shell {
 rule WebShell_aZRaiLPhp_v1_0 {
 	meta:
 		description = "PHP Webshells Github Archive - file aZRaiLPhp v1.0.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "a2c609d1a8c8ba3d706d1d70bef69e63f239782b"
 	strings:
@@ -6026,6 +6281,7 @@ rule WebShell_aZRaiLPhp_v1_0 {
 rule WebShell_webshells_zehir4 {
 	meta:
 		description = "Webshells Github Archive - file zehir4"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "788928ae87551f286d189e163e55410acbb90a64"
 		score = 55
@@ -6038,6 +6294,7 @@ rule WebShell_webshells_zehir4 {
 rule WebShell_zehir4_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - file zehir4.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "1d9b78b5b14b821139541cc0deb4cbbd994ce157"
 	strings:
@@ -6050,6 +6307,7 @@ rule WebShell_zehir4_asp_php {
 rule WebShell_php_webshells_lostDC {
 	meta:
 		description = "PHP Webshells Github Archive - file lostDC.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "d54fe07ea53a8929620c50e3a3f8fb69fdeb1cde"
 	strings:
@@ -6064,6 +6322,7 @@ rule WebShell_php_webshells_lostDC {
 rule WebShell_CasuS_1_5 {
 	meta:
 		description = "PHP Webshells Github Archive - file CasuS 1.5.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "7eee8882ad9b940407acc0146db018c302696341"
 	strings:
@@ -6076,6 +6335,7 @@ rule WebShell_CasuS_1_5 {
 rule WebShell_ftpsearch {
 	meta:
 		description = "PHP Webshells Github Archive - file ftpsearch.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		hash = "c945f597552ccb8c0309ad6d2831c8cabdf4e2d6"
 	strings:
@@ -6089,6 +6349,7 @@ rule WebShell_ftpsearch {
 rule WebShell__Cyber_Shell_cybershell_Cyber_Shell__v_1_0_ {
 	meta:
 		description = "PHP Webshells Github Archive - from files Cyber Shell.php, cybershell.php, Cyber Shell (v 1.0).php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
@@ -6105,6 +6366,7 @@ rule WebShell__Cyber_Shell_cybershell_Cyber_Shell__v_1_0_ {
 rule WebShell__Ajax_PHP_Command_Shell_Ajax_PHP_Command_Shell_soldierofallah {
 	meta:
 		description = "PHP Webshells Github Archive - from files Ajax_PHP Command Shell.php, Ajax_PHP_Command_Shell.php, soldierofallah.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "fa11deaee821ca3de7ad1caafa2a585ee1bc8d82"
@@ -6123,7 +6385,8 @@ rule WebShell__Ajax_PHP_Command_Shell_Ajax_PHP_Command_Shell_soldierofallah {
 }
 rule WebShell_Generic_PHP_7 {
 	meta:
-		description = "PHP Webshells Github Archive - from files Mysql interface v1.0.php, MySQL Web Interface Version 0.8.php, Mysql_interface_v1.0.php, MySQL_Web_Interface_Version_0.8.php"
+		description = "PHP Webshells Github Archive"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "de98f890790756f226f597489844eb3e53a867a9"
@@ -6141,6 +6404,7 @@ rule WebShell_Generic_PHP_7 {
 rule WebShell__Small_Web_Shell_by_ZaCo_small_zaco_zacosmall {
 	meta:
 		description = "PHP Webshells Github Archive - from files Small Web Shell by ZaCo.php, small.php, zaco.php, zacosmall.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "b148ead15d34a55771894424ace2a92983351dda"
@@ -6157,7 +6421,8 @@ rule WebShell__Small_Web_Shell_by_ZaCo_small_zaco_zacosmall {
 }
 rule WebShell_Generic_PHP_8 {
 	meta:
-		description = "PHP Webshells Github Archive - from files Macker's Private PHPShell.php, PHP Shell.php, Safe0ver Shell -Safe Mod Bypass By Evilc0der.php"
+		description = "PHP Webshells Github Archive"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "fc1ae242b926d70e32cdb08bbe92628bc5bd7f99"
@@ -6176,6 +6441,7 @@ rule WebShell_Generic_PHP_8 {
 rule WebShell__PH_Vayv_PHVayv_PH_Vayv_klasvayv_asp_php {
 	meta:
 		description = "PHP Webshells Github Archive - from files PH Vayv.php, PHVayv.php, PH_Vayv.php, klasvayv.asp.php.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "b51962a1ffa460ec793317571fc2f46042fd13ee"
@@ -6190,27 +6456,32 @@ rule WebShell__PH_Vayv_PHVayv_PH_Vayv_klasvayv_asp_php {
 	condition:
 		2 of them
 }
+
 rule WebShell_Generic_PHP_9 {
-	meta:
-		description = "PHP Webshells Github Archive - from files KAdot Universal Shell v0.1.6.php, KAdot_Universal_Shell_v0.1.6.php, KA_uShell 0.1.6.php"
-		author = "Florian Roth"
-		super_rule = 1
-		hash0 = "89f2a7007a2cd411e0a7abd2ff5218d212b84d18"
-		hash1 = "2266178ad4eb72c2386c0a4d536e5d82bb7ed6a2"
-		hash2 = "0daed818cac548324ad0c5905476deef9523ad73"
-	strings:
-		$s2 = ":<b>\" .base64_decode($_POST['tot']). \"</b>\";" fullword
-		$s6 = "if (isset($_POST['wq']) && $_POST['wq']<>\"\") {" fullword
-		$s12 = "if (!empty($_POST['c'])){" fullword
-		$s13 = "passthru($_POST['c']);" fullword
-		$s16 = "<input type=\"radio\" name=\"tac\" value=\"1\">B64 Decode<br>" fullword
-		$s20 = "<input type=\"radio\" name=\"tac\" value=\"3\">md5 Hash" fullword
-	condition:
-		3 of them
+   meta:
+      description = "PHP Webshells Github Archive - from files KAdot Universal Shell v0.1.6.php, KAdot_Universal_Shell_v0.1.6.php, KA_uShell 0.1.6.php"
+      author = "Florian Roth"
+      super_rule = 1
+      date = "2014/04/06"
+      modified = "2022-12-06"
+      score = 70
+      reference = "Internal Research"
+      hash0 = "89f2a7007a2cd411e0a7abd2ff5218d212b84d18"
+      hash1 = "2266178ad4eb72c2386c0a4d536e5d82bb7ed6a2"
+      hash2 = "0daed818cac548324ad0c5905476deef9523ad73"
+   strings:
+      $ = { 3a 3c 62 3e 22 20 2e 62 61 73 65 36 34 5f 64 65 63 6f 64 65 28 24 5f 50 4f 53 54 5b 27 74 6f 74 27 5d 29 2e 20 22 3c 2f 62 3e 22 3b }
+      $ = { 69 66 20 28 69 73 73 65 74 28 24 5f 50 4f 53 54 5b 27 77 71 27 5d 29 20 26 26 20 24 5f 50 4f 53 54 5b 27 77 71 27 5d 3c 3e 22 22 29 20 7b }
+      $ = { 70 61 73 73 74 68 72 75 28 24 5f 50 4f 53 54 5b 27 63 27 5d 29 3b }
+      $ = { 3c 69 6e 70 75 74 20 74 79 70 65 3d 22 72 61 64 69 6f 22 20 6e 61 6d 65 3d 22 74 61 63 22 20 76 61 6c 75 65 3d 22 31 22 3e 42 36 34 20 44 65 63 6f 64 65 3c 62 72 3e }
+   condition:
+      1 of them
 }
+
 rule WebShell__PH_Vayv_PHVayv_PH_Vayv {
 	meta:
 		description = "PHP Webshells Github Archive - from files PH Vayv.php, PHVayv.php, PH_Vayv.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "b51962a1ffa460ec793317571fc2f46042fd13ee"
@@ -6223,29 +6494,31 @@ rule WebShell__PH_Vayv_PHVayv_PH_Vayv {
 	condition:
 		2 of them
 }
+
 rule WebShell_Generic_PHP_1 {
-	meta:
-		description = "PHP Webshells Github Archive - from files Dive Shell 1.0 - Emperor Hacking Team.php, Dive_Shell_1.0_Emperor_Hacking_Team.php, SimShell 1.0 - Simorgh Security MGZ.php, SimShell_1.0_-_Simorgh_Security_MGZ.php"
-		author = "Florian Roth"
-		super_rule = 1
-		hash0 = "3b086b9b53cf9d25ff0d30b1d41bb2f45c7cda2b"
-		hash1 = "2558e728184b8efcdb57cfab918d95b06d45de04"
-		hash2 = "203a8021192531d454efbc98a3bbb8cabe09c85c"
-		hash3 = "b79709eb7801a28d02919c41cc75ac695884db27"
-	strings:
-		$s1 = "$token = substr($_REQUEST['command'], 0, $length);" fullword
-		$s4 = "var command_hist = new Array(<?php echo $js_command_hist ?>);" fullword
-		$s7 = "$_SESSION['output'] .= htmlspecialchars(fgets($io[1])," fullword
-		$s9 = "document.shell.command.value = command_hist[current_line];" fullword
-		$s16 = "$_REQUEST['command'] = $aliases[$token] . substr($_REQUEST['command'], $"
-		$s19 = "if (empty($_SESSION['cwd']) || !empty($_REQUEST['reset'])) {" fullword
-		$s20 = "if (e.keyCode == 38 && current_line < command_hist.length-1) {" fullword
-	condition:
-		5 of them
+   meta:
+      description = "PHP Webshells Github Archive - from files Dive Shell 1.0"
+      author = "Florian Roth"
+      super_rule = 1
+      score = 70
+      date = "2014/04/06"
+      modified = "2022-12-06"
+      hash0 = "3b086b9b53cf9d25ff0d30b1d41bb2f45c7cda2b"
+      hash1 = "2558e728184b8efcdb57cfab918d95b06d45de04"
+      hash2 = "203a8021192531d454efbc98a3bbb8cabe09c85c"
+      hash3 = "b79709eb7801a28d02919c41cc75ac695884db27"
+   strings:
+      $ = { 76 61 72 20 63 6f 6d 6d 61 6e 64 5f 68 69 73 74 20 3d 20 6e 65 77 20 41 72 72 61 79 28 3c 3f 70 68 70 20 65 63 68 6f 20 24 6a 73 5f 63 6f 6d 6d 61 6e 64 5f 68 69 73 74 20 3f 3e 29 3b }
+      $ = { 69 66 20 28 65 6d 70 74 79 28 24 5f 53 45 53 53 49 4f 4e 5b 27 63 77 64 27 5d 29 20 7c 7c 20 21 65 6d 70 74 79 28 24 5f 52 45 51 55 45 53 54 5b 27 72 65 73 65 74 27 5d 29 29 20 7b }
+      $ = { 69 66 20 28 65 2e 6b 65 79 43 6f 64 65 20 3d 3d 20 33 38 20 26 26 20 63 75 72 72 65 6e 74 5f 6c 69 6e 65 20 3c 20 63 6f 6d 6d 61 6e 64 5f 68 69 73 74 2e 6c 65 6e 67 74 68 2d 31 29 20 7b }
+   condition:
+      1 of them
 }
+
 rule WebShell_Generic_PHP_2 {
 	meta:
 		description = "PHP Webshells Github Archive - from files CrystalShell v.1.php, load_shell.php, Loaderz WEB Shell.php, stres.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
@@ -6264,6 +6537,7 @@ rule WebShell_Generic_PHP_2 {
 rule WebShell__CrystalShell_v_1_erne_stres {
 	meta:
 		description = "PHP Webshells Github Archive - from files CrystalShell v.1.php, erne.php, stres.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
@@ -6283,7 +6557,8 @@ rule WebShell__CrystalShell_v_1_erne_stres {
 }
 rule WebShell_Generic_PHP_3 {
 	meta:
-		description = "PHP Webshells Github Archive - from files Antichat Shell v1.3.php, Antichat Shell. Modified by Go0o$E.php, Antichat Shell.php, fatal.php"
+		description = "PHP Webshells Github Archive"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "d829e87b3ce34460088c7775a60bded64e530cd4"
@@ -6302,6 +6577,7 @@ rule WebShell_Generic_PHP_3 {
 rule WebShell_Generic_PHP_4 {
 	meta:
 		description = "PHP Webshells Github Archive - from files CrystalShell v.1.php, load_shell.php, nshell.php, Loaderz WEB Shell.php, stres.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
@@ -6320,27 +6596,11 @@ rule WebShell_Generic_PHP_4 {
 	condition:
 		all of them
 }
-rule WebShell_Generic_PHP_5 {
-	meta:
-		description = "PHP Webshells Github Archive - from files ex0shell.php, megabor.php, GRP WebShell 2.0 release build 2018 (C)2006,Great.php"
-		author = "Florian Roth"
-		super_rule = 1
-		hash0 = "64461ad8d8f23ea078201a31d747157f701a4e00"
-		hash1 = "3df1afbcfa718da6fc8af27554834ff6d1a86562"
-		hash2 = "ad86ef7f24f75081318146edc788e5466722a629"
-	strings:
-		$s0 = "(($perms & 0x0400) ? 'S' : '-'));" fullword
-		$s10 = "} elseif (($perms & 0x8000) == 0x8000) {" fullword
-		$s11 = "if (($perms & 0xC000) == 0xC000) {" fullword
-		$s12 = "$info .= (($perms & 0x0008) ?" fullword
-		$s16 = "// Block special" fullword
-		$s18 = "$info = 's';" fullword
-	condition:
-		all of them
-}
+
 rule WebShell_GFS {
 	meta:
 		description = "PHP Webshells Github Archive - from files GFS web-shell ver 3.1.7 - PRiV8.php, Predator.php, GFS_web-shell_ver_3.1.7_-_PRiV8.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "c2f1ef6b11aaec255d4dd31efad18a3869a2a42c"
@@ -6356,6 +6616,7 @@ rule WebShell_GFS {
 rule WebShell__CrystalShell_v_1_sosyete_stres {
 	meta:
 		description = "PHP Webshells Github Archive - from files CrystalShell v.1.php, sosyete.php, stres.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
@@ -6375,6 +6636,7 @@ rule WebShell__CrystalShell_v_1_sosyete_stres {
 rule WebShell_Generic_PHP_10 {
 	meta:
 		description = "PHP Webshells Github Archive - from files Cyber Shell.php, cybershell.php, Cyber Shell (v 1.0).php, PHPRemoteView.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
@@ -6394,6 +6656,7 @@ rule WebShell_Generic_PHP_10 {
 rule WebShell_Generic_PHP_11 {
 	meta:
 		description = "PHP Webshells Github Archive - from files rootshell.php, Rootshell.v.1.0.php, s72 Shell v1.1 Coding.php, s72_Shell_v1.1_Coding.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "31a82cbee8dffaf8eb7b73841f3f3e8e9b3e78cf"
@@ -6415,6 +6678,7 @@ rule WebShell_Generic_PHP_11 {
 rule WebShell__findsock_php_findsock_shell_php_reverse_shell {
 	meta:
 		description = "PHP Webshells Github Archive - from files findsock.c, php-findsock-shell.php, php-reverse-shell.php"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "5622c9841d76617bfc3cd4cab1932d8349b7044f"
@@ -6427,7 +6691,8 @@ rule WebShell__findsock_php_findsock_shell_php_reverse_shell {
 }
 rule WebShell_Generic_PHP_6 {
 	meta:
-		description = "PHP Webshells Github Archive - from files c0derz shell [csh] v. 0.1.1 release.php, CrystalShell v.1.php, load_shell.php, Loaderz WEB Shell.php, stres.php"
+		description = "PHP Webshells Github Archive"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		super_rule = 1
 		hash0 = "1a08f5260c4a2614636dfc108091927799776b13"
@@ -6449,7 +6714,8 @@ rule WebShell_Generic_PHP_6 {
 rule Unpack_Injectt {
 	meta:
 		description = "Webshells Auto-generated - file Injectt.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8a5d2158a566c87edc999771e12d42c5"
 	strings:
 		$s2 = "%s -Run                              -->To Install And Run The Service"
@@ -6461,7 +6727,8 @@ rule Unpack_Injectt {
 rule HYTop_DevPack_fso {
 	meta:
 		description = "Webshells Auto-generated - file fso.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b37f3cde1a08890bd822a182c3a881f6"
 	strings:
 		$s0 = "<!-- PageFSO Below -->"
@@ -6472,7 +6739,8 @@ rule HYTop_DevPack_fso {
 rule FeliksPack3___PHP_Shells_ssh {
 	meta:
 		description = "Webshells Auto-generated - file ssh.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1aa5307790d72941589079989b4f900e"
 	strings:
 		$s0 = "eval(gzinflate(str_rot13(base64_decode('"
@@ -6482,7 +6750,8 @@ rule FeliksPack3___PHP_Shells_ssh {
 rule Debug_BDoor {
 	meta:
 		description = "Webshells Auto-generated - file BDoor.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "e4e8e31dd44beb9320922c5f49739955"
 	strings:
 		$s1 = "\\BDoor\\"
@@ -6493,7 +6762,8 @@ rule Debug_BDoor {
 rule bin_Client {
 	meta:
 		description = "Webshells Auto-generated - file Client.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5f91a5b46d155cacf0cc6673a2a5461b"
 	strings:
 		$s0 = "Recieved respond from server!!"
@@ -6506,7 +6776,8 @@ rule bin_Client {
 rule ZXshell2_0_rar_Folder_ZXshell {
 	meta:
 		description = "Webshells Auto-generated - file ZXshell.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "246ce44502d2f6002d720d350e26c288"
 	strings:
 		$s0 = "WPreviewPagesn"
@@ -6517,7 +6788,8 @@ rule ZXshell2_0_rar_Folder_ZXshell {
 rule RkNTLoad {
 	meta:
 		description = "Webshells Auto-generated - file RkNTLoad.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "262317c95ced56224f136ba532b8b34f"
 	strings:
 		$s1 = "$Info: This file is packed with the UPX executable packer http://upx.tsx.org $"
@@ -6534,7 +6806,8 @@ rule RkNTLoad {
 rule binder2_binder2 {
 	meta:
 		description = "Webshells Auto-generated - file binder2.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d594e90ad23ae0bc0b65b59189c12f11"
 	strings:
 		$s0 = "IsCharAlphaNumericA"
@@ -6549,7 +6822,8 @@ rule binder2_binder2 {
 rule thelast_orice2 {
 	meta:
 		description = "Webshells Auto-generated - file orice2.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "aa63ffb27bde8d03d00dda04421237ae"
 	strings:
 		$s0 = " $aa = $_GET['aa'];"
@@ -6560,7 +6834,8 @@ rule thelast_orice2 {
 rule FSO_s_sincap {
 	meta:
 		description = "Webshells Auto-generated - file sincap.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "dc5c2c2392b84a1529abd92e98e9aa5b"
 	strings:
 		$s0 = "    <font color=\"#E5E5E5\" style=\"font-size: 8pt; font-weight: 700\" face=\"Arial\">"
@@ -6571,7 +6846,8 @@ rule FSO_s_sincap {
 rule PhpShell {
 	meta:
 		description = "Webshells Auto-generated - file PhpShell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "539baa0d39a9cf3c64d65ee7a8738620"
 	strings:
 		$s2 = "href=\"http://www.gimpster.com/wiki/PhpShell\">www.gimpster.com/wiki/PhpShell</a>."
@@ -6581,7 +6857,8 @@ rule PhpShell {
 rule HYTop_DevPack_config {
 	meta:
 		description = "Webshells Auto-generated - file config.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b41d0e64e64a685178a3155195921d61"
 	strings:
 		$s0 = "const adminPassword=\""
@@ -6593,7 +6870,8 @@ rule HYTop_DevPack_config {
 rule sendmail {
 	meta:
 		description = "Webshells Auto-generated - file sendmail.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "75b86f4a21d8adefaf34b3a94629bd17"
 	strings:
 		$s3 = "_NextPyC808"
@@ -6604,7 +6882,8 @@ rule sendmail {
 rule FSO_s_zehir4 {
 	meta:
 		description = "Webshells Auto-generated - file zehir4.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5b496a61363d304532bcf52ee21f5d55"
 	strings:
 		$s5 = " byMesaj "
@@ -6614,7 +6893,8 @@ rule FSO_s_zehir4 {
 rule hkshell_hkshell {
 	meta:
 		description = "Webshells Auto-generated - file hkshell.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "168cab58cee59dc4706b3be988312580"
 	strings:
 		$s1 = "PrSessKERNELU"
@@ -6626,7 +6906,8 @@ rule hkshell_hkshell {
 rule iMHaPFtp {
 	meta:
 		description = "Webshells Auto-generated - file iMHaPFtp.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "12911b73bc6a5d313b494102abcf5c57"
 	strings:
 		$s1 = "echo \"\\t<th class=\\\"permission_header\\\"><a href=\\\"$self?{$d}sort=permission$r\\\">"
@@ -6636,7 +6917,8 @@ rule iMHaPFtp {
 rule Unpack_TBack {
 	meta:
 		description = "Webshells Auto-generated - file TBack.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a9d1007823bf96fb163ab38726b48464"
 	strings:
 		$s5 = "\\final\\new\\lcc\\public.dll"
@@ -6646,7 +6928,8 @@ rule Unpack_TBack {
 rule DarkSpy105 {
 	meta:
 		description = "Webshells Auto-generated - file DarkSpy105.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "f0b85e7bec90dba829a3ede1ab7d8722"
 	strings:
 		$s7 = "Sorry,DarkSpy got an unknown exception,please re-run it,thanks!"
@@ -6656,7 +6939,8 @@ rule DarkSpy105 {
 rule EditServer_EXE {
 	meta:
 		description = "Webshells Auto-generated - file EditServer.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "f945de25e0eba3bdaf1455b3a62b9832"
 	strings:
 		$s2 = "Server %s Have Been Configured"
@@ -6668,7 +6952,8 @@ rule EditServer_EXE {
 rule FSO_s_reader {
 	meta:
 		description = "Webshells Auto-generated - file reader.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b598c8b662f2a1f6cc61f291fb0a6fa2"
 	strings:
 		$s2 = "mailto:mailbomb@hotmail."
@@ -6678,7 +6963,8 @@ rule FSO_s_reader {
 rule ASP_CmdAsp {
 	meta:
 		description = "Webshells Auto-generated - file CmdAsp.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "79d4f3425f7a89befb0ef3bafe5e332f"
 	strings:
 		$s2 = "' -- Read the output from our command and remove the temp file -- '"
@@ -6690,7 +6976,8 @@ rule ASP_CmdAsp {
 rule KA_uShell {
 	meta:
 		description = "Webshells Auto-generated - file KA_uShell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "685f5d4f7f6751eaefc2695071569aab"
 	strings:
 		$s5 = "if(empty($_SERVER['PHP_AUTH_PW']) || $_SERVER['PHP_AUTH_PW']<>$pass"
@@ -6701,7 +6988,8 @@ rule KA_uShell {
 rule PHP_Backdoor_v1 {
 	meta:
 		description = "Webshells Auto-generated - file PHP Backdoor v1.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "0506ba90759d11d78befd21cabf41f3d"
 	strings:
 
@@ -6713,7 +7001,8 @@ rule PHP_Backdoor_v1 {
 rule svchostdll {
 	meta:
 		description = "Webshells Auto-generated - file svchostdll.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "0f6756c8cb0b454c452055f189e4c3f4"
 	strings:
 		$s0 = "InstallService"
@@ -6731,7 +7020,8 @@ rule svchostdll {
 rule HYTop_DevPack_server {
 	meta:
 		description = "Webshells Auto-generated - file server.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1d38526a215df13c7373da4635541b43"
 	strings:
 		$s0 = "<!-- PageServer Below -->"
@@ -6741,7 +7031,8 @@ rule HYTop_DevPack_server {
 rule vanquish {
 	meta:
 		description = "Webshells Auto-generated - file vanquish.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "684450adde37a93e8bb362994efc898c"
 	strings:
 		$s3 = "You cannot delete protected files/folders! Instead, your attempt has been logged"
@@ -6753,7 +7044,8 @@ rule vanquish {
 rule winshell {
 	meta:
 		description = "Webshells Auto-generated - file winshell.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3144410a37dd4c29d004a814a294ea26"
 	strings:
 		$s0 = "Software\\Microsoft\\Windows\\CurrentVersion\\RunServices"
@@ -6771,7 +7063,8 @@ rule winshell {
 rule FSO_s_remview {
 	meta:
 		description = "Webshells Auto-generated - file remview.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b4a09911a5b23e00b55abe546ded691c"
 	strings:
 		$s2 = "      echo \"<hr size=1 noshade>\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\""
@@ -6783,7 +7076,8 @@ rule FSO_s_remview {
 rule saphpshell {
 	meta:
 		description = "Webshells Auto-generated - file saphpshell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d7bba8def713512ddda14baf9cd6889a"
 	strings:
 		$s0 = "<td><input type=\"text\" name=\"command\" size=\"60\" value=\"<?=$_POST['command']?>"
@@ -6793,7 +7087,8 @@ rule saphpshell {
 rule HYTop2006_rar_Folder_2006Z {
 	meta:
 		description = "Webshells Auto-generated - file 2006Z.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "fd1b6129abd4ab177fed135e3b665488"
 	strings:
 		$s1 = "wangyong,czy,allen,lcx,Marcos,kEvin1986,myth"
@@ -6804,7 +7099,8 @@ rule HYTop2006_rar_Folder_2006Z {
 rule admin_ad {
 	meta:
 		description = "Webshells Auto-generated - file admin-ad.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "e6819b8f8ff2f1073f7d46a0b192f43b"
 	strings:
 		$s6 = "<td align=\"center\"> <input name=\"cmd\" type=\"text\" id=\"cmd\" siz"
@@ -6815,7 +7111,8 @@ rule admin_ad {
 rule FSO_s_casus15 {
 	meta:
 		description = "Webshells Auto-generated - file casus15.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8d155b4239d922367af5d0a1b89533a3"
 	strings:
 		$s6 = "if((is_dir(\"$deldir/$file\")) AND ($file!=\".\") AND ($file!=\"..\"))"
@@ -6825,7 +7122,8 @@ rule FSO_s_casus15 {
 rule BIN_Client {
 	meta:
 		description = "Webshells Auto-generated - file Client.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "9f0a74ec81bc2f26f16c5c172b80eca7"
 	strings:
 		$s0 = "=====Remote Shell Closed====="
@@ -6840,7 +7138,8 @@ rule BIN_Client {
 rule shelltools_g0t_root_uptime {
 	meta:
 		description = "Webshells Auto-generated - file uptime.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d1f56102bc5d3e2e37ab3ffa392073b9"
 	strings:
 		$s0 = "JDiamondCSlC~"
@@ -6854,7 +7153,8 @@ rule shelltools_g0t_root_uptime {
 rule Simple_PHP_BackDooR {
 	meta:
 		description = "Webshells Auto-generated - file Simple_PHP_BackDooR.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a401132363eecc3a1040774bec9cb24f"
 	strings:
 		$s0 = "<hr>to browse go to http://<? echo $SERVER_NAME.$REQUEST_URI; ?>?d=[directory he"
@@ -6866,7 +7166,8 @@ rule Simple_PHP_BackDooR {
 rule sig_2005Gray {
 	meta:
 		description = "Webshells Auto-generated - file 2005Gray.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "75dbe3d3b70a5678225d3e2d78b604cc"
 	strings:
 		$s0 = "SCROLLBAR-FACE-COLOR: #e8e7e7;"
@@ -6879,7 +7180,8 @@ rule sig_2005Gray {
 rule DllInjection {
 	meta:
 		description = "Webshells Auto-generated - file DllInjection.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a7b92283a5102886ab8aee2bc5c8d718"
 	strings:
 		$s0 = "\\BDoor\\DllInjecti"
@@ -6889,7 +7191,8 @@ rule DllInjection {
 rule Mithril_v1_45_Mithril {
 	meta:
 		description = "Webshells Auto-generated - file Mithril.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "f1484f882dc381dde6eaa0b80ef64a07"
 	strings:
 		$s2 = "cress.exe"
@@ -6900,7 +7203,8 @@ rule Mithril_v1_45_Mithril {
 rule hkshell_hkrmv {
 	meta:
 		description = "Webshells Auto-generated - file hkrmv.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "bd3a0b7a6b5536f8d96f50956560e9bf"
 	strings:
 		$s5 = "/THUMBPOSITION7"
@@ -6911,7 +7215,8 @@ rule hkshell_hkrmv {
 rule phpshell {
 	meta:
 		description = "Webshells Auto-generated - file phpshell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1dccb1ea9f24ffbd085571c88585517b"
 	strings:
 		$s1 = "echo \"<input size=\\\"100\\\" type=\\\"text\\\" name=\\\"newfile\\\" value=\\\"$inputfile\\\"><b"
@@ -6923,7 +7228,8 @@ rule phpshell {
 rule FSO_s_cmd {
 	meta:
 		description = "Webshells Auto-generated - file cmd.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cbe8e365d41dd3cd8e462ca434cf385f"
 	strings:
 		$s0 = "<%= \"\\\\\" & oScriptNet.ComputerName & \"\\\" & oScriptNet.UserName %>"
@@ -6934,7 +7240,8 @@ rule FSO_s_cmd {
 rule FeliksPack3___PHP_Shells_phpft {
 	meta:
 		description = "Webshells Auto-generated - file phpft.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "60ef80175fcc6a879ca57c54226646b1"
 	strings:
 		$s6 = "PHP Files Thief"
@@ -6945,7 +7252,8 @@ rule FeliksPack3___PHP_Shells_phpft {
 rule FSO_s_indexer {
 	meta:
 		description = "Webshells Auto-generated - file indexer.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "135fc50f85228691b401848caef3be9e"
 	strings:
 		$s3 = "<td>Nereye :<td><input type=\"text\" name=\"nereye\" size=25></td><td><input type=\"r"
@@ -6955,7 +7263,8 @@ rule FSO_s_indexer {
 rule r57shell {
 	meta:
 		description = "Webshells Auto-generated - file r57shell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8023394542cddf8aee5dec6072ed02b5"
 	strings:
 		$s11 = " $_POST['cmd']=\"echo \\\"Now script try connect to"
@@ -6965,7 +7274,8 @@ rule r57shell {
 rule bdcli100 {
 	meta:
 		description = "Webshells Auto-generated - file bdcli100.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b12163ac53789fb4f62e4f17a8c2e028"
 	strings:
 		$s5 = "unable to connect to "
@@ -6976,7 +7286,8 @@ rule bdcli100 {
 rule HYTop_DevPack_2005Red {
 	meta:
 		description = "Webshells Auto-generated - file 2005Red.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d8ccda2214b3f6eabd4502a050eb8fe8"
 	strings:
 		$s0 = "scrollbar-darkshadow-color:#FF9DBB;"
@@ -6988,7 +7299,8 @@ rule HYTop_DevPack_2005Red {
 rule HYTop2006_rar_Folder_2006X2 {
 	meta:
 		description = "Webshells Auto-generated - file 2006X2.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cc5bf9fc56d404ebbc492855393d7620"
 	strings:
 		$s2 = "Powered By "
@@ -6999,7 +7311,8 @@ rule HYTop2006_rar_Folder_2006X2 {
 rule rdrbs084 {
 	meta:
 		description = "Webshells Auto-generated - file rdrbs084.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "ed30327b255816bdd7590bf891aa0020"
 	strings:
 		$s0 = "Create mapped port. You have to specify domain when using HTTP type."
@@ -7010,7 +7323,8 @@ rule rdrbs084 {
 rule HYTop_CaseSwitch_2005 {
 	meta:
 		description = "Webshells Auto-generated - file 2005.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8bf667ee9e21366bc0bd3491cb614f41"
 	strings:
 		$s1 = "MSComDlg.CommonDialog"
@@ -7027,7 +7341,8 @@ rule HYTop_CaseSwitch_2005 {
 rule eBayId_index3 {
 	meta:
 		description = "Webshells Auto-generated - file index3.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "0412b1e37f41ea0d002e4ed11608905f"
 	strings:
 		$s8 = "$err = \"<i>Your Name</i> Not Entered!</font></h2>Sorry, \\\"You"
@@ -7037,7 +7352,8 @@ rule eBayId_index3 {
 rule FSO_s_phvayv {
 	meta:
 		description = "Webshells Auto-generated - file phvayv.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "205ecda66c443083403efb1e5c7f7878"
 	strings:
 		$s2 = "wrap=\"OFF\">XXXX</textarea></font><font face"
@@ -7047,7 +7363,8 @@ rule FSO_s_phvayv {
 rule byshell063_ntboot {
 	meta:
 		description = "Webshells Auto-generated - file ntboot.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "99b5f49db6d6d9a9faeffb29fd8e6d8c"
 	strings:
 		$s0 = "SYSTEM\\CurrentControlSet\\Services\\NtBoot"
@@ -7060,7 +7377,8 @@ rule byshell063_ntboot {
 rule FSO_s_casus15_2 {
 	meta:
 		description = "Webshells Auto-generated - file casus15.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8d155b4239d922367af5d0a1b89533a3"
 	strings:
 		$s0 = "copy ( $dosya_gonder"
@@ -7070,7 +7388,8 @@ rule FSO_s_casus15_2 {
 rule installer {
 	meta:
 		description = "Webshells Auto-generated - file installer.cmd"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a507919ae701cf7e42fa441d3ad95f8f"
 	strings:
 		$s0 = "Restore Old Vanquish"
@@ -7078,20 +7397,11 @@ rule installer {
 	condition:
 		all of them
 }
-rule uploader {
-	meta:
-		description = "Webshells Auto-generated - file uploader.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
-		hash = "b9a9aab319964351b46bd5fc9d6246a8"
-	strings:
-		$s0 = "move_uploaded_file($userfile, \"entrika.php\"); "
-	condition:
-		all of them
-}
 rule FSO_s_remview_2 {
 	meta:
 		description = "Webshells Auto-generated - file remview.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b4a09911a5b23e00b55abe546ded691c"
 	strings:
 		$s0 = "<xmp>$out</"
@@ -7102,7 +7412,8 @@ rule FSO_s_remview_2 {
 rule FeliksPack3___PHP_Shells_r57 {
 	meta:
 		description = "Webshells Auto-generated - file r57.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "903908b77a266b855262cdbce81c3f72"
 	strings:
 		$s1 = "$sql = \"LOAD DATA INFILE \\\"\".$_POST['test3_file']."
@@ -7112,7 +7423,8 @@ rule FeliksPack3___PHP_Shells_r57 {
 rule HYTop2006_rar_Folder_2006X {
 	meta:
 		description = "Webshells Auto-generated - file 2006X.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cf3ee0d869dd36e775dfcaa788db8e4b"
 	strings:
 		$s1 = "<input name=\"password\" type=\"password\" id=\"password\""
@@ -7123,7 +7435,8 @@ rule HYTop2006_rar_Folder_2006X {
 rule FSO_s_phvayv_2 {
 	meta:
 		description = "Webshells Auto-generated - file phvayv.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "205ecda66c443083403efb1e5c7f7878"
 	strings:
 		$s2 = "rows=\"24\" cols=\"122\" wrap=\"OFF\">XXXX</textarea></font><font"
@@ -7133,7 +7446,8 @@ rule FSO_s_phvayv_2 {
 rule elmaliseker {
 	meta:
 		description = "Webshells Auto-generated - file elmaliseker.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "ccf48af0c8c09bbd038e610a49c9862e"
 	strings:
 		$s0 = "javascript:Command('Download'"
@@ -7144,7 +7458,8 @@ rule elmaliseker {
 rule shelltools_g0t_root_resolve {
 	meta:
 		description = "Webshells Auto-generated - file resolve.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "69bf9aa296238610a0e05f99b5540297"
 	strings:
 		$s0 = "3^n6B(Ed3"
@@ -7160,7 +7475,8 @@ rule shelltools_g0t_root_resolve {
 rule FSO_s_RemExp {
 	meta:
 		description = "Webshells Auto-generated - file RemExp.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b69670ecdbb40012c73686cd22696eeb"
 	strings:
 		$s1 = "<td bgcolor=\"<%=BgColor%>\" title=\"<%=SubFolder.Name%>\"> <a href= \"<%=Request.Ser"
@@ -7172,7 +7488,8 @@ rule FSO_s_RemExp {
 rule FSO_s_tool {
 	meta:
 		description = "Webshells Auto-generated - file tool.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3a1e1e889fdd974a130a6a767b42655b"
 	strings:
 		$s7 = "\"\"%windir%\\\\calc.exe\"\")"
@@ -7182,7 +7499,8 @@ rule FSO_s_tool {
 rule FeliksPack3___PHP_Shells_2005 {
 	meta:
 		description = "Webshells Auto-generated - file 2005.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "97f2552c2fafc0b2eb467ee29cc803c8"
 	strings:
 		$s0 = "window.open(\"\"&url&\"?id=edit&path=\"+sfile+\"&op=copy&attrib=\"+attrib+\"&dpath=\"+lp"
@@ -7193,7 +7511,8 @@ rule FeliksPack3___PHP_Shells_2005 {
 rule byloader {
 	meta:
 		description = "Webshells Auto-generated - file byloader.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "0f0d6dc26055653f5844ded906ce52df"
 	strings:
 		$s0 = "SYSTEM\\CurrentControlSet\\Services\\NtfsChk"
@@ -7207,7 +7526,8 @@ rule byloader {
 rule shelltools_g0t_root_Fport {
 	meta:
 		description = "Webshells Auto-generated - file Fport.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "dbb75488aa2fa22ba6950aead1ef30d5"
 	strings:
 		$s4 = "Copyright 2000 by Foundstone, Inc."
@@ -7218,7 +7538,8 @@ rule shelltools_g0t_root_Fport {
 rule BackDooR__fr_ {
 	meta:
 		description = "Webshells Auto-generated - file BackDooR (fr).php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a79cac2cf86e073a832aaf29a664f4be"
 	strings:
 		$s3 = "print(\"<p align=\\\"center\\\"><font size=\\\"5\\\">Exploit include "
@@ -7228,7 +7549,8 @@ rule BackDooR__fr_ {
 rule FSO_s_ntdaddy {
 	meta:
 		description = "Webshells Auto-generated - file ntdaddy.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "f6262f3ad9f73b8d3e7d9ea5ec07a357"
 	strings:
 		$s1 = "<input type=\"text\" name=\".CMD\" size=\"45\" value=\"<%= szCMD %>\"> <input type=\"s"
@@ -7238,7 +7560,8 @@ rule FSO_s_ntdaddy {
 rule nstview_nstview {
 	meta:
 		description = "Webshells Auto-generated - file nstview.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3871888a0c1ac4270104918231029a56"
 	strings:
 		$s4 = "open STDIN,\\\"<&X\\\";open STDOUT,\\\">&X\\\";open STDERR,\\\">&X\\\";exec(\\\"/bin/sh -i\\\");"
@@ -7248,7 +7571,8 @@ rule nstview_nstview {
 rule HYTop_DevPack_upload {
 	meta:
 		description = "Webshells Auto-generated - file upload.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b09852bda534627949f0259828c967de"
 	strings:
 		$s0 = "<!-- PageUpload Below -->"
@@ -7258,7 +7582,8 @@ rule HYTop_DevPack_upload {
 rule PasswordReminder {
 	meta:
 		description = "Webshells Auto-generated - file PasswordReminder.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "ea49d754dc609e8bfa4c0f95d14ef9bf"
 	strings:
 		$s3 = "The encoded password is found at 0x%8.8lx and has a length of %d."
@@ -7268,7 +7593,8 @@ rule PasswordReminder {
 rule Pack_InjectT {
 	meta:
 		description = "Webshells Auto-generated - file InjectT.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "983b74ccd57f6195a0584cdfb27d55e8"
 	strings:
 		$s3 = "ail To Open Registry"
@@ -7282,7 +7608,8 @@ rule Pack_InjectT {
 rule FSO_s_RemExp_2 {
 	meta:
 		description = "Webshells Auto-generated - file RemExp.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b69670ecdbb40012c73686cd22696eeb"
 	strings:
 		$s2 = " Then Response.Write \""
@@ -7293,7 +7620,8 @@ rule FSO_s_RemExp_2 {
 rule FSO_s_c99 {
 	meta:
 		description = "Webshells Auto-generated - file c99.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5f9ba02eb081bba2b2434c603af454d0"
 	strings:
 		$s2 = "\"txt\",\"conf\",\"bat\",\"sh\",\"js\",\"bak\",\"doc\",\"log\",\"sfc\",\"cfg\",\"htacce"
@@ -7303,7 +7631,8 @@ rule FSO_s_c99 {
 rule rknt_zip_Folder_RkNT {
 	meta:
 		description = "Webshells Auto-generated - file RkNT.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5f97386dfde148942b7584aeb6512b85"
 	strings:
 		$s0 = "PathStripPathA"
@@ -7319,7 +7648,8 @@ rule rknt_zip_Folder_RkNT {
 rule dbgntboot {
 	meta:
 		description = "Webshells Auto-generated - file dbgntboot.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "4d87543d4d7f73c1529c9f8066b475ab"
 	strings:
 		$s2 = "now DOS is working at mode %d,faketype %d,against %s,has worked %d minutes,by sp"
@@ -7330,7 +7660,8 @@ rule dbgntboot {
 rule PHP_shell {
 	meta:
 		description = "Webshells Auto-generated - file shell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "45e8a00567f8a34ab1cccc86b4bc74b9"
 	strings:
 		$s0 = "AR8iROET6mMnrqTpC6W1Kp/DsTgxNby9H1xhiswfwgoAtED0y6wEXTihoAtICkIX6L1+vTUYWuWz"
@@ -7341,7 +7672,8 @@ rule PHP_shell {
 rule hxdef100 {
 	meta:
 		description = "Webshells Auto-generated - file hxdef100.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "55cc1769cef44910bd91b7b73dee1f6c"
 	strings:
 		$s0 = "RtlAnsiStringToUnicodeString"
@@ -7353,7 +7685,8 @@ rule hxdef100 {
 rule rdrbs100 {
 	meta:
 		description = "Webshells Auto-generated - file rdrbs100.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "7c752bcd6da796d80a6830c61a632bff"
 	strings:
 		$s3 = "Server address must be IP in A.B.C.D format."
@@ -7364,7 +7697,8 @@ rule rdrbs100 {
 rule Mithril_Mithril {
 	meta:
 		description = "Webshells Auto-generated - file Mithril.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "017191562d72ab0ca551eb89256650bd"
 	strings:
 		$s0 = "OpenProcess error!"
@@ -7381,7 +7715,8 @@ rule Mithril_Mithril {
 rule hxdef100_2 {
 	meta:
 		description = "Webshells Auto-generated - file hxdef100.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1b393e2e13b9c57fb501b7cd7ad96b25"
 	strings:
 		$s0 = "\\\\.\\mailslot\\hxdef-rkc000"
@@ -7393,7 +7728,8 @@ rule hxdef100_2 {
 rule Release_dllTest {
 	meta:
 		description = "Webshells Auto-generated - file dllTest.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "76a59fc3242a2819307bb9d593bef2e0"
 	strings:
 		$s0 = ";;;Y;`;d;h;l;p;t;x;|;"
@@ -7412,7 +7748,8 @@ rule Release_dllTest {
 rule webadmin {
 	meta:
 		description = "Webshells Auto-generated - file webadmin.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3a90de401b30e5b590362ba2dde30937"
 	strings:
 		$s0 = "<input name=\\\"editfilename\\\" type=\\\"text\\\" class=\\\"style1\\\" value='\".$this->inpu"
@@ -7422,7 +7759,8 @@ rule webadmin {
 rule commands {
 	meta:
 		description = "Webshells Auto-generated - file commands.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "174486fe844cb388e2ae3494ac2d1ec2"
 	strings:
 		$s1 = "If CheckRecord(\"SELECT COUNT(ID) FROM VictimDetail WHERE VictimID = \" & VictimID"
@@ -7433,7 +7771,8 @@ rule commands {
 rule hkdoordll {
 	meta:
 		description = "Webshells Auto-generated - file hkdoordll.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b715c009d47686c0e62d0981efce2552"
 	strings:
 		$s6 = "Can't uninstall,maybe the backdoor is not installed or,the Password you INPUT is"
@@ -7443,7 +7782,8 @@ rule hkdoordll {
 rule r57shell_2 {
 	meta:
 		description = "Webshells Auto-generated - file r57shell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8023394542cddf8aee5dec6072ed02b5"
 	strings:
 		$s2 = "echo \"<br>\".ws(2).\"HDD Free : <b>\".view_size($free).\"</b> HDD Total : <b>\".view_"
@@ -7453,7 +7793,8 @@ rule r57shell_2 {
 rule Mithril_v1_45_dllTest {
 	meta:
 		description = "Webshells Auto-generated - file dllTest.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1b9e518aaa62b15079ff6edb412b21e9"
 	strings:
 		$s3 = "syspath"
@@ -7465,7 +7806,8 @@ rule Mithril_v1_45_dllTest {
 rule dbgiis6cli {
 	meta:
 		description = "Webshells Auto-generated - file dbgiis6cli.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3044dceb632b636563f66fee3aaaf8f3"
 	strings:
 		$s0 = "User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)"
@@ -7476,7 +7818,8 @@ rule dbgiis6cli {
 rule remview_2003_04_22 {
 	meta:
 		description = "Webshells Auto-generated - file remview_2003_04_22.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "17d3e4e39fbca857344a7650f7ea55e3"
 	strings:
 		$s1 = "\"<b>\".mm(\"Eval PHP code\").\"</b> (\".mm(\"don't type\").\" \\\"&lt;?\\\""
@@ -7486,7 +7829,8 @@ rule remview_2003_04_22 {
 rule FSO_s_test {
 	meta:
 		description = "Webshells Auto-generated - file test.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "82cf7b48da8286e644f575b039a99c26"
 	strings:
 		$s0 = "$yazi = \"test\" . \"\\r\\n\";"
@@ -7497,7 +7841,8 @@ rule FSO_s_test {
 rule Debug_cress {
 	meta:
 		description = "Webshells Auto-generated - file cress.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "36a416186fe010574c9be68002a7286a"
 	strings:
 		$s0 = "\\Mithril "
@@ -7508,7 +7853,8 @@ rule Debug_cress {
 rule webshell {
 	meta:
 		description = "Webshells Auto-generated - file webshell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "f2f8c02921f29368234bfb4d4622ad19"
 	strings:
 		$s0 = "RhViRYOzz"
@@ -7522,7 +7868,8 @@ rule webshell {
 rule FSO_s_EFSO_2 {
 	meta:
 		description = "Webshells Auto-generated - file EFSO_2.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a341270f9ebd01320a7490c12cb2e64c"
 	strings:
 		$s0 = ";!+/DRknD7+.\\mDrC(V+kcJznndm\\f|nzKuJb'r@!&0KUY@*Jb@#@&Xl\"dKVcJ\\CslU,),@!0KxD~mKV"
@@ -7533,7 +7880,8 @@ rule FSO_s_EFSO_2 {
 rule thelast_index3 {
 	meta:
 		description = "Webshells Auto-generated - file index3.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cceff6dc247aaa25512bad22120a14b4"
 	strings:
 		$s5 = "$err = \"<i>Your Name</i> Not Entered!</font></h2>Sorry, \\\"Your Name\\\" field is r"
@@ -7543,7 +7891,8 @@ rule thelast_index3 {
 rule adjustcr {
 	meta:
 		description = "Webshells Auto-generated - file adjustcr.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "17037fa684ef4c90a25ec5674dac2eb6"
 	strings:
 		$s0 = "$Info: This file is packed with the UPX executable packer $"
@@ -7556,7 +7905,8 @@ rule adjustcr {
 rule FeliksPack3___PHP_Shells_xIShell {
 	meta:
 		description = "Webshells Auto-generated - file xIShell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "997c8437c0621b4b753a546a53a88674"
 	strings:
 		$s3 = "if (!$nix) { $xid = implode(explode(\"\\\\\",$xid),\"\\\\\\\\\");}echo (\"<td><a href='Java"
@@ -7566,7 +7916,8 @@ rule FeliksPack3___PHP_Shells_xIShell {
 rule HYTop_AppPack_2005 {
 	meta:
 		description = "Webshells Auto-generated - file 2005.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "63d9fd24fa4d22a41fc5522fc7050f9f"
 	strings:
 		$s6 = "\" onclick=\"this.form.sqlStr.value='e:\\hytop.mdb"
@@ -7576,7 +7927,8 @@ rule HYTop_AppPack_2005 {
 rule xssshell {
 	meta:
 		description = "Webshells Auto-generated - file xssshell.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8fc0ffc5e5fbe85f7706ffc45b3f79b4"
 	strings:
 		$s1 = "if( !getRequest(COMMANDS_URL + \"?v=\" + VICTIM + \"&r=\" + generateID(), \"pushComma"
@@ -7586,7 +7938,8 @@ rule xssshell {
 rule FeliksPack3___PHP_Shells_usr {
 	meta:
 		description = "Webshells Auto-generated - file usr.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "ade3357520325af50c9098dc8a21a024"
 	strings:
 		$s0 = "<?php $id_info = array('notify' => 'off','sub' => 'aasd','s_name' => 'nurullahor"
@@ -7596,7 +7949,8 @@ rule FeliksPack3___PHP_Shells_usr {
 rule FSO_s_phpinj {
 	meta:
 		description = "Webshells Auto-generated - file phpinj.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "dd39d17e9baca0363cc1c3664e608929"
 	strings:
 		$s4 = "echo '<a href='.$expurl.'> Click Here to Exploit </a> <br />';"
@@ -7606,7 +7960,8 @@ rule FSO_s_phpinj {
 rule xssshell_db {
 	meta:
 		description = "Webshells Auto-generated - file db.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cb62e2ec40addd4b9930a9e270f5b318"
 	strings:
 		$s8 = "'// By Ferruh Mavituna | http://ferruh.mavituna.com"
@@ -7616,7 +7971,8 @@ rule xssshell_db {
 rule PHP_sh {
 	meta:
 		description = "Webshells Auto-generated - file sh.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1e9e879d49eb0634871e9b36f99fe528"
 	strings:
 		$s1 = "\"@$SERVER_NAME \".exec(\"pwd\")"
@@ -7626,7 +7982,8 @@ rule PHP_sh {
 rule xssshell_default {
 	meta:
 		description = "Webshells Auto-generated - file default.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d156782ae5e0b3724de3227b42fcaf2f"
 	strings:
 		$s3 = "If ProxyData <> \"\" Then ProxyData = Replace(ProxyData, DATA_SEPERATOR, \"<br />\")"
@@ -7636,7 +7993,8 @@ rule xssshell_default {
 rule EditServer_2 {
 	meta:
 		description = "Webshells Auto-generated - file EditServer.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5c1f25a4d206c83cdfb006b3eb4c09ba"
 	strings:
 		$s0 = "@HOTMAIL.COM"
@@ -7648,7 +8006,8 @@ rule EditServer_2 {
 rule by064cli {
 	meta:
 		description = "Webshells Auto-generated - file by064cli.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "10e0dff366968b770ae929505d2a9885"
 	strings:
 		$s7 = "packet dropped,redirecting"
@@ -7659,7 +8018,8 @@ rule by064cli {
 rule Mithril_dllTest {
 	meta:
 		description = "Webshells Auto-generated - file dllTest.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a8d25d794d8f08cd4de0c3d6bf389e6d"
 	strings:
 		$s0 = "please enter the password:"
@@ -7670,7 +8030,8 @@ rule Mithril_dllTest {
 rule peek_a_boo {
 	meta:
 		description = "Webshells Auto-generated - file peek-a-boo.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "aca339f60d41fdcba83773be5d646776"
 	strings:
 		$s0 = "__vbaHresultCheckObj"
@@ -7685,7 +8046,8 @@ rule peek_a_boo {
 rule fmlibraryv3 {
 	meta:
 		description = "Webshells Auto-generated - file fmlibraryv3.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "c34c248fed6d5a20d8203924a2088acc"
 	strings:
 		$s3 = "ExeNewRs.CommandText = \"UPDATE \" & tablename & \" SET \" & ExeNewRsValues & \" WHER"
@@ -7695,7 +8057,8 @@ rule fmlibraryv3 {
 rule Debug_dllTest_2 {
 	meta:
 		description = "Webshells Auto-generated - file dllTest.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1b9e518aaa62b15079ff6edb412b21e9"
 	strings:
 		$s4 = "\\Debug\\dllTest.pdb"
@@ -7706,7 +8069,8 @@ rule Debug_dllTest_2 {
 rule connector {
 	meta:
 		description = "Webshells Auto-generated - file connector.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "3ba1827fca7be37c8296cd60be9dc884"
 	strings:
 		$s2 = "If ( AttackID = BROADCAST_ATTACK )"
@@ -7717,7 +8081,8 @@ rule connector {
 rule shelltools_g0t_root_HideRun {
 	meta:
 		description = "Webshells Auto-generated - file HideRun.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "45436d9bfd8ff94b71eeaeb280025afe"
 	strings:
 		$s0 = "Usage -- hiderun [AppName]"
@@ -7725,22 +8090,11 @@ rule shelltools_g0t_root_HideRun {
 	condition:
 		all of them
 }
-rule regshell {
-	meta:
-		description = "Webshells Auto-generated - file regshell.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
-		hash = "db2fdc821ca6091bab3ebd0d8bc46ded"
-	strings:
-		$s0 = "Changes the base hive to HKEY_CURRENT_USER."
-		$s4 = "Displays a list of values and sub-keys in a registry Hive."
-		$s5 = "Enter a menu selection number (1 - 3) or 99 to Exit: "
-	condition:
-		all of them
-}
 rule PHP_Shell_v1_7 {
 	meta:
 		description = "Webshells Auto-generated - file PHP_Shell_v1.7.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b5978501c7112584532b4ca6fb77cba5"
 	strings:
 		$s8 = "<title>[ADDITINAL TITTLE]-phpShell by:[YOURNAME]"
@@ -7750,7 +8104,8 @@ rule PHP_Shell_v1_7 {
 rule xssshell_save {
 	meta:
 		description = "Webshells Auto-generated - file save.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "865da1b3974e940936fe38e8e1964980"
 	strings:
 		$s4 = "RawCommand = Command & COMMAND_SEPERATOR & Param & COMMAND_SEPERATOR & AttackID"
@@ -7761,7 +8116,8 @@ rule xssshell_save {
 rule screencap {
 	meta:
 		description = "Webshells Auto-generated - file screencap.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "51139091dea7a9418a50f2712ea72aa6"
 	strings:
 		$s0 = "GetDIBColorTable"
@@ -7773,7 +8129,8 @@ rule screencap {
 rule FSO_s_phpinj_2 {
 	meta:
 		description = "Webshells Auto-generated - file phpinj.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "dd39d17e9baca0363cc1c3664e608929"
 	strings:
 		$s9 = "<? system(\\$_GET[cpc]);exit; ?>' ,0 ,0 ,0 ,0 INTO"
@@ -7783,7 +8140,8 @@ rule FSO_s_phpinj_2 {
 rule ZXshell2_0_rar_Folder_zxrecv {
 	meta:
 		description = "Webshells Auto-generated - file zxrecv.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5d3d12a39f41d51341ef4cb7ce69d30f"
 	strings:
 		$s0 = "RyFlushBuff"
@@ -7799,7 +8157,8 @@ rule ZXshell2_0_rar_Folder_zxrecv {
 rule FSO_s_ajan {
 	meta:
 		description = "Webshells Auto-generated - file ajan.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "22194f8c44524f80254e1b5aec67b03e"
 	strings:
 		$s4 = "entrika.write \"BinaryStream.SaveToFile"
@@ -7809,7 +8168,8 @@ rule FSO_s_ajan {
 rule c99shell {
 	meta:
 		description = "Webshells Auto-generated - file c99shell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "90b86a9c63e2cd346fe07cea23fbfc56"
 	strings:
 		$s0 = "<br />Input&nbsp;URL:&nbsp;&lt;input&nbsp;name=\\\"uploadurl\\\"&nbsp;type=\\\"text\\\"&"
@@ -7819,7 +8179,8 @@ rule c99shell {
 rule phpspy_2005_full {
 	meta:
 		description = "Webshells Auto-generated - file phpspy_2005_full.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "d1c69bb152645438440e6c903bac16b2"
 	strings:
 		$s7 = "echo \"  <td align=\\\"center\\\" nowrap valign=\\\"top\\\"><a href=\\\"?downfile=\".urlenco"
@@ -7829,30 +8190,19 @@ rule phpspy_2005_full {
 rule FSO_s_zehir4_2 {
 	meta:
 		description = "Webshells Auto-generated - file zehir4.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "5b496a61363d304532bcf52ee21f5d55"
 	strings:
 		$s4 = "\"Program Files\\Serv-u\\Serv"
 	condition:
 		all of them
 }
-rule httpdoor {
-	meta:
-		description = "Webshells Auto-generated - file httpdoor.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
-		hash = "6097ea963455a09474471a9864593dc3"
-	strings:
-		$s4 = "''''''''''''''''''DaJKHPam"
-		$s5 = "o,WideCharR]!n]"
-		$s6 = "HAutoComplete"
-		$s7 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <assembly xmlns=\"urn:sch"
-	condition:
-		all of them
-}
 rule FSO_s_indexer_2 {
 	meta:
 		description = "Webshells Auto-generated - file indexer.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "135fc50f85228691b401848caef3be9e"
 	strings:
 		$s5 = "<td>Nerden :<td><input type=\"text\" name=\"nerden\" size=25 value=index.html></td>"
@@ -7862,7 +8212,8 @@ rule FSO_s_indexer_2 {
 rule HYTop_DevPack_2005 {
 	meta:
 		description = "Webshells Auto-generated - file 2005.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "63d9fd24fa4d22a41fc5522fc7050f9f"
 	strings:
 		$s7 = "theHref=encodeForUrl(mid(replace(lcase(list.path),lcase(server.mapPath(\"/\")),\"\")"
@@ -7874,7 +8225,8 @@ rule HYTop_DevPack_2005 {
 rule _root_040_zip_Folder_deploy {
 	meta:
 		description = "Webshells Auto-generated - file deploy.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "2c9f9c58999256c73a5ebdb10a9be269"
 	strings:
 		$s5 = "halon synscan 127.0.0.1 1-65536"
@@ -7886,7 +8238,8 @@ rule _root_040_zip_Folder_deploy {
 rule by063cli {
 	meta:
 		description = "Webshells Auto-generated - file by063cli.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "49ce26eb97fd13b6d92a5e5d169db859"
 	strings:
 		$s2 = "#popmsghello,are you all right?"
@@ -7897,7 +8250,8 @@ rule by063cli {
 rule icyfox007v1_10_rar_Folder_asp {
 	meta:
 		description = "Webshells Auto-generated - file asp.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "2c412400b146b7b98d6e7755f7159bb9"
 	strings:
 		$s0 = "<SCRIPT RUNAT=SERVER LANGUAGE=JAVASCRIPT>eval(Request.form('#')+'')</SCRIPT>"
@@ -7907,7 +8261,8 @@ rule icyfox007v1_10_rar_Folder_asp {
 rule FSO_s_EFSO_2_2 {
 	meta:
 		description = "Webshells Auto-generated - file EFSO_2.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "a341270f9ebd01320a7490c12cb2e64c"
 	strings:
 		$s0 = ";!+/DRknD7+.\\mDrC(V+kcJznndm\\f|nzKuJb'r@!&0KUY@*Jb@#@&Xl\"dKVcJ\\CslU,),@!0KxD~mKV"
@@ -7918,7 +8273,8 @@ rule FSO_s_EFSO_2_2 {
 rule byshell063_ntboot_2 {
 	meta:
 		description = "Webshells Auto-generated - file ntboot.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "cb9eb5a6ff327f4d6c46aacbbe9dda9d"
 	strings:
 		$s6 = "OK,job was done,cuz we have localsystem & SE_DEBUG_NAME:)"
@@ -7928,7 +8284,8 @@ rule byshell063_ntboot_2 {
 rule u_uay {
 	meta:
 		description = "Webshells Auto-generated - file uay.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "abbc7b31a24475e4c5d82fc4c2b8c7c4"
 	strings:
 		$s1 = "exec \"c:\\WINDOWS\\System32\\freecell.exe"
@@ -7939,7 +8296,8 @@ rule u_uay {
 rule bin_wuaus {
 	meta:
 		description = "Webshells Auto-generated - file wuaus.dll"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "46a365992bec7377b48a2263c49e4e7d"
 	strings:
 		$s1 = "9(90989@9V9^9f9n9v9"
@@ -7954,7 +8312,8 @@ rule bin_wuaus {
 rule pwreveal {
 	meta:
 		description = "Webshells Auto-generated - file pwreveal.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "b4e8447826a45b76ca45ba151a97ad50"
 	strings:
 		$s0 = "*<Blank - no es"
@@ -7967,7 +8326,8 @@ rule pwreveal {
 rule shelltools_g0t_root_xwhois {
 	meta:
 		description = "Webshells Auto-generated - file xwhois.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "0bc98bd576c80d921a3460f8be8816b4"
 	strings:
 		$s1 = "rting! "
@@ -7980,7 +8340,8 @@ rule shelltools_g0t_root_xwhois {
 rule vanquish_2 {
 	meta:
 		description = "Webshells Auto-generated - file vanquish.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "2dcb9055785a2ee01567f52b5a62b071"
 	strings:
 		$s2 = "Vanquish - DLL injection failed:"
@@ -7990,7 +8351,8 @@ rule vanquish_2 {
 rule down_rar_Folder_down {
 	meta:
 		description = "Webshells Auto-generated - file down.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "db47d7a12b3584a2e340567178886e71"
 	strings:
 		$s0 = "response.write \"<font color=blue size=2>NetBios Name: \\\\\"  & Snet.ComputerName &"
@@ -8000,7 +8362,8 @@ rule down_rar_Folder_down {
 rule cmdShell {
 	meta:
 		description = "Webshells Auto-generated - file cmdShell.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "8a9fef43209b5d2d4b81dfbb45182036"
 	strings:
 		$s1 = "if cmdPath=\"wscriptShell\" then"
@@ -8010,7 +8373,8 @@ rule cmdShell {
 rule ZXshell2_0_rar_Folder_nc {
 	meta:
 		description = "Webshells Auto-generated - file nc.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "2cd1bf15ae84c5f6917ddb128827ae8b"
 	strings:
 		$s0 = "WSOCK32.dll"
@@ -8023,7 +8387,8 @@ rule ZXshell2_0_rar_Folder_nc {
 rule portlessinst {
 	meta:
 		description = "Webshells Auto-generated - file portlessinst.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "74213856fc61475443a91cd84e2a6c2f"
 	strings:
 		$s2 = "Fail To Open Registry"
@@ -8035,7 +8400,8 @@ rule portlessinst {
 rule SetupBDoor {
 	meta:
 		description = "Webshells Auto-generated - file SetupBDoor.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "41f89e20398368e742eda4a3b45716b6"
 	strings:
 		$s1 = "\\BDoor\\SetupBDoor"
@@ -8045,7 +8411,8 @@ rule SetupBDoor {
 rule phpshell_3 {
 	meta:
 		description = "Webshells Auto-generated - file phpshell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "e8693a2d4a2ffea4df03bb678df3dc6d"
 	strings:
 		$s3 = "<input name=\"submit_btn\" type=\"submit\" value=\"Execute Command\"></p>"
@@ -8056,7 +8423,8 @@ rule phpshell_3 {
 rule BIN_Server {
 	meta:
 		description = "Webshells Auto-generated - file Server.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "1d5aa9cbf1429bb5b8bf600335916dcd"
 	strings:
 		$s0 = "configserver"
@@ -8071,7 +8439,8 @@ rule BIN_Server {
 rule HYTop2006_rar_Folder_2006 {
 	meta:
 		description = "Webshells Auto-generated - file 2006.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "c19d6f4e069188f19b08fa94d44bc283"
 	strings:
 		$s6 = "strBackDoor = strBackDoor "
@@ -8081,7 +8450,8 @@ rule HYTop2006_rar_Folder_2006 {
 rule r57shell_3 {
 	meta:
 		description = "Webshells Auto-generated - file r57shell.php"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "87995a49f275b6b75abe2521e03ac2c0"
 	strings:
 		$s1 = "<b>\".$_POST['cmd']"
@@ -8091,7 +8461,8 @@ rule r57shell_3 {
 rule HDConfig {
 	meta:
 		description = "Webshells Auto-generated - file HDConfig.exe"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "7d60e552fdca57642fd30462416347bd"
 	strings:
 		$s0 = "An encryption key is derived from the password hash. "
@@ -8105,7 +8476,8 @@ rule HDConfig {
 rule FSO_s_ajan_2 {
 	meta:
 		description = "Webshells Auto-generated - file ajan.asp"
-		author = "Yara Bulk Rule Generator by Florian Roth"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
 		hash = "22194f8c44524f80254e1b5aec67b03e"
 	strings:
 		$s2 = "\"Set WshShell = CreateObject(\"\"WScript.Shell\"\")"
@@ -8117,6 +8489,7 @@ rule FSO_s_ajan_2 {
 rule Webshell_and_Exploit_CN_APT_HK : Webshell
 {
 meta:
+	license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 	author = "Florian Roth"
 	description = "Webshell and Exploit Code in relation with APT against Honk Kong protesters"
 	date = "10.10.2014"
@@ -8132,7 +8505,7 @@ condition:
 rule JSP_Browser_APT_webshell {
 	meta:
 		description = "VonLoesch JSP Browser used as web shell by APT groups - jsp File browser 1.1a"
-		author = "F.Roth"
+		author = "Florian Roth"
 		date = "10.10.2014"
 		score = 60
 	strings:
@@ -8147,7 +8520,7 @@ rule JSP_Browser_APT_webshell {
 rule JSP_jfigueiredo_APT_webshell {
 	meta:
 		description = "JSP Browser used as web shell by APT groups - author: jfigueiredo"
-		author = "F.Roth"
+		author = "Florian Roth"
 		date = "12.10.2014"
 		score = 60
 		reference = "http://ceso.googlecode.com/svn/web/bko/filemanager/Browser.jsp"
@@ -8161,7 +8534,7 @@ rule JSP_jfigueiredo_APT_webshell {
 rule JSP_jfigueiredo_APT_webshell_2 {
 	meta:
 		description = "JSP Browser used as web shell by APT groups - author: jfigueiredo"
-		author = "F.Roth"
+		author = "Florian Roth"
 		date = "12.10.2014"
 		score = 60
 		reference = "http://ceso.googlecode.com/svn/web/bko/filemanager/"
@@ -8174,24 +8547,10 @@ rule JSP_jfigueiredo_APT_webshell_2 {
 		all of ($a*) or all of ($s*)
 }
 
-rule AJAX_FileUpload_webshell {
-	meta:
-		description = "AJAX JS/CSS components providing web shell by APT groups"
-		author = "F.Roth"
-		date = "12.10.2014"
-		score = 75
-		reference = "http://ceso.googlecode.com/svn/web/bko/filemanager/ajaxfileupload.js"
-	strings:
-		$a1 = "var frameId = 'jUploadFrame' + id;" ascii
-		$a2 = "var form = jQuery('<form  action=\"\" method=\"POST\" name=\"' + formId + '\" id=\"' + formId + '\" enctype=\"multipart/form-data\"></form>');" ascii
-		$a3 = "jQuery(\"<div>\").html(data).evalScripts();" ascii
-	condition:
-		all of them
-}
-
 rule Webshell_Insomnia {
 	meta:
 		description = "Insomnia Webshell - file InsomniaShell.aspx"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "http://www.darknet.org.uk/2014/12/insomniashell-asp-net-reverse-shell-bind-shell/"
 		date = "2014/12/09"
@@ -8213,6 +8572,7 @@ rule Webshell_Insomnia {
 rule HawkEye_PHP_Panel {
 	meta:
 		description = "Detects HawkEye Keyloggers PHP Panel"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/12/14"
 		score = 60
@@ -8229,6 +8589,7 @@ rule SoakSoak_Infected_Wordpress {
 	meta:
 		description = "Detects a SoakSoak infected Wordpress site http://goo.gl/1GzWUX"
 		reference = "http://goo.gl/1GzWUX"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		date = "2014/12/15"
 		score = 60
@@ -8243,6 +8604,7 @@ rule SoakSoak_Infected_Wordpress {
 rule Pastebin_Webshell {
 	meta:
 		description = "Detects a web shell that downloads content from pastebin.com http://goo.gl/7dbyZs"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		score = 70
 		date = "13.01.2015"
@@ -8265,6 +8627,7 @@ rule Pastebin_Webshell {
 rule ASPXspy2 {
 	meta:
 		description = "Web shell - file ASPXspy2.aspx"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "not set"
 		date = "2015/01/24"
@@ -8300,6 +8663,7 @@ rule ASPXspy2 {
 rule Webshell_27_9_c66_c99 {
 	meta:
 		description = "Detects Webshell - rule generated from from files 27.9.txt, c66.php, c99-shadows-mod.php, c99.php ..."
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8325,6 +8689,7 @@ rule Webshell_27_9_c66_c99 {
 rule Webshell_acid_AntiSecShell_3 {
 	meta:
 		description = "Detects Webshell Acid"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8357,6 +8722,7 @@ rule Webshell_acid_AntiSecShell_3 {
 rule Webshell_c99_4 {
 	meta:
 		description = "Detects C99 Webshell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8388,6 +8754,7 @@ rule Webshell_c99_4 {
 rule Webshell_r57shell_2 {
 	meta:
 		description = "Detects Webshell R57"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8415,6 +8782,7 @@ rule Webshell_r57shell_2 {
 rule Webshell_27_9_acid_c99_locus7s {
 	meta:
 		description = "Detects Webshell - rule generated from from files 27.9.txt, acid.php, c99_locus7s.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8437,6 +8805,7 @@ rule Webshell_27_9_acid_c99_locus7s {
 rule Webshell_Backdoor_PHP_Agent_r57_mod_bizzz_shell_r57 {
 	meta:
 		description = "Detects Webshell - rule generated from from files Backdoor.PHP.Agent.php, r57.mod-bizzz.shell.txt ..."
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8462,6 +8831,7 @@ rule Webshell_Backdoor_PHP_Agent_r57_mod_bizzz_shell_r57 {
 rule Webshell_c100 {
 	meta:
 		description = "Detects Webshell - rule generated from from files c100 v. 777shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8486,6 +8856,7 @@ rule Webshell_c100 {
 rule Webshell_AcidPoison {
 	meta:
 		description = "Detects Poison Sh3ll - Webshell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8508,7 +8879,8 @@ rule Webshell_AcidPoison {
 
 rule Webshell_acid_FaTaLisTiCz_Fx_fx_p0isoN_sh3ll_x0rg_byp4ss_256 {
 	meta:
-		description = "Detects Webshell - rule generated from from files acid.php, FaTaLisTiCz_Fx.txt, fx.txt, p0isoN.sh3ll.txt, x0rg.byp4ss.txt"
+		description = "Detects Webshell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8527,7 +8899,8 @@ rule Webshell_acid_FaTaLisTiCz_Fx_fx_p0isoN_sh3ll_x0rg_byp4ss_256 {
 
 rule Webshell_Ayyildiz {
 	meta:
-		description = "Detects Webshell - rule generated from from files Ayyildiz Tim  -AYT- Shell v 2.1 Biz.txt, Macker's Private PHPShell.php, matamu.txt, myshell.txt, PHP Shell.txt"
+		description = "Detects Webshell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8547,6 +8920,7 @@ rule Webshell_Ayyildiz {
 rule Webshell_zehir {
 	meta:
 		description = "Detects Webshell - rule generated from from files elmaliseker.asp, zehir.asp, zehir.txt, zehir4.asp, zehir4.txt"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://github.com/nikicat/web-malware-collection"
 		date = "2016-01-11"
@@ -8561,4 +8935,425 @@ rule Webshell_zehir {
 		$s2 = "if (frmUpload.max.value<=0) frmUpload.max.value=1;" fullword ascii
 	condition:
 		filesize < 200KB and 1 of them
+}
+
+/*
+	Yara Rule Set
+	Author: Florian Roth
+	Date: 2016-09-10
+	Identifier: Webshells PHP bartblaze
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule UploadShell_98038f1efa4203432349badabad76d44337319a6 {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "506a6ab6c49e904b4adc1f969c91e4f1a7dde164be549c6440e766de36c93215"
+	strings:
+		$s2 = "$lol = file_get_contents(\"../../../../../wp-config.php\");" fullword ascii
+		$s6 = "@unlink(\"./export-check-settings.php\");" fullword ascii
+		$s7 = "$xos = \"Safe-mode:[Safe-mode:\".$hsafemode.\"] " fullword ascii
+	condition:
+		( uint16(0) == 0x3f3c and filesize < 6KB and ( all of ($s*) ) ) or ( all of them )
+}
+
+rule DKShell_f0772be3c95802a2d1e7a4a3f5a45dcdef6997f3 {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "7ea49d5c29f1242f81f2393b514798ff7caccb50d46c60bdfcf61db00043473b"
+	strings:
+		$s1 = "<?php Error_Reporting(0); $s_pass = \"" ascii
+		$s2 = "$s_func=\"cr\".\"eat\".\"e_fun\".\"cti\".\"on" ascii
+	condition:
+		( uint16(0) == 0x3c0a and filesize < 300KB and all of them )
+}
+
+rule Unknown_8af033424f9590a15472a23cc3236e68070b952e {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "3382b5eaaa9ad651ab4793e807032650667f9d64356676a16ae3e9b02740ccf3"
+	strings:
+		$s1 = "$check = $_SERVER['DOCUMENT_ROOT']" fullword ascii
+		$s2 = "$fp=fopen(\"$check\",\"w+\");" fullword ascii
+		$s3 = "fwrite($fp,base64_decode('" ascii
+	condition:
+		( uint16(0) == 0x6324 and filesize < 6KB and ( all of ($s*) ) ) or ( all of them )
+}
+
+rule DkShell_4000bd83451f0d8501a9dfad60dce39e55ae167d {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "51a16b09520a3e063adf10ff5192015729a5de1add8341a43da5326e626315bd"
+	strings:
+		$x1 = "DK Shell - Took the Best made it Better..!!" fullword ascii
+		$x2 = "preg_replace(\"/.*/e\",\"\\x65\\x76\\x61\\x6C\\x28\\x67\\x7A\\x69\\x6E\\x66\\x6C\\x61\\x74\\x65\\x28\\x62\\x61\\x73\\x65\\x36\\x" ascii
+		$x3 = "echo '<b>Sw Bilgi<br><br>'.php_uname().'<br></b>';" fullword ascii
+
+		$s1 = "echo '<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" name=\"uploader\" id=\"uploader\">';" fullword ascii
+		$s9 = "$x = $_GET[\"x\"];" fullword ascii
+	condition:
+		( uint16(0) == 0x3f3c and filesize < 200KB and 1 of ($x*) ) or ( 3 of them )
+}
+
+rule WebShell_5786d7d9f4b0df731d79ed927fb5a124195fc901 {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "b1733cbb0eb3d440c4174cc67ca693ba92308ded5fc1069ed650c3c78b1da4bc"
+	strings:
+		$s1 = "preg_replace(\"\\x2F\\x2E\\x2A\\x2F\\x65\",\"\\x65\\x76\\x61\\x6C\\x28\\x67\\x7A\\x69\\x6E\\x66\\x6C\\x61\\x74\\x65\\x28\\x62\\x" ascii
+		$s2 = "input[type=text], input[type=password]{" fullword ascii
+	condition:
+		( uint16(0) == 0x6c3c and filesize < 80KB and all of them )
+}
+
+rule webshell_e8eaf8da94012e866e51547cd63bb996379690bf {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "027544baa10259939780e97dc908bd43f0fb940510119fc4cce0883f3dd88275"
+	strings:
+		$x1 = "@exec('./bypass/ln -s /etc/passwd 1.php');" fullword ascii
+		$x2 = "echo \"<iframe src=mysqldumper/index.php width=100% height=100% frameborder=0></iframe> \";" fullword ascii
+		$x3 = "@exec('tar -xvf mysqldumper.tar.gz');" fullword ascii
+	condition:
+		( uint16(0) == 0x213c and filesize < 100KB and 1 of ($x*) ) or ( 2 of them )
+}
+
+rule Unknown_0f06c5d1b32f4994c3b3abf8bb76d5468f105167 {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "6362372850ac7455fa9461ed0483032a1886543f213a431f81a2ac76d383b47e"
+	strings:
+		$s1 = "$check = $_SERVER['DOCUMENT_ROOT'] . \"/libraries/lola.php\" ;" fullword ascii
+		$s2 = "$fp=fopen(\"$check\",\"w+\");" fullword ascii
+		$s3 = "fwrite($fp,base64_decode('" ascii
+	condition:
+		( uint16(0) == 0x6324 and filesize < 2KB and all of them )
+}
+
+rule WSOShell_0bbebaf46f87718caba581163d4beed56ddf73a7 {
+	meta:
+		description = "Detects a web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		hash1 = "d053086907aed21fbb6019bf9e644d2bae61c63563c4c3b948d755db3e78f395"
+	strings:
+		$s8 = "$default_charset='Wi'.'ndo.'.'ws-12'.'51';" fullword ascii
+		$s9 = "$mosimage_session = \"" fullword ascii
+	condition:
+		( uint16(0) == 0x3f3c and filesize < 300KB and all of them )
+}
+
+rule WebShell_Generic_1609_A {
+	meta:
+		description = "Auto-generated rule"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/bartblaze/PHP-backdoors"
+		date = "2016-09-10"
+		super_rule = 1
+		hash1 = "c817a490cfd4d6377c15c9ac9bcfa136f4a45ff5b40c74f15216c030f657d035"
+		hash3 = "69b9d55ea2eb4a0d9cfe3b21b0c112c31ea197d1cb00493d1dddc78b90c5745e"
+	strings:
+		$s1 = "return $qwery45234dws($b);" fullword ascii
+	condition:
+		( uint16(0) == 0x3f3c and 1 of them )
+}
+
+rule Nishang_Webshell {
+	meta:
+		description = "Detects a ASPX web shell"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		reference = "https://github.com/samratashok/nishang"
+		date = "2016-09-11"
+	strings:
+		$s1 = "psi.Arguments = \"-noninteractive \" + \"-executionpolicy bypass \" + arg;" ascii
+		$s2 = "output.Text += \"\nPS> \" + console.Text + \"\n\" + do_ps(console.Text);" ascii
+		$s3 = "<title>Antak Webshell</title>" fullword ascii
+		$s4 = "<asp:Button ID=\"executesql\" runat=\"server\" Text=\"Execute SQL Query\"" ascii
+	condition:
+		( uint16(0) == 0x253C and filesize < 100KB and 1 of ($s*) )
+}
+
+
+/*
+   Yara Rule Set
+   Author: Florian Roth
+   Date: 2017-02-28
+   Identifier: Simple PHP Webshell
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule PHP_Webshell_1_Feb17 {
+   meta:
+      description = "Detects a simple cloaked PHP web shell"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "https://isc.sans.edu/diary/Analysis+of+a+Simple+PHP+Backdoor/22127"
+      date = "2017-02-28"
+   strings:
+      $h1 = "<?php ${\"\\x" ascii
+
+      $x1 = "\";global$auth;function sh_decrypt_phase($data,$key){${\"" ascii
+      $x2 = "global$auth;return sh_decrypt_phase(sh_decrypt_phase($" ascii
+      $x3 = "]}[\"\x64\"]);}}echo " ascii
+      $x4 = "\"=>@phpversion(),\"\\x" ascii
+
+      /* Decloaked version */
+      $s1 = "$i=Array(\"pv\"=>@phpversion(),\"sv\"" ascii
+      $s3 = "$data = @unserialize(sh_decrypt(@base64_decode($data),$data_key));" ascii
+   condition:
+      uint32(0) == 0x68703f3c and ( $h1 at 0 and 1 of them ) or 2 of them
+}
+
+rule Webshell_Tiny_JSP_2 {
+	meta:
+		description = "Detects a tiny webshell - chine chopper"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		author = "Florian Roth"
+		date = "2015-12-05"
+		score = 100
+	strings:
+		$s1 = "<%eval(Request(" nocase
+	condition:
+		uint16(0) == 0x253c and filesize < 40 and all of them
+}
+
+/*
+   Yara Rule Set
+   Author: Florian Roth
+   Date: 2017-06-25
+   Identifier: Wordpress Webshell
+   Reference: Internal Research
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule Wordpress_Config_Webshell_Preprend {
+   meta:
+      description = "Webshell that uses standard Wordpress wp-config.php file and appends the malicious code in front of it"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2017-06-25"
+		score = 65
+   strings:
+      $x1 = " * @package WordPress" fullword ascii
+
+      $s1 = "define('DB_NAME'," ascii
+      $s2 = "require_once(ABSPATH . 'wp-settings.php');" ascii
+
+      $fp1 = "iThemes Security Config" ascii
+   condition:
+      uint32(0) == 0x68703f3c and filesize < 400KB and
+      $x1 and
+      all of ($s*) and
+      not $x1 in (0..1000) and
+      not 1 of ($fp*)
+}
+
+/*
+   Yara Rule Set
+   Author: Florian Roth
+   Date: 2017-07-11
+   Identifier: PAS Webshell
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule PAS_Webshell_Encoded {
+   meta:
+      description = "Detects a PAS webshell"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "http://blog.talosintelligence.com/2017/07/the-medoc-connection.html"
+      date = "2017-07-11"
+      score = 80
+   strings:
+      $head1 = "<?php $____=" fullword ascii
+      $head2 = "'base'.(32*2).'"
+
+      $enc1 = "isset($_COOKIE['___']" ascii
+      $enc2 = "if($___!==NULL){" ascii
+      $enc3 = ").substr(md5(strrev($" ascii
+      $enc4 = "]))%256);$" ascii
+      $enc5 = "]))@setcookie('" ascii
+      $enc6 = "]=chr(( ord($_" ascii
+
+      /* =\x0A'));if(isset($_COOKIE[' */
+      $x1 = { 3D 0A 27 29 29 3B 69 66 28 69 73 73 65 74 28 24 5F 43 4F 4F 4B 49 45 5B 27 }
+
+      $foot1 = "value=\"\"/><input type=\"submit\" value=\"&gt;\"/></form>"
+      $foot2 = "();}} @header(\"Status: 404 Not Found\"); ?>"
+   condition:
+      ( uint32(0) == 0x68703f3c and filesize < 80KB and (
+         3 of them or
+         $head1 at 0 or
+         $head2 in (0..20) or
+         1 of ($x*)
+         )
+      ) or
+      $foot1 at (filesize-52) or
+      $foot2 at (filesize-44)
+}
+
+/*
+   Yara Rule Set
+   Author: Florian Roth
+   Date: 2017-09-21
+   Identifier: ALFA Shell
+   Reference: Internal Research - APT33
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule ALFA_SHELL {
+   meta:
+      description = "Detects web shell often used by Iranian APT groups"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "Internal Research - APT33"
+      date = "2017-09-21"
+      hash1 = "a39d8823d54c55e60a7395772e50d116408804c1a5368391a1e5871dbdc83547"
+   strings:
+      $x1 = "$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64')" ascii
+      $x2 = "#solevisible@gmail.com" fullword ascii
+      $x3 = "'login_page' => '500',//gui or 500 or 403 or 404" fullword ascii
+      $x4 = "$GLOBALS['__ALFA__']" fullword ascii
+      $x5 = "if(!function_exists('b'.'as'.'e6'.'4_'.'en'.'co'.'de')" ascii
+      $f1 = { 76 2F 38 76 2F 36 76 2F 2B 76 2F 2F 66 38 46 27 29 3B 3F 3E 0D 0A }
+   condition:
+      ( filesize < 900KB and 2 of ($x*) or $f1 at (filesize-22) )
+}
+
+rule Webshell_FOPO_Obfuscation_APT_ON_Nov17_1 {
+   meta:
+      description = "Detects malware from NK APT incident DE"
+      license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+      author = "Florian Roth"
+      reference = "Internal Research - ON"
+      date = "2017-11-17"
+      hash1 = "ed6e2e0027d3f564f5ce438984dc8a54577df822ce56ce079c60c99a91d5ffb1"
+   strings:
+      $x1 = "Obfuscation provided by FOPO" fullword ascii
+
+      $s1 = "\";@eval($" ascii
+      $f1 = { 22 29 29 3B 0D 0A 3F 3E }
+   condition:
+      uint16(0) == 0x3f3c and filesize < 800KB and (
+        $x1 or
+        ( $s1 in (0..350) and $f1 at (filesize-23) )
+      )
+}
+
+rule WebShell_JexBoss_JSP_1 {
+   meta:
+      description = "Detects JexBoss JSPs"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2018-11-08"
+      hash1 = "41e0fb374e5d30b2e2a362a2718a5bf16e73127e22f0dfc89fdb17acbe89efdf"
+   strings:
+      $x1 = "equals(\"jexboss\")"
+      $x2 = "%><pre><%if(request.getParameter(\"ppp\") != null &&" ascii
+
+      $s1 = "<%@ page import=\"java.util.*,java.io.*\"%><pre><% if (request.getParameter(\""
+      $s2 = "!= null && request.getHeader(\"user-agent\"" ascii
+      $s3 = "String disr = dis.readLine(); while ( disr != null ) { out.println(disr); disr = dis.readLine(); }}%>" fullword ascii
+   condition:
+      uint16(0) == 0x253c and filesize < 1KB and 1 of ($x*) or 2 of them
+}
+
+rule WebShell_JexBoss_WAR_1 {
+   meta:
+      description = "Detects JexBoss versions in WAR form"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2018-11-08"
+      hash1 = "6271775ab144ce9bb9138bf054b149b5813d3beb96338993c6de35330f566092"
+      hash2 = "6f14a63c3034d3762da8b3ad4592a8209a0c88beebcb9f9bd11b40e879f74eaf"
+   strings:
+      $ = "jbossass" fullword ascii
+      $ = "jexws.jsp" fullword ascii
+      $ = "jexws.jspPK" fullword ascii
+      $ = "jexws1.jsp" fullword ascii
+      $ = "jexws1.jspPK" fullword ascii
+      $ = "jexws2.jsp" fullword ascii
+      $ = "jexws2.jspPK" fullword ascii
+      $ = "jexws3.jsp" fullword ascii
+      $ = "jexws3.jspPK" fullword ascii
+      $ = "jexws4.jsp" fullword ascii
+      $ = "jexws4.jspPK" fullword ascii
+   condition:
+      uint16(0) == 0x4b50 and filesize < 4KB and 1 of them
+}
+
+rule webshell_tinyasp {
+    meta:
+	author = "Jeff Beley"
+	hash1 = "1f29905348e136b66d4ff6c1494d6008ea13f9551ad5aa9b991893a31b37e452"
+	description = "Detects 24 byte ASP webshell and variations"
+	date = "2019-01-09"
+   strings:
+   	$s1 = "Execute Request" ascii wide nocase
+   condition:
+   	uint16(0) == 0x253c and filesize < 150 and 1 of them
+}
+
+rule WEBSHELL_ASPX_Mar21_1 {
+   meta:
+      description = "Detects ASPX Web Shells"
+      author = "Florian Roth"
+      reference = "Internal Research"
+      date = "2021-03-12"
+      hash1 = "10b6e82125a2ddf3cc31a238e0d0c71a64f902e0d77171766713affede03174d"
+      hash2 = "170bee832df176aac0a3c6c7d5aa3fee413b4572030a24c994a97e70f6648ffc"
+      hash3 = "31c4d1fc81c052e269866deff324dffb215e7d481a47a2b6357a572a3e685d90"
+      hash4 = "41b5c26ac194439612b68e9ec6a638eceaf00842c347ffa551eb009ef6c015a3"
+      hash5 = "4b645bc773acde2b3cc204e77ac27c3f6991046c3b75f42d12bc90ec29cff9e3"
+      hash6 = "602bb701b78895d4de32f5e78f3c511e5298ba244b29641b11a7c1c483789859"
+      hash7 = "7ac47a17c511e25c06a53a1c7a5fbbf05f41f047a4a40b71afa81ce7b59f4b03"
+      hash8 = "9a5097d0e8dc29a2814adac070c80fd4b149b33e56aaaf9235af9e87b0501d91"
+      hash9 = "9efb5932c0753e45504fc9e8444209b92c2bdf22e63b1c1a44e2d52cb62b4548"
+      hash10 = "d40b16307d6434c3281374c0e1bbc0f6db388883e7f6266c3c81de0694266882"
+   strings:
+      $s1 = ".StartInfo.FileName = 'cmd.exe';" ascii fullword
+      $s2 = "<xsl:template match=\"\"/root\"\">" ascii fullword
+      $s3 = "<?xml version=\"\"1.0\"\"?><root>test</root>\";" ascii fullword
+   condition:
+      uint16(0) == 0x253c and
+      filesize < 6KB and
+      all of them
 }

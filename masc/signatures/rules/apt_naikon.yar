@@ -2,6 +2,7 @@
 rule Backdoor_Naikon_APT_Sample1 {
 	meta:
 		description = "Detects backdoors related to the Naikon APT"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		author = "Florian Roth"
 		reference = "https://goo.gl/7vHyvh"
 		date = "2015-05-14"
