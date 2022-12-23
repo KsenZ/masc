@@ -46,26 +46,26 @@ def main():
 
     if len(sys.argv) == 1:  # FIXME: if using entrypoint prints ugly path
         print("No arguments provided. Execute '" + sys.argv[0] + " -h' for help")
-        exit()
+        sys.exit()
 
     if args.compile_file:
         Dictionary.save_compiled_rules()
         print_green("Rules compiled. Now you can scan using compiled rules just add --run-compiled-rules")
-        exit()
+        sys.exit()
 
     if args.scan:
         if not args.path:
             print_red("You must specifiy the installation path to perform a scan")
-            exit()
+            sys.exit()
 
         if not args.site_type:
             print_red("You must specify the installation type to perform a scan")
-            exit()
+            sys.exit()
 
         if args.clean_site and not args.name:
             print_red("You selected clean up your website, but no name was provided. "
                       "You must choose a name if you want to clean up your site")
-            exit()
+            sys.exit()
 
         # Set a default or choosen name
         name = 'no-name'
@@ -83,7 +83,7 @@ def main():
         except Exception as e:
             print_red(e)
             print_blue("Exiting . . .")
-            exit()
+            sys.exit()
 
         # Load dictionaries/signatures/rules from databases
         print_blue("Loading dictionaries and signatures. . . ")
@@ -104,7 +104,7 @@ def main():
         print_blue("Making a backup . . .")
         if not cms.make_backup():
             print_red("An error has occured while making backup. Aborting . . .")
-            exit()
+            sys.exit()
         print_green("done.")
 
         # If user chosen custom website, masc only try to search and print some info. Then, exit
@@ -113,7 +113,7 @@ def main():
             results = cms.search_malware_signatures()
             print_results(results, "Malware were found. Listing files . . .", "Congratulations! No walware were found")
             print_green("done.")
-            exit()
+            sys.exit()
 
         # Compare malware and suspect files with clean installation files
         print_blue("Let's search for malware and suspect files. Then, let's compare results with a clean installation")
@@ -127,7 +127,7 @@ def main():
                 print_red("Malware/suspect files were found. They will be removed if you include the option --clean-site")
                 for filename in files_to_remove:
                     print("\t" + os.path.join(cms.path, filename))
-            exit()
+            sys.exit()
 
         # The user chose clean up the site
         if args.clean_site:
@@ -166,15 +166,15 @@ def main():
     elif args.make_backup:
         if not args.path:
             print_red("You must provide the path of your website to make a backup")
-            exit()
+            sys.exit()
 
         if not args.site_type:
             print_red("You must provide the type-site option to make a backup")
-            exit
+            sys.exit()
 
         if not args.name:
             print_red("You must provide the name of your installation to make a backup")
-            exit()
+            sys.exit()
 
         # Check if it's exists a previous backup of the same website for the same date
         backups_list = os.scandir(BACKUPS_DIR)
@@ -194,7 +194,7 @@ def main():
             user_input = input('')
             if user_input != 'm':
                 print_red('Aborted by user.')
-                exit()
+                sys.exit()
 
         print_blue("Making backup . . .")
         website = Custom(args.path, args.name, args.site_type)
@@ -205,15 +205,15 @@ def main():
     elif args.rollback:
         if not args.path:
             print_red("You must provide the path of your website to rollback")
-            exit()
+            sys.exit()
 
         if not args.site_type:
             print_red("You must provide the type-site option to rollback")
-            exit
+            sys.exit()
 
         if not args.name:
             print_red("You must provide the name of your installation to rollback")
-            exit()
+            sys.exit()
 
         print_blue("Restoring backup . . .")
         website = Custom(args.path, args.name, args.site_type)
@@ -230,15 +230,15 @@ def main():
     elif args.monitor:
         if not args.path:
             print_red("You must provide the path of your website to monitor it")
-            exit()
+            sys.exit()
 
         if not args.site_type:
             print_red("You must provide the type-site option to monitor it")
-            exit()
+            sys.exit()
 
         if not args.name:
             print_red("You must provide the name of your installation to monitor it")
-            exit()
+            sys.exit()
 
         print_blue("Monitoring website . . .(Press CTRL+C to terminate)")
         website = Custom(args.path, args.name, args.site_type, False)
@@ -248,14 +248,14 @@ def main():
     elif args.add_file:
         if not args.site_type:
             print_red("You must specify the site_type to add a new suspect file")
-            exit()
+            sys.exit()
 
         Dictionary.add_suspect_file(args.site_type, args.add_file)
         print_blue("Added '" + args.add_file + "' as a suspect file to the " + args.site_type + " dictionary")
     elif args.add_word:
         if not args.site_type:
             print_red("Yoy must specify the site_type to add a new suspect content")
-            exit()
+            sys.exit()
 
         Dictionary.add_suspect_content(args.site_type, args.add_word)
         print_blue("Added '" + args.add_word + "' as a suspect word to the " + args.site_type + " dictionary")
