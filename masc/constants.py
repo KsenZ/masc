@@ -1,10 +1,10 @@
 import os
 import sys
 
-if sys.version_info < (3, 8):
-    import importlib_metadata as metadata
-else:
+if sys.version_info >= (3, 8):
     from importlib import metadata
+else:
+    from importlib_metadata import metadata
 
 """
 Some contants to use
