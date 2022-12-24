@@ -2,7 +2,7 @@ import os
 import sys
 
 if sys.version_info >= (3, 8):
-    from importlib import metadata
+    from importlib import metadata, util
 else:
     from importlib_metadata import metadata
 
@@ -10,8 +10,12 @@ else:
 Some contants to use
 """
 
+
 # Current masc version as seen on setup.py
-VERSION = metadata.version('masc')
+try:
+    VERSION = metadata.version('masc')
+except:
+    VERSION = 'Git'
 
 # Current path that masc is being executed from
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
